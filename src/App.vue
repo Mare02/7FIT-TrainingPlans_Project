@@ -1,30 +1,53 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+<div class="app">
+  
+  <div class="container">
+    <router-view/>
   </div>
-  <router-view/>
+</div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  <style>
+  *{
+    padding: 0;
+    margin: 0;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;    
+  }
+  .nav-home, button{
+    font-family: 'Bebas Neue', cursive;
+  }
+  body{
+    background-color: rgb(0, 0, 0); 
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
 
-#nav {
-  padding: 30px;
-}
+  label, p{
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  a{
+    text-decoration: none;
+    color: white;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  ::-webkit-scrollbar{
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track{
+    background-color: gray;
+  }
+  ::-webkit-scrollbar-thumb{
+    background-color: #ee441d;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-button{
+    background-color: rgb(54, 54, 54);
+  }
+</style>>
