@@ -18,8 +18,24 @@
           <input type="text" v-model="username">
         </div>
         <div class="input-div">
-          <label>Password:</label>
+          <label>Confirm password:</label>
           <input type="password" v-model="password">
+        </div>
+        <div class="input-div">
+          <label>Password:</label>
+          <input type="password" v-model="password_confirm">
+        </div>
+        <div class="input-div">
+          <label>Weight:</label>
+          <input type="text" v-model="weight">
+        </div>
+        <div class="input-div">
+          <label>Height:</label>
+          <input type="text" v-model="height">
+        </div>
+        <div class="input-div">
+          <label>Bday:</label>
+          <input type="date" v-model="bday">
         </div>
         <div class="buttons">
           <button @click="register" class="submit">Submit</button>
@@ -28,21 +44,24 @@
     </div>
   </div>
 </template>
+
 <script>
 import axios from 'axios'
 
 export default {
   data(){
     return{ 
-      email: '',
-      name: '',
-      username: '',
-      password: '',
-      password_confirm: '',
-      weight: '',
-      height: '',
-      bday: '', //YYYY/MM/DD
-      sex: ''
+      user_info:{
+        email: '',
+        name: '',
+        username: '',
+        password: '',
+        password_confirm: '',
+        weight: '',
+        height: '',
+        bday: '', //YYYY/MM/DD
+        sex: '1'
+      }
     }
   },
   methods:{
