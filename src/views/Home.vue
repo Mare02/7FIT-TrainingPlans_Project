@@ -1,19 +1,5 @@
 <template>
-    <nav class="nav-home">
-      <div>
-        <img src="../assets/logo.png" alt="">
-      </div>
-      <div class="list-div">
-        <ul class="nav-list">
-          <li>
-            <a href="/about">About us</a> 
-          </li>
-          <li>
-            <a href="/register">Sign up</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    
   <div class="container">
     <div class="content">
       <div class="image-1">
@@ -59,59 +45,7 @@ export default {
     
   }
 
-  .nav-home{
-    position: sticky;
-    top: 0;
-    height: 4.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1;
-  }
-  .nav-home img{
-    width: 7rem;
-    margin-left: 1rem;
-    margin-top: 4px;
-  }
-  .nav-list{
-    font-size: 1.8rem;
-    display: flex;
-    color: white;
-    list-style: none;
-  }
-  .nav-list li {
-    position: relative;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: 1.5rem;
-    text-shadow: 0 0 10px black;
-  }
-
-  .nav-list a:hover {
-    transition: 0.5s;
-    color:#ee441d;
-  }
-
-  .nav-list a::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #ee441d;
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-  }
-
-  .nav-list a:hover::before {
-    transform: scaleX(1);
-  }
-  .list-div{
-    margin-right: 1.5rem;
-  }
+  
 
   .content{
     display: flex;
@@ -176,12 +110,6 @@ export default {
     .content p{
       font-size: 2.5rem;
       top: 25rem;
-    }
-    .nav-list{
-      font-size: 1.5rem;
-    }
-    .nav-home img{
-      width: 5rem;
     }
   }
 

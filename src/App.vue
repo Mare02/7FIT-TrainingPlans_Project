@@ -1,11 +1,22 @@
 <template>
 <div class="app">
-  
+  <navbar/>
   <div class="container">
     <router-view/>
   </div>
 </div>
 </template>
+
+  <script>
+  import navbar from './components/navbar.vue'
+  
+  export default{
+    components:{
+      navbar
+    }
+  }
+  </script>
+  
 
   <style>
   *{
@@ -17,9 +28,11 @@
     -ms-user-select: none; 
     user-select: none;    
   }
+
   .nav-home, button{
     font-family: 'Bebas Neue', cursive;
   }
+
   body{
     background-color: rgb(0, 0, 0); 
     overflow-x: hidden;
@@ -37,6 +50,7 @@
     color: white;
   }
 
+  
   ::-webkit-scrollbar{
     width: 5px;
   }
