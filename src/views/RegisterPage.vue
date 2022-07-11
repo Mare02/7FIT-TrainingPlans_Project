@@ -18,11 +18,11 @@
           <input type="text" v-model="username">
         </div>
         <div class="input-div">
-          <label>Confirm password:</label>
+          <label>Password:</label>
           <input type="password" v-model="password">
         </div>
         <div class="input-div">
-          <label>Password:</label>
+          <label>Confirm password:</label>
           <input type="password" v-model="password_confirm">
         </div>
         <div class="input-div">
@@ -32,10 +32,6 @@
         <div class="input-div">
           <label>Height:</label>
           <input type="text" v-model="height">
-        </div>
-        <div class="input-div">
-          <label>Bday:</label>
-          <input type="date" v-model="bday">
         </div>
         <div class="buttons">
           <button @click="register" class="submit">Submit</button>
@@ -59,7 +55,7 @@ export default {
         password_confirm: '',
         weight: '',
         height: '',
-        bday: '', //YYYY/MM/DD
+        bday: '2002/07/02', //YYYY/MM/DD
         sex: '1'
       }
     }
@@ -79,7 +75,7 @@ export default {
         ('sex', this.sex)
       );
       let result = await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register', formdata);
-      console.log(result);
+      console.log('ovaj' + result);
     }
   }
 }
