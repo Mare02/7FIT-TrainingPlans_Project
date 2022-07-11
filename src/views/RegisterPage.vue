@@ -22,7 +22,7 @@
           <input type="password" v-model="password">
         </div>
         <div class="buttons">
-          <button class="submit">Submit</button>
+          <button @click="register" class="submit">Submit</button>
         </div>
       </div>
     </div>
@@ -51,9 +51,16 @@ export default {
       formdata.append(
         ('email', this.email),
         ('name', this.name),
-        ('username', this.username)
-      )
-      let result = await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register' )
+        ('username', this.username),
+        ('password', this.password),
+        ('password_confirm', this.password_confirm),
+        ('weight', this.weight),
+        ('height', this.height),
+        ('bday', this.bday),
+        ('sex', this.sex)
+      );
+      let result = await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register', formdata);
+      console.log(result);
     }
   }
 }
