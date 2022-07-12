@@ -22,6 +22,7 @@
   *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
     -webkit-user-select: none;
     -webkit-touch-callout: none; 
     -moz-user-select: none; 

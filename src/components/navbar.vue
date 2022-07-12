@@ -53,7 +53,7 @@ export default {
   }
   .nav-list a:hover {
     transition: 0.5s;
-    color:#ee441d;
+    color:#eb2626;
   }
   .nav-list a::before {
     content: "";

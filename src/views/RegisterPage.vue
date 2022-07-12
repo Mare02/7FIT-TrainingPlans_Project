@@ -7,31 +7,31 @@
       <div class="user-input">
         <div class="input-div">
           <label>Email:</label>
-          <input type="text" v-model="email">
+          <input type="text" v-model="user_info.email">
         </div>
         <div class="input-div">
           <label>Name:</label>
-          <input type="text" v-model="name">
+          <input type="text" v-model="user_info.name">
         </div>
         <div class="input-div">
           <label>Username:</label>
-          <input type="text" v-model="username">
+          <input type="text" v-model="user_info.username">
         </div>
         <div class="input-div">
           <label>Password:</label>
-          <input type="password" v-model="password">
+          <input type="password" v-model="user_info.password">
         </div>
         <div class="input-div">
           <label>Confirm password:</label>
-          <input type="password" v-model="password_confirm">
+          <input type="password" v-model="user_info.password_confirm">
         </div>
         <div class="input-div">
           <label>Weight:</label>
-          <input type="text" v-model="weight">
+          <input type="text" v-model="user_info.weight">
         </div>
         <div class="input-div">
           <label>Height:</label>
-          <input type="text" v-model="height">
+          <input type="text" v-model="user_info.height">
         </div>
         <div class="buttons">
           <button @click="register" class="submit">Submit</button>
@@ -55,27 +55,23 @@ export default {
         password_confirm: '',
         weight: '',
         height: '',
-        bday: '2002/07/02', //YYYY/MM/DD
+        bday: '2002-07-02', //YYYY/MM/DD
         sex: '1'
       }
     }
   },
   methods:{
     async register(){
-      let formdata = new FormData();
-      formdata.append(
-        ('email', this.email),
-        ('name', this.name),
-        ('username', this.username),
-        ('password', this.password),
-        ('password_confirm', this.password_confirm),
-        ('weight', this.weight),
-        ('height', this.height),
-        ('bday', this.bday),
-        ('sex', this.sex)
-      );
-      let result = await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register', formdata);
-      console.log('ovaj' + result);
+      let result = await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register', {email: this.user_info.email,
+                                                                                              name: this.user_info.name,
+                                                                                              username: this.user_info.username,
+                                                                                              password: this.user_info.password,
+                                                                                              password_confirm: this.user_info.password_confirm,
+                                                                                              weight: this.user_info.weight,
+                                                                                              height: this.user_info.height,
+                                                                                              bday: this.user_info.bday,
+                                                                                              sex: this.user_info.sex});
+      console.log(result);
     }
   }
 }
@@ -117,5 +113,9 @@ export default {
     width: 7rem;
     margin-top: 2rem;
     border-radius: 15px;
+  }
+  button:hover{
+    background-color: #ee441d;
+    cursor: pointer;
   }
 </style>
