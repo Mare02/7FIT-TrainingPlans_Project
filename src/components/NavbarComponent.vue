@@ -6,10 +6,10 @@
       <div class="list-div">
         <ul class="nav-list">
           <li>
-            <a href="/about">About us</a> 
+            <a href="/about">about us</a> 
           </li>
           <li>
-            <a href="/register">Sign up</a>
+            <a href="/login">sign in</a>
           </li>
         </ul>
       </div>
@@ -24,6 +24,7 @@ export default {
 
 <style>
   .nav-home{
+    font-family: 'Bebas Neue', cursive;
     position: sticky;
     top: 0;
     height: 4.3rem;
@@ -63,7 +64,7 @@ export default {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #ee441d;
+    background-color: #eb2626;
     transform: scaleX(0);
     transition: transform 0.5s ease;
   }

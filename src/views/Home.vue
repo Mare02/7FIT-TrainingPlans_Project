@@ -1,5 +1,5 @@
 <template>
-  <navbar/>    
+  <NavbarComponent/>    
   <div class="container">
     <div class="content">
       <div class="image-1">
@@ -20,12 +20,12 @@
 </template> 
 
 <script>
-import navbar from '../components/navbar.vue'
+import NavbarComponent from '../components/NavbarComponent.vue'
 
 export default {
   name: 'Home',
   components: {
-    navbar
+    NavbarComponent
   },
   mounted(){
     
@@ -37,17 +37,6 @@ export default {
 </script>
 
 <style scoped> 
-  :root {
-    --red: #ee441d;
-  }
-
-  /* scroll animations */
-  .fade-right{
-    
-  }
-
-  
-
   .content{
     display: flex;
     justify-content: center;
@@ -61,7 +50,7 @@ export default {
     text-align: center;
   }
   b{
-    color: #ee441d;
+    color: #eb2626;
   }
 
   .image-1{

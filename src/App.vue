@@ -57,7 +57,7 @@
     background-color: gray;
   }
   ::-webkit-scrollbar-thumb{
-    background-color: #ee441d;
+    background-color: #eb2626;
     border-radius: 20px;
   }
   ::-webkit-scrollbar-button{

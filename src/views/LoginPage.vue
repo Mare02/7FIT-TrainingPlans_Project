@@ -1,42 +1,23 @@
 <template>
-  <div class="container">
-    <div class="company">
-      image
-    </div>
-    <div class="login-div">
-      login
-    </div>
-  </div>
+  <LoginComponent/>
 </template>
 
 <script>
-export default {
+import LoginComponent from '../components/LoginComponent.vue'
 
+export default {
+  data(){
+    return{
+      email: '',
+      password: ''
+    }
+  },
+  components:{
+    LoginComponent
+  }
 }
 </script>
 
-<style scoped>
-  .container{
-    height: 100vh;
-    display: flex;
-  }
+<style>
 
-  .company{
-    width: 60%;
-    background-color: rgb(179, 179, 179);
-  }
-
-  .login-div{
-    background-color: gray;
-    width: 40%;
-  }
-  
-  @media only screen and (max-width: 1200px){
-    .company{
-      width: 0%;
-    }
-    .login-div{
-      width: 100%;
-    }
-  }
 </style>
