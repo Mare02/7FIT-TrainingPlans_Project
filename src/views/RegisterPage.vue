@@ -34,7 +34,10 @@
           <input type="text" v-model="user_info.height">
         </div>
         <div class="buttons">
-          <button @click="register" class="submit">Submit</button>
+          <button @click="register" class="submit">Register</button>
+          <button @click="login" class="submit">Log In</button>
+          <button @click="getUser" class="submit">Get</button>
+          <input type="text" v-model="user_id">
         </div>
       </div>
     </div>
@@ -57,7 +60,8 @@ export default {
         height: '',
         bday: '2002-07-02', //YYYY/MM/DD
         sex: '1'
-      }
+      },
+      user_id: ''
     }
   },
   methods:{
@@ -72,6 +76,28 @@ export default {
                                                                                               bday: this.user_info.bday,
                                                                                               sex: this.user_info.sex});
       console.log(result);
+    },
+    async login(){
+      axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', {email: this.user_info.email,
+                                                                        password: this.user_info.password})
+      .then(res => {
+        console.log('Successful login, session id saved');
+        localStorage.setItem('sid', res.data.user.sid);
+      });
+      //console.log(Object.keys(result));
+      //console.log(result);
+    },
+    getUser(){
+      let sid = localStorage.getItem('sid');
+      console.log(sid);
+      let formdata = new FormData();
+      formdata.append('sid', sid);
+      console.log(sid);
+
+      axios.get('http://783p122.e2.mars-hosting.com/7fit/users/' + this.user_id + '?sid='+sid)
+      .then(res => {
+        console.log(res);
+      })
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-    
+  <navbar/>    
   <div class="container">
     <div class="content">
       <div class="image-1">
@@ -20,11 +20,12 @@
 </template> 
 
 <script>
+import navbar from '../components/navbar.vue'
 
 export default {
   name: 'Home',
   components: {
-    
+    navbar
   },
   mounted(){
     
