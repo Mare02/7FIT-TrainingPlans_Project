@@ -68,8 +68,8 @@ export default {
   .exercises{
     background-color: rgb(49, 49, 49);
     height: 40rem;
-    border-top-right-radius: 100px;
-    border-top-style:groove;
+    border-radius: 20px;
+    border-style:groove;
   }
   .exercises p{
     font-size: 1.8rem;

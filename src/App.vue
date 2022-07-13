@@ -21,25 +21,42 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    -webkit-user-select: none;
     -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+    -khtml-user-select: none;
     -moz-user-select: none; 
     -ms-user-select: none; 
     user-select: none;    
   }
 
-  .nav-home, button{
+  button{
     font-family: 'Bebas Neue', cursive;
   }
 
   body{
-    background-color: rgb(0, 0, 0); 
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    -45deg, 
+    rgb(0, 0, 0) 0%, 
+    rgb(20, 20, 20) 25%, 
+    rgb(39, 39, 39) 51%, 
+    rgb(59, 59, 59) 100%
+  );  
+    animation: AnimateBG 20s ease infinite;
   }
 
-  label, p{
+  @keyframes AnimateBG { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  } 
+
+  label, input, p{
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
   }
