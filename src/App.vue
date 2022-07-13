@@ -34,26 +34,12 @@
   }
 
   body{
-  overflow-x: hidden;
-  width: 100%;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-size: 300% 300%;
-  background-image: linear-gradient(
-    -45deg, 
-    rgb(0, 0, 0) 0%, 
-    rgb(20, 20, 20) 25%, 
-    rgb(39, 39, 39) 51%, 
-    rgb(59, 59, 59) 100%
-  );  
-    animation: AnimateBG 20s ease infinite;
-  }
-
-  @keyframes AnimateBG { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
   } 
 
   label, input, p{

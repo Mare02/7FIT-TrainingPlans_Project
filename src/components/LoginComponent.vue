@@ -1,24 +1,21 @@
 <template>
 	<div class="container">
-		<div class="logo">
-			<img class="logo" src="../assets/logo.png" alt="" />
-		</div>
 		<p class="title">Sign in</p>
 		<form>
 			<div class="login-div">
 				<div class="wrap">
 					<div class="input-div">
-						<input type="text" placeholder="Email" v-model="email"/>
+						<input type="text" placeholder="Email" v-model="log_data.email"/>
 					</div>
 					<div class="input-div">
-						<input type="password" placeholder="Password" v-model="password"/>
+						<input type="password" placeholder="Password" v-model="log_data.password"/>
 					</div>
 				</div>
 			</div>
 		</form>
-		<button @click="emitData" class="login-btn">log in</button>
+		<button @click="emit_log_data" class="login-btn">log in</button>
 		<div class="register-option">
-			<p>Already have an account?</p>
+			<p>Don't have an account?</p>
 			<button class="register-btn" @click="redirect">Register</button>
 		</div>
 	</div>
@@ -28,13 +25,15 @@
 export default {
 	data() {
 		return {
-			email: "",
-			password: "",
+      log_data:{
+        email: "",
+			  password: "",
+      }			
 		};
 	},
 	methods: {
-		emitData() {
-			this.$emit("loginData", { email: this.email, password: this.password });
+		emit_log_data() {
+			this.$emit("loginData", { email: this.log_data.email, password: this.log_data.password });
 		},
     redirect(){
       this.$router.push('/register');
@@ -44,7 +43,7 @@ export default {
 </script>
 
 <style scoped>
-a {
+a{
 	font-family: "Roboto Condensed", sans-serif;
 	margin-left: 0.5rem;
 	color: #eb2626;
@@ -53,9 +52,10 @@ a:hover {
 	cursor: pointer;
 }
 
-.container {
-	text-align: center;
+.container{
+  text-align: center;
 }
+
 form{
   display: flex;
   justify-content: center;
@@ -67,14 +67,6 @@ form{
 	top: 1rem;
 }
 
-.logo {
-	display: flex;
-	justify-content: center;
-}
-.logo img {
-	width: 7rem;
-}
-
 .wrap {
   position: relative;
   bottom: 4.5rem;
@@ -84,7 +76,7 @@ form{
 
 .login-div {
 	display: flex;
-	justify-content: center;
+  justify-content: center;
 	height: 100vh;
 	height: 30rem;
   width: 40rem;
@@ -145,7 +137,7 @@ button{
 .register-btn:hover{
   color: #eb2626;
   cursor: pointer;
-  transition: 0.5;
+  transition: 0.2s;
 }
 
 .login-btn{
@@ -155,6 +147,7 @@ button{
   color: white;
   background-color: #eb2626;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 ::placeholder{
@@ -180,6 +173,10 @@ button{
   }
   .login-btn{
     font-size: 1.5rem;
+  }
+  .login-div{
+    border-bottom-style: none;
+    box-shadow: none;
   }
 }
 </style>
