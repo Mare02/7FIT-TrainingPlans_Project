@@ -1,14 +1,14 @@
 <template>
-	<div class="container">
+	<div class="container"  v-if="show">
 		<p class="title">Sign in</p>
 		<form>
 			<div class="login-div">
 				<div class="wrap">
 					<div class="input-div">
-						<input type="text" placeholder="Email" v-model="log_data.email"/>
+						<input type="text" placeholder="Email" v-model="log_data.email" required/>
 					</div>
 					<div class="input-div">
-						<input type="password" placeholder="Password" v-model="log_data.password"/>
+						<input type="password" placeholder="password" v-model="log_data.password" required/>
 					</div>
 				</div>
 			</div>
@@ -16,13 +16,16 @@
 		<button @click="emit_log_data" class="login-btn">log in</button>
 		<div class="register-option">
 			<p>Don't have an account?</p>
-			<button class="register-btn" @click="redirect">Register</button>
+			<button class="register-btn" @click="emit_show">Register</button>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
+  props:[
+    'show'
+  ],
 	data() {
 		return {
       log_data:{
@@ -35,8 +38,8 @@ export default {
 		emit_log_data() {
 			this.$emit("loginData", { email: this.log_data.email, password: this.log_data.password });
 		},
-    redirect(){
-      this.$router.push('/register');
+    emit_show(){
+      this.$emit('emit_show')
     }
 	},
 };
@@ -88,7 +91,7 @@ form{
   box-shadow: 0 0 20px 0.5px gray;
 }
 
-.input-div {
+.input-div{
 	margin-top: 2rem;
 }
 

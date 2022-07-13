@@ -1,23 +1,23 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="show">
     <p class="title">Register</p>
     <form>
       <div class="register-div">
         <div class="wrap">
           <div class="input-div">
-            <input type="text" placeholder="Email" v-model="reg_data.email"/>
+            <input type="text" placeholder="Email" v-model="reg_data.email" required/>
           </div>
           <div class="input-div">
-            <input type="text" placeholder="Name" v-model="reg_data.name"/>
+            <input type="text" placeholder="Name" v-model="reg_data.name" required/>
           </div>
            <div class="input-div">
-            <input type="text" placeholder="Username" v-model="reg_data.username"/>
+            <input type="text" placeholder="Username" v-model="reg_data.username" required/>
           </div>
           <div class="input-div">
-            <input type="password" placeholder="Password" v-model="reg_data.password"/>
+            <input type="password" placeholder="Password" v-model="reg_data.password" required/>
           </div>
           <div class="input-div">
-            <input type="password" placeholder="Password (confirm)" v-model="reg_data.password_confirm"/>
+            <input type="password" placeholder="Password (confirm)" v-model="reg_data.password_confirm" required/>
           </div>
         </div>
       </div>
@@ -25,13 +25,16 @@
     <button @click="emit_reg_data" class="reg-btn">Submit</button>
     <div class="login-option">
 			<p>Already have an account?</p>
-			<button class="login-btn" @click="redirect">Sign In</button>
+			<button class="login-btn" @click="emit_show">Sign In</button>
 		</div>
   </div>
 </template>
 
 <script>
 export default {
+  props:[
+    'show'
+  ],
   data(){
     return{
       reg_data:{
@@ -60,8 +63,8 @@ export default {
                               sex: this.reg_data.sex
       })
     },
-    redirect(){
-      this.$router.push('/login');
+    emit_show(){
+      this.$emit('emit_show')
     }
   }
 }
