@@ -54,6 +54,7 @@ a:hover {
 
 .container{
   text-align: center;
+  overflow: hidden;
 }
 
 form{

@@ -35,7 +35,7 @@ export default {
     width: 7rem;
   }
   .container-div {
-    overflow-y: hidden;
+    overflow: hidden;
     height: 100vh;
     text-align: center;
     background-size: 300% 300%;

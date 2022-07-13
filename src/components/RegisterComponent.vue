@@ -70,6 +70,7 @@ export default {
 <style scoped>
   .container{
     text-align: center;
+    overflow: hidden;
   }
 
   form{

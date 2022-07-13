@@ -51,7 +51,6 @@
     text-decoration: none;
     color: white;
   }
-
   
   ::-webkit-scrollbar{
     width: 5px;
