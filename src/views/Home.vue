@@ -13,7 +13,7 @@
       </p>
       <div class="content-everyone">
         <div class="iphone-img">
-          <img src="../assets/iphone-x.png" alt="">
+          <img src="../assets/iphone-x-app.png" alt="">
         </div>
         <div class="content-everyone-text">
           <p class="text-title">Whether your goal is:</p>
@@ -34,11 +34,19 @@
           <p class="text">
             <b>7</b>FIT provides the <b>support</b> and <b>motivation</b> people<br> 
             need to reach their wellness goals and take <br> 
-            control of their health — <b>anytime, anywhere, <br> 
-            any age, any fitness level.</b> 
+            control of their health — anytime, anywhere, <br> 
+            any age, any fitness level.
+          </p>
+          <p class="text">
+            <b>7</b>FIT provides personalized fitness programs <br> 
+            for building strength, losing weight, increasing <br> 
+            flexibility, and conquering pain.
           </p>
         </div>
       </div>
+    </div>
+    <div class="contact">
+      
     </div>
   </div>
 </template> 
@@ -91,8 +99,9 @@ export default {
 
   .exercises{
     background-color: rgb(36, 36, 36);
-    height: 100rem;
+    height: 55rem;
     border-top: 3px solid white;
+    border-bottom: 3px solid white;
   }
   .exercises p{
     font-size: 2.5rem;
@@ -101,7 +110,9 @@ export default {
     position: relative;
     top: 2rem;
   }
-
+  .contact{
+    height: 100rem;
+  }
 
   .content-everyone{
     margin-top: 5rem;
@@ -110,11 +121,11 @@ export default {
   }
   .iphone-img{
      position: relative;
-     right: 8em;
-     top: 2rem;
+     right: 7rem;
+     top: 1.5rem;
   }
   .iphone-img img{
-    width: 30rem;
+    width: 18rem;
 
   }
   .content-everyone-text{
@@ -160,6 +171,7 @@ export default {
       font-size: 2.5rem;
       top: 25rem;
     }
+    
   }
 
   @media only screen and (max-width: 1450px){
@@ -170,6 +182,31 @@ export default {
   @media only screen and (max-width: 1200px){
     .image-1 img{
       left: 0;
+    }
+    .content-everyone-text{
+      left: 3rem;
+    }
+    .iphone-img{
+      right: 3.5rem;
+    }
+  }
+  @media only screen and (max-width: 1040px){
+    .iphone-img{
+      right: 2rem;
+    }
+    .iphone-img img{
+      width: 17rem;
+    }
+    .content-everyone-text{
+      left: 2rem;
+
+    }
+    .content-everyone-text .text{
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    .content-everyone-text .text-title{
+      margin-left: -18rem;
     }
   }
   @media only screen and (max-width: 1050px){
