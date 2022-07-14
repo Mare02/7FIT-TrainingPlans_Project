@@ -36,6 +36,7 @@
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
+          this.$router.push('/home')
         });
       },
       async register(payload){
@@ -84,8 +85,8 @@
     background-image: linear-gradient(
       -90deg, 
       rgb(24, 24, 24) 0%, 
-      rgb(68, 0, 0) 30%, 
-      rgb(24, 24, 24) 60%, 
+      rgb(24, 24, 24) 30%, 
+      rgb(24, 24, 24) 35%, 
       rgb(24, 24, 24) 100%
     );  
     animation: AnimateBG 20s ease infinite;
