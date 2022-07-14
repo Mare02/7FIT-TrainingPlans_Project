@@ -9,12 +9,36 @@
     </div>
     <div class="exercises">
       <p>
-        Choose a category that best suits <br> the workout you're searching for.
+        Improving Health with Fitness for <b>Everyone</b> 
       </p>
-        <div class="image-2">
-          <!-- <img src="../assets/workout_squats.gif" alt=""> -->
-          <img src="../assets/workout.gif" alt="">
+      <div class="content-everyone">
+        <div class="iphone-img">
+          <img src="../assets/iphone-x.png" alt="">
         </div>
+        <div class="content-everyone-text">
+          <p class="text-title">Whether your goal is:</p>
+          <ul>
+            <li>
+              <img src="../assets/next.png" alt="">
+              Weight Loss
+            </li>
+            <li>
+              <img src="../assets/next.png" alt="">
+              Muscle Gain
+            </li>
+            <li>
+              <img src="../assets/next.png" alt="">
+              Increased Endurance
+            </li>
+          </ul>
+          <p class="text">
+            <b>7</b>FIT provides the <b>support</b> and <b>motivation</b> people<br> 
+            need to reach their wellness goals and take <br> 
+            control of their health — <b>anytime, anywhere, <br> 
+            any age, any fitness level.</b> 
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template> 
@@ -66,30 +90,65 @@ export default {
   }
 
   .exercises{
-    background-color: rgb(49, 49, 49);
-    height: 40rem;
-    border-radius: 20px;
-    border-style:groove;
+    background-color: rgb(36, 36, 36);
+    height: 100rem;
+    border-top: 3px solid white;
   }
   .exercises p{
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     font-weight: 100;
     text-align: center;
     position: relative;
     top: 2rem;
   }
 
-  .image-2{
-    display: flex;
-    justify-content: space-around;
-  }
-  .image-2 img{
-    border: 2px solid #b9b9b9;
-    border-radius: 20px;
-    position: relative;
-    margin-left: 5rem;
-    margin-right: 5rem;
+
+  .content-everyone{
     margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+  }
+  .iphone-img{
+     position: relative;
+     right: 8em;
+     top: 2rem;
+  }
+  .iphone-img img{
+    width: 30rem;
+
+  }
+  .content-everyone-text{
+    position: relative;
+    left: 4rem;
+  }
+  .content-everyone-text .text-title{
+    margin-left: -22rem;
+    font-size: 2rem;
+  }
+  .content-everyone-text ul{
+    position: relative;
+    top: 2rem;
+    left: 1rem;
+    color: white;
+    list-style: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+    color: rgb(212, 212, 212);
+  }
+  .content-everyone-text li{
+    margin-top: 2rem;
+  }
+  .content-everyone-text img{
+    position: relative;
+    top: 2px;
+    right: 10px;
+    width: 20px;
+    filter: invert();
+  }
+  .content-everyone-text .text{
+    margin-top: 2rem;
+    font-size: 2rem;
+    text-align: left;
   }
 
   

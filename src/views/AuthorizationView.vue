@@ -36,7 +36,7 @@
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
-          this.$router.push('/home')
+          this.$router.push('/')
         });
       },
       async register(payload){

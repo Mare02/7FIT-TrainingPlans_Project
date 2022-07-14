@@ -21,7 +21,7 @@ export default {
       description: '',
       muscles: [1, 2, 3],
       level: 2,
-      goals: [1, 2, 3]
+      goals: [1, 2]
     }
   },
   methods:{
