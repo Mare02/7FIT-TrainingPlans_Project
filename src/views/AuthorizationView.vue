@@ -7,8 +7,7 @@
       <p>Registered successfuly! <br> You can now log in.</p>
     </div>
     <LoginComponent @loginData="login" :show="this.show" @emit_show="changeShow"/>
-    <RegisterComponent :show="!this.show" @emit_show="changeShow" @reg-data="register"/>
-    
+    <RegisterComponent :show="!this.show" :show_reg_inputs2="show_reg_inputs2" @emit_show="changeShow" @reg-data="register" @validation-data="formValidation"/>
   </div>
 </template>
 
@@ -23,7 +22,8 @@
     },
     data(){
       return{
-        show: true
+        show: true,
+        show_reg_inputs2: false
       }
     },
     components:{
@@ -31,6 +31,14 @@
       RegisterComponent
     },
     methods:{
+      async formValidation(payload){
+        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', payload)
+        .then(res => {
+          if(res.status === 200){
+            this.show_reg_inputs2 = true
+          }
+        })
+      },
       async login(payload){
         axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
         .then(res => {

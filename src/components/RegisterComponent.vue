@@ -4,25 +4,39 @@
     <form>
       <div class="register-div">
         <div class="wrap">
-          <div class="input-div">
-            <input type="text" placeholder="Email" v-model="reg_data.email" required/>
+          <div class="reg-inputs-1" v-if="!show_reg_inputs_2">
+            <div class="input-div">
+              <input type="text" placeholder="Email" v-model="reg_data.basic.email" required/>
+            </div>
+            <div class="input-div">
+              <input type="text" placeholder="Name" v-model="reg_data.basic.name" required/>
+            </div>
+            <div class="input-div">
+              <input type="text" placeholder="Username" v-model="reg_data.basic.username" required/>
+            </div>
+            <div class="input-div">
+              <input type="password" placeholder="Password" v-model="reg_data.basic.password" required/>
+            </div>
+            <div class="input-div">
+              <input type="password" placeholder="Password (confirm)" v-model="reg_data.basic.password_confirm" required/>
+            </div>
           </div>
-          <div class="input-div">
-            <input type="text" placeholder="Name" v-model="reg_data.name" required/>
-          </div>
-           <div class="input-div">
-            <input type="text" placeholder="Username" v-model="reg_data.username" required/>
-          </div>
-          <div class="input-div">
-            <input type="password" placeholder="Password" v-model="reg_data.password" required/>
-          </div>
-          <div class="input-div">
-            <input type="password" placeholder="Password (confirm)" v-model="reg_data.password_confirm" required/>
+          <div class="reg-inputs-2" v-if="show_reg_inputs_2">
+            <div class="input-div">
+              <input type="text" placeholder="Weight" v-model="reg_data.weight" required/>
+            </div>
+            <div class="input-div">
+              <input type="text" placeholder="Height" v-model="reg_data.height" required/>
+            </div>
           </div>
         </div>
       </div>
     </form>
-    <button @click="emit_reg_data" class="reg-btn">Submit</button>
+    <div class="form-buttons">
+      <button @click="checkInputs" id="next-btn" class="reg-btn">next</button>
+      <button @click="emit_reg_data" class="reg-btn" v-if="show_reg_inputs_2">Submit</button>
+    </div>
+    
     <div class="login-option">
 			<p>Already have an account?</p>
 			<button class="login-btn" @click="emit_show">Sign In</button>
@@ -33,18 +47,23 @@
 <script>
 export default {
   props:[
-    'show'
+    'show',
+    'show_reg_inputs2'
   ],
   data(){
     return{
+      show_reg_inputs_2: false,
+
       reg_data:{
-        email: '',
-        name: '',
-        username: '',
-        password: '',
-        password_confirm: '',
-        weight: '60',
-        height: '180',
+        basic:{
+          email: '',
+          name: '',
+          username: '',
+          password: '',
+          password_confirm: '',
+        },
+        weight: '',
+        height: '',
         bday: '2002-07-02',
         sex: '1'
       }     
@@ -52,11 +71,11 @@ export default {
   },
   methods:{
     emit_reg_data(){
-      this.$emit('reg-data', {email: this.reg_data.email,
-                              name: this.reg_data.name,
-                              username: this.reg_data.username,
-                              password: this.reg_data.password,
-                              password_confirm: this.reg_data.password_confirm,
+      this.$emit('reg-data', {email: this.reg_data.basic.email,
+                              name: this.reg_data.basic.name,
+                              username: this.reg_data.basic.username,
+                              password: this.reg_data.basic.password,
+                              password_confirm: this.reg_data.basic.password_confirm,
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
                               bday: this.reg_data.bday,
@@ -65,7 +84,39 @@ export default {
     },
     emit_show(){
       this.$emit('emit_show')
-    }
+    },
+    checkInputs(){
+      if(this.checkIfEmpty() == false){
+        console.log('checkIfEmpty func works');
+        this.$emit('validation-data', {email: this.reg_data.basic.email,
+                                       username: this.reg_data.basic.username,
+                                       password: this.reg_data.basic.password,
+                                       password_confirm: this.reg_data.basic.password_confirm
+        })
+        this.show_reg_inputs_2 = !this.show_reg_inputs_2;
+
+        let button = document.getElementById('next-btn')
+        if(this.show_reg_inputs_2 === true){
+          button.innerText = 'back'
+        }
+        if(this.show_reg_inputs_2 === false){
+          button.innerText = 'next'
+        }
+      }
+      else{
+        console.log('u didnt fill all the inputs');
+      }
+    },
+    checkIfEmpty(){
+      if(this.reg_data.basic.email == '' || this.reg_data.basic.name == '' || this.reg_data.basic.username == '' || this.reg_data.basic.password == '' || this.reg_data.basic.password_confirm == ''){
+        console.log('there are empty inputs');
+        return true
+      }
+      if(this.reg_data.basic.email != '' || this.reg_data.basic.name != '' || this.reg_data.basic.username != '' || this.reg_data.basic.password != '' || this.reg_data.basic.password_confirm != ''){
+        console.log('there are no empty inputs');
+        return false
+      }
+    },
   }
 }
 </script>
@@ -79,6 +130,10 @@ export default {
   form{
     display: flex;
     justify-content: center;
+  }
+  .form-buttons button{
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   .container .title {
     font-family: "Bebas Neue", cursive;

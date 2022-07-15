@@ -45,19 +45,19 @@
         </div>
       </div>
     </div>
-    <div class="contact">
-      
-    </div>
+    <FooterComponent/>
   </div>
 </template> 
 
 <script>
 import NavbarComponent from '../components/NavbarComponent.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 
 export default {
   name: 'Home',
   components: {
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   },
   mounted(){
     
@@ -197,9 +197,11 @@ export default {
     .iphone-img img{
       width: 17rem;
     }
+    .exercises{
+      height: 54rem;
+    }
     .content-everyone-text{
       left: 2rem;
-
     }
     .content-everyone-text .text{
       font-size: 1.8rem;
@@ -209,6 +211,31 @@ export default {
       margin-left: -18rem;
     }
   }
+  @media only screen and (max-width: 900px){
+    .exercises{
+      height: 100rem;
+    }
+    .content-everyone{
+      display: grid;
+    }
+    .content-everyone-text{
+      left: 0px;
+      position: relative;
+      bottom: 52rem;
+    }
+    .iphone-img{
+      position: relative;
+      top: 38rem;
+      right: 0px;
+      display: flex;
+      justify-content: center;
+    }
+    .iphone-img img{
+      width: 25rem;
+    }
+  }
+
+
   @media only screen and (max-width: 1050px){
     .image-1 img{
       left: initial;
