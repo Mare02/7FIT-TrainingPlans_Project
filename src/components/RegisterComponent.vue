@@ -28,12 +28,27 @@
             <div class="input-div">
               <input type="text" placeholder="Height" v-model="reg_data.height" required/>
             </div>
+            <div class="input-div">
+              <div>
+                <label>year: </label>
+                <input type="number" v-model="date.year">
+              </div>
+              <div>
+                <label>month: </label>
+                <input type="number" v-model="date.month">
+              </div>
+              <div>
+                <label>day: </label>
+                <input type="number" v-model="date.day">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </form>
+
     <div class="form-buttons">
-      <button @click="checkInputs" id="next-btn" class="reg-btn">next</button>
+      <button @click="changeShowRegInputs2" id="next-btn" class="reg-btn">next</button>
       <button @click="emit_reg_data" class="reg-btn" v-if="show_reg_inputs_2">Submit</button>
     </div>
     
@@ -48,11 +63,16 @@
 export default {
   props:[
     'show',
-    'show_reg_inputs2'
   ],
   data(){
     return{
       show_reg_inputs_2: false,
+
+      date:{
+        year: null,
+        month: null,
+        day: null
+      },
 
       reg_data:{
         basic:{
@@ -62,9 +82,8 @@ export default {
           password: '',
           password_confirm: '',
         },
-        weight: '',
-        height: '',
-        bday: '2002-07-02',
+        weight: '60',
+        height: '180',
         sex: '1'
       }     
     }
@@ -78,45 +97,24 @@ export default {
                               password_confirm: this.reg_data.basic.password_confirm,
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
-                              bday: this.reg_data.bday,
+                              bday: String(`${this.date.year + '/' + this.date.month + '/' + this.date.day}`),
                               sex: this.reg_data.sex
       })
     },
     emit_show(){
       this.$emit('emit_show')
     },
-    checkInputs(){
-      if(this.checkIfEmpty() == false){
-        console.log('checkIfEmpty func works');
-        this.$emit('validation-data', {email: this.reg_data.basic.email,
-                                       username: this.reg_data.basic.username,
-                                       password: this.reg_data.basic.password,
-                                       password_confirm: this.reg_data.basic.password_confirm
-        })
-        this.show_reg_inputs_2 = !this.show_reg_inputs_2;
+    changeShowRegInputs2(){
+      this.show_reg_inputs_2 = !this.show_reg_inputs_2
 
-        let button = document.getElementById('next-btn')
-        if(this.show_reg_inputs_2 === true){
-          button.innerText = 'back'
-        }
-        if(this.show_reg_inputs_2 === false){
-          button.innerText = 'next'
-        }
+      let button = document.getElementById('next-btn')
+      if(this.show_reg_inputs_2 == true){
+        button.innerText = 'back'
       }
       else{
-        console.log('u didnt fill all the inputs');
+        button.innerText = 'next'
       }
-    },
-    checkIfEmpty(){
-      if(this.reg_data.basic.email == '' || this.reg_data.basic.name == '' || this.reg_data.basic.username == '' || this.reg_data.basic.password == '' || this.reg_data.basic.password_confirm == ''){
-        console.log('there are empty inputs');
-        return true
-      }
-      if(this.reg_data.basic.email != '' || this.reg_data.basic.name != '' || this.reg_data.basic.username != '' || this.reg_data.basic.password != '' || this.reg_data.basic.password_confirm != ''){
-        console.log('there are no empty inputs');
-        return false
-      }
-    },
+    }
   }
 }
 </script>

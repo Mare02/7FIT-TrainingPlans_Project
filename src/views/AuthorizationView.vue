@@ -7,7 +7,7 @@
       <p>Registered successfuly! <br> You can now log in.</p>
     </div>
     <LoginComponent @loginData="login" :show="this.show" @emit_show="changeShow"/>
-    <RegisterComponent :show="!this.show" :show_reg_inputs2="show_reg_inputs2" @emit_show="changeShow" @reg-data="register" @validation-data="formValidation"/>
+    <RegisterComponent :show="!this.show" @emit_show="changeShow" @reg-data="register"/>
   </div>
 </template>
 
@@ -23,7 +23,6 @@
     data(){
       return{
         show: true,
-        show_reg_inputs2: false
       }
     },
     components:{
@@ -34,9 +33,7 @@
       async formValidation(payload){
         await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', payload)
         .then(res => {
-          if(res.status === 200){
-            this.show_reg_inputs2 = true
-          }
+          console.log(res);
         })
       },
       async login(payload){
@@ -48,12 +45,13 @@
         });
       },
       async register(payload){
+        console.log('reg ulaz');
         await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register', payload)
         .then(res => {
+          console.log(res);
           if(res.status == 200){
             this.show = !this.show;
           }
-
           let msg = document.getElementById('msg')
           msg.classList.remove('hidden');
           msg.classList.add('fade-down');
