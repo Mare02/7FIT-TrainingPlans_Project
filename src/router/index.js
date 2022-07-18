@@ -2,11 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import test_vezbe from '../views/test_vezbe.vue'
+import store from '../store'
 
 const routes = [{
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+
     },
     {
         path: '/about',
@@ -34,4 +36,8 @@ const router = createRouter({
     routes
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.name == 'Home' && store.isLoggedIn != true) next({ name: 'Login' })
+    else next()
+})
 export default router

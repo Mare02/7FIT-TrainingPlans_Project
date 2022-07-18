@@ -47,6 +47,7 @@
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
+          localStorage.setItem('isLoggedIn', true)
           this.$router.push('/')
         });
       },

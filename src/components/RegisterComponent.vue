@@ -44,7 +44,7 @@
             </div>
             <div class="input-div">
               <label for="cars">Gender:</label>
-              <select id="goals" v-model="sex">
+              <select id="goals" @change="sex">
                 <option value="1">Male</option>
                 <option value="2">Female</option>
               </select>
@@ -91,7 +91,7 @@ export default {
         },
         weight: '60',
         height: '180',
-        sex: ''
+        sex: null
       }     
     }
   },
@@ -104,7 +104,7 @@ export default {
                               password_confirm: this.reg_data.basic.password_confirm,
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
-                              bday: String(`${this.date.year + '-' + ('0' + this.date.month) + '-' + this.date.day}`),
+                              bday: String(`${this.date.year + '-' + ('0' + this.date.month) + '-' + ('0' + this.date.day)}`),
                               sex: this.reg_data.sex
       })
     },
