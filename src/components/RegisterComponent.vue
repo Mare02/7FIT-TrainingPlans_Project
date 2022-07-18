@@ -42,13 +42,20 @@
                 <input type="number" v-model="date.day">
               </div>
             </div>
+            <div class="input-div">
+              <label for="cars">Gender:</label>
+              <select id="goals" v-model="sex">
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
     </form>
 
     <div class="form-buttons">
-      <button @click="changeShowRegInputs2" id="next-btn" class="reg-btn">next</button>
+      <button @click="checkInputs" id="next-btn" class="reg-btn">next</button>
       <button @click="emit_reg_data" class="reg-btn" v-if="show_reg_inputs_2">Submit</button>
     </div>
     
@@ -84,7 +91,7 @@ export default {
         },
         weight: '60',
         height: '180',
-        sex: '1'
+        sex: ''
       }     
     }
   },
@@ -114,6 +121,14 @@ export default {
       else{
         button.innerText = 'next'
       }
+    },
+    checkInputs(){
+      
+      this.$emit('form_check', {funcChange: this.changeShowRegInputs2,
+                                email: this.reg_data.basic.email,
+                                username: this.reg_data.basic.username,
+                                password: this.reg_data.basic.password,
+                                password_confirm: this.reg_data.basic.password_confirm})
     }
   }
 }

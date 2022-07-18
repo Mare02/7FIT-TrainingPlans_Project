@@ -7,7 +7,7 @@
       <p>Registered successfuly! <br> You can now log in.</p>
     </div>
     <LoginComponent @loginData="login" :show="this.show" @emit_show="changeShow"/>
-    <RegisterComponent :show="!this.show" @emit_show="changeShow" @reg-data="register"/>
+    <RegisterComponent :show="!this.show" @emit_show="changeShow" @reg-data="register" @form_check="formValidation"/>
   </div>
 </template>
 
@@ -30,10 +30,16 @@
       RegisterComponent
     },
     methods:{
-      async formValidation(payload){
-        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', payload)
+      async formValidation({funcChange, email, username, password, password_confirm}){
+        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm})
         .then(res => {
           console.log(res);
+          if(res.status == 200){
+            funcChange()
+          }
+          else{
+            console.log('jebem ti mater');
+          }
         })
       },
       async login(payload){
