@@ -29,18 +29,7 @@
               <input type="text" placeholder="Height" v-model="reg_data.height" required/>
             </div>
             <div class="input-div">
-              <div>
-                <label>year: </label>
-                <input type="number" v-model="date.year">
-              </div>
-              <div>
-                <label>month: </label>
-                <input type="number" v-model="date.month">
-              </div>
-              <div>
-                <label>day: </label>
-                <input type="number" v-model="date.day">
-              </div>
+              <input type="date" v-model="bday">
             </div>
             <div class="input-div">
               <label for="cars">Gender:</label>
@@ -73,13 +62,7 @@ export default {
   ],
   data(){
     return{
-      show_reg_inputs_2: false,
-
-      date:{
-        year: null,
-        month: null,
-        day: null
-      },
+      show_reg_inputs_2: true,
 
       reg_data:{
         basic:{
@@ -88,6 +71,7 @@ export default {
           username: '',
           password: '',
           password_confirm: '',
+          bday: null
         },
         weight: '60',
         height: '180',
@@ -104,7 +88,14 @@ export default {
                               password_confirm: this.reg_data.basic.password_confirm,
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
-                              bday: String(`${this.date.year + '-' + ('0' + this.date.month) + '-' + ('0' + this.date.day)}`),
+                              bday: this.reg_data.basic.bday,
+                              // bday: (() => {
+                              //   let date = this.reg_data.bday;
+                              //   let day = ("0" + date.getDate()).slice(-2);
+                              //   let month = ("0" + (date.getMonth() + 1)).slice(-2);
+                              //   let bday = date.getFullYear() + "-" + month + "-" + day;
+                              //   return bday;
+                              // }),
                               sex: this.reg_data.sex
       })
     },
