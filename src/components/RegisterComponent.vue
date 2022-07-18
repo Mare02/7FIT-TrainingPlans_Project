@@ -97,7 +97,7 @@ export default {
                               password_confirm: this.reg_data.basic.password_confirm,
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
-                              bday: String(`${this.date.year + '/' + this.date.month + '/' + this.date.day}`),
+                              bday: String(`${this.date.year + '-' + ('0' + this.date.month) + '-' + this.date.day}`),
                               sex: this.reg_data.sex
       })
     },
