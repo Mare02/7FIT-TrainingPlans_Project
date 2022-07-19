@@ -20,6 +20,9 @@
             <div class="input-div">
               <input type="password" placeholder="Password (confirm)" v-model="reg_data.basic.password_confirm" required/>
             </div>
+            <div class="input-div">
+              <input type="date" v-model="reg_data.basic.bday">
+            </div>
           </div>
           <div class="reg-inputs-2" v-if="show_reg_inputs_2">
             <div class="input-div">
@@ -28,13 +31,11 @@
             <div class="input-div">
               <input type="text" placeholder="Height" v-model="reg_data.height" required/>
             </div>
-            <div class="input-div">
-              <input type="date" v-model="reg_data.basic.bday">
-            </div>
+            
             <div class="input-div">
               <label for="cars">Gender:</label>
-              <select id="goals" @change="reg_data.sex">
-                <option value="1">Male</option>
+              <select id="goals" v-model="reg_data.sex">
+                <option value="1" selected>Male</option>
                 <option value="2">Female</option>
               </select>
             </div>
@@ -56,12 +57,17 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
   props:[
     'show',
   ],
   data(){
     return{
+      dayjs,
+
+
       show_reg_inputs_2: false,
 
       reg_data:{
@@ -71,11 +77,11 @@ export default {
           username: '',
           password: '',
           password_confirm: '',
-          bday: '2002-07-23'
+          bday: ''
         },
         weight: '60',
         height: '180',
-        sex: null
+        sex: ''
       }     
     }
   },
@@ -88,7 +94,7 @@ export default {
                               password_confirm: this.reg_data.basic.password_confirm,
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
-                              bday: this.reg_data.basic.bday,
+                              bday: dayjs(this.reg_data.basic.bday).format('YYYY-MM-DD'),
                               // bday: (() => {
                               //   let date = this.reg_data.bday;
                               //   let day = ("0" + date.getDate()).slice(-2);
@@ -114,13 +120,13 @@ export default {
       }
     },
     checkInputs(){
-      
       this.$emit('form_check', {funcChange: this.changeShowRegInputs2,
                                 email: this.reg_data.basic.email,
                                 username: this.reg_data.basic.username,
                                 password: this.reg_data.basic.password,
                                 password_confirm: this.reg_data.basic.password_confirm,
                                 bday: this.reg_data.basic.bday})
+      console.log(this.reg_data.sex);
     }
   }
 }

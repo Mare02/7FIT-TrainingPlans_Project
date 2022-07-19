@@ -31,11 +31,11 @@ const routes = [{
         name: 'AdminView',
         component: AdminView,
         // children: [{
-        //     path: '/admin/manage-users',
-        //     name: 'AdminManageUsers',
-        //     component: () =>
-        //     import ( /* webpackChunkName: "about" */ '../views/About.vue')
-        // }]
+        //         path: '/admin/manage-users',
+        //         name: 'AdminManageUsers',
+        //         component: () =>
+        //             import ('../components/AdminComponents/)
+        //             }]
     },
     {
         path: '/test',

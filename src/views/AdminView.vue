@@ -2,6 +2,14 @@
 <div class="background">
   <AdminMenu/>
 </div>
+<div>
+  <nav>
+    <router-link to="/login"></router-link>
+    <router-link></router-link>
+    <router-link></router-link>
+  </nav>
+  <router-view/>
+</div>
   
 </template>
 
