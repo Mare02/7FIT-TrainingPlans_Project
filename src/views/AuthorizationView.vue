@@ -15,7 +15,7 @@
   import LoginComponent from '../components/LoginComponent.vue'
   import RegisterComponent from '../components/RegisterComponent.vue'
   import axios from 'axios'
-  import dayjs from 'dayjs'
+
 
   export default {
     mounted(){

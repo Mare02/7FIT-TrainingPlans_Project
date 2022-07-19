@@ -30,12 +30,25 @@ const routes = [{
         path: '/admin',
         name: 'AdminView',
         component: AdminView,
-        // children: [{
-        //         path: '/admin/manage-users',
-        //         name: 'AdminManageUsers',
-        //         component: () =>
-        //             import ('../components/AdminComponents/)
-        //             }]
+        children: [{
+                path: '/admin/manage-users',
+                name: 'AdminManageUsers',
+                component: () =>
+                    import ('../components/AdminComponents/adminEditWorkers')
+            },
+            {
+                path: '/admin/manage-plans',
+                name: 'AdminManagePlans',
+                component: () =>
+                    import ('../components/AdminComponents/adminManagePlans')
+            },
+            {
+                path: '/admin/manage-exercises',
+                name: 'AdminManageExercises',
+                component: () =>
+                    import ('../components/AdminComponents/adminManageExercises')
+            }
+        ]
     },
     {
         path: '/test',
