@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import test_vezbe from '../views/test_vezbe.vue'
+import AdminView from '../views/AdminView.vue'
 import store from '../store'
 
 const routes = [{
@@ -22,7 +23,19 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
-        component: AuthorizationView
+        component: AuthorizationView,
+
+    },
+    {
+        path: '/admin',
+        name: 'AdminView',
+        component: AdminView,
+        // children: [{
+        //     path: '/admin/manage-users',
+        //     name: 'AdminManageUsers',
+        //     component: () =>
+        //     import ( /* webpackChunkName: "about" */ '../views/About.vue')
+        // }]
     },
     {
         path: '/test',
@@ -36,8 +49,8 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.name == 'Home' && store.isLoggedIn != true) next({ name: 'Login' })
-    else next()
-})
+// router.beforeEach((to, from, next) => {
+//     if (to.name == 'Home' && store.isLoggedIn != true) next({ name: 'Login' })
+//     else next()
+// })
 export default router

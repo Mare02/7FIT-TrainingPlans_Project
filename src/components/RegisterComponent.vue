@@ -71,7 +71,7 @@ export default {
           username: '',
           password: '',
           password_confirm: '',
-          bday: null
+          bday: '2002-07-23'
         },
         weight: '60',
         height: '180',
