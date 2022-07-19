@@ -34,19 +34,19 @@ const routes = [{
                 path: '/admin/manage-users',
                 name: 'AdminManageUsers',
                 component: () =>
-                    import ('../components/AdminComponents/adminEditWorkers')
+                    import ('../components/AdminComponents/adminEditUsers.vue')
             },
             {
                 path: '/admin/manage-plans',
                 name: 'AdminManagePlans',
                 component: () =>
-                    import ('../components/AdminComponents/adminManagePlans')
+                    import ('../components/AdminComponents/adminManagePlans.vue')
             },
             {
                 path: '/admin/manage-exercises',
                 name: 'AdminManageExercises',
                 component: () =>
-                    import ('../components/AdminComponents/adminManageExercises')
+                    import ('../components/AdminComponents/adminManageExercises.vue')
             }
         ]
     },

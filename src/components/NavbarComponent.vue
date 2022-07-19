@@ -6,7 +6,7 @@
       <div class="list-div">
         <ul class="nav-list">
           <li>
-            <a href="/about">about us</a> 
+            <a href="/admin">admin</a> 
           </li>
           <li>
             <a href="/login">sign in</a>
