@@ -85,10 +85,11 @@ export default {
     border-bottom: 1px solid rgb(192, 192, 192);
   }
   .menu-list li:hover{
-    box-shadow: 0 0 5px 10px rgb(87, 0, 0);
-    clip-path: inset(0px -15px 0px 0px);
+    /* box-shadow: 0 0 5px 10px rgb(87, 0, 0);
+    clip-path: inset(0px -15px 0px 0px); */
     background-color: #eb2626;
-    transition: 0.5s;
+    border-radius: 10px;
+    transition: 0.3s;
     cursor: pointer;
     position: relative;
     left: 1rem;
