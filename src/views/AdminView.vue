@@ -2,25 +2,26 @@
 <div class="background">
   <nav class="nav">
     <div class="menu-logo">
-      <img src="../assets/logo.png" alt="">
+      <img class="menu-icon" src="../assets/icons/menu.png" alt="">
+      <img class="logo" src="../assets/logo.png" alt="">
     </div>
     <ul class="menu-list">
       <router-link to="/admin/manage-users">
         <li>
-          <img class="menu-img" src="../assets/user.png" alt="">
-          <span>manage users</span>
+          <img class="menu-img" src="../assets/icons/user.png" alt="">
+          <span>users</span>
         </li>
       </router-link>
       <router-link to="/admin/manage-plans">
         <li>
-          <img class="menu-img" src="../assets/planning.png" alt="">
-          <span>manage plans</span>
+          <img class="menu-img" src="../assets/icons/planning.png" alt="">
+          <span>plans</span>
         </li>
       </router-link>
       <router-link to="/admin/manage-exercises">
         <li>
-          <img class="menu-img" src="../assets/exercise.png" alt="">
-          <span>manage exercises</span>
+          <img class="menu-img" src="../assets/icons/exercise.png" alt="">
+          <span>exercises</span>
         </li>
       </router-link>
     </ul>
@@ -47,16 +48,27 @@ export default {
   }
   .background{
     height: 100vh;
-    background-color: rgb(68, 68, 68);
+    background-color: rgb(51, 51, 51);
   }
-  .menu-logo img{
-    width: 6rem;
+
+  .menu-logo .menu-icon{
     margin-left: 1rem;
+    width: 2rem;
+    filter: invert();
+  }
+  .menu-logo .logo{
+    width: 6rem;
+    margin-left: 4rem;
   }
    .menu-logo{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-right: 1px solid rgb(192, 192, 192);
     background-color: rgb(39, 39, 39);
     border-bottom: 2px solid white;
   }
+
   .nav{
     color: white;
     background-color: rgb(60, 60, 60);
@@ -70,6 +82,7 @@ export default {
     display: flex;
     justify-content: left;
     align-items: center;
+    border-bottom: 1px solid rgb(192, 192, 192);
   }
   .menu-list li:hover{
     box-shadow: 0 0 5px 10px rgb(87, 0, 0);
@@ -77,7 +90,8 @@ export default {
     background-color: #eb2626;
     transition: 0.5s;
     cursor: pointer;
-    width: 100%;
+    position: relative;
+    left: 1rem;
   }
 
   .menu-img{
