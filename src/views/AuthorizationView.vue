@@ -30,8 +30,8 @@
       RegisterComponent
     },
     methods:{
-      async formValidation({funcChange, email, username, password, password_confirm}){
-        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm})
+      async formValidation({funcChange, email, username, password, password_confirm, bday}){
+        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm, bday})
         .then(res => {
           console.log(res);
           if(res.status == 200){

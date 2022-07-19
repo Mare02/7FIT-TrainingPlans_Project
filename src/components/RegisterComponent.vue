@@ -29,11 +29,11 @@
               <input type="text" placeholder="Height" v-model="reg_data.height" required/>
             </div>
             <div class="input-div">
-              <input type="date" v-model="bday">
+              <input type="date" v-model="reg_data.basic.bday">
             </div>
             <div class="input-div">
               <label for="cars">Gender:</label>
-              <select id="goals" @change="sex">
+              <select id="goals" @change="reg_data.sex">
                 <option value="1">Male</option>
                 <option value="2">Female</option>
               </select>
@@ -62,7 +62,7 @@ export default {
   ],
   data(){
     return{
-      show_reg_inputs_2: true,
+      show_reg_inputs_2: false,
 
       reg_data:{
         basic:{
@@ -119,7 +119,8 @@ export default {
                                 email: this.reg_data.basic.email,
                                 username: this.reg_data.basic.username,
                                 password: this.reg_data.basic.password,
-                                password_confirm: this.reg_data.basic.password_confirm})
+                                password_confirm: this.reg_data.basic.password_confirm,
+                                bday: this.reg_data.basic.bday})
     }
   }
 }
