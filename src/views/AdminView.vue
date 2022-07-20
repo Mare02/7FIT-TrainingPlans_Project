@@ -103,7 +103,7 @@ export default {
     background-color: rgb(48, 48, 48);
     height: 100vh;
     width: 16rem;
-    box-shadow: 0 0 10px 0.5px gray;
+    box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
   }
   .menu-list li{
     border-radius: 10px;
@@ -118,7 +118,7 @@ export default {
   .menu-list li:hover{
     /* clip-path: inset(0px -15px 0px 0px); */
     /* box-shadow: 0 0 10px 0.5px gray; */
-    background-color: #850202;
+    background-color: #940000;
     border-radius: 10px;
     transition: 0.3s;
     cursor: pointer; 
