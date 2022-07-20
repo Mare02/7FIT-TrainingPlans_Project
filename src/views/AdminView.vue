@@ -98,6 +98,7 @@ export default {
   }
 
   .nav{
+    /* overflow: hidden; */
     position: fixed;
     color: white;
     background-color: rgb(48, 48, 48);
@@ -113,7 +114,8 @@ export default {
     display: flex;
     justify-content: left;
     align-items: center;
-    box-shadow: 0 0 20px 0.5px rgb(31, 31, 31);;
+    box-shadow: 0 0 20px 0.5px rgb(19, 19, 19);
+    border-bottom: 1px solid rgb(192, 192, 192);
   }
   .menu-list li:hover{
     /* clip-path: inset(0px -15px 0px 0px); */
@@ -137,6 +139,7 @@ export default {
     border-radius: 10px;
   }
 
-
-
+  .nav-active{
+    width: 16rem;
+  } 
 </style>
