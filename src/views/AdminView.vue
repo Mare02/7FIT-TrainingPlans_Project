@@ -60,13 +60,16 @@ export default {
   }
 }
 </script>
-
 <style scoped>
+
+  
   .container{
     position: absolute;
     background-color: rgb(36, 36, 36);
-    height: 100%;
+    min-height: 100%;
     width: 100%;
+
+
   }
   
   span{
@@ -104,6 +107,10 @@ export default {
     height: 100vh;
     width: 16rem;
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
+    z-index:999;
+  }
+  .menu-list{
+     
   }
   .menu-list li{
     border-radius: 10px;
@@ -113,8 +120,10 @@ export default {
     display: flex;
     justify-content: left;
     align-items: center;
-    box-shadow: 0 0 20px 0.5px rgb(31, 31, 31);;
+    box-shadow: 0 0 20px 0.5px rgb(31, 31, 31);
+   
   }
+  
   .menu-list li:hover{
     /* clip-path: inset(0px -15px 0px 0px); */
     /* box-shadow: 0 0 10px 0.5px gray; */
