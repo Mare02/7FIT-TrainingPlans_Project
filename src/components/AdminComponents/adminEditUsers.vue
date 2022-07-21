@@ -12,15 +12,18 @@
           </div>
           <p><label>Name: </label>{{user.usr_name}}</p>
           <p><label>Username: </label>{{user.usr_username}}</p>
-          <p><label>Birthday: </label>{{user.usr_bday}}</p>
         </div>
         <div class="item-active" v-if="showExtraInfo === index">
           <div class="user-profile-active">
             <img :src="user.file_url" alt="">
           </div>
-          <p><label>Name: </label>{{user.usr_name}}</p>
-          <p><label>Username: </label>{{user.usr_username}}</p>
-          <p><label>Birthday: </label>{{user.usr_bday}}</p>
+          <div>
+            <p><label>Name: </label>{{user.usr_name}}</p>
+            <p><label>Username: </label>{{user.usr_username}}</p>
+            <p><label>Email: </label>{{user.usr_email}}</p>
+            <p><label>Birthday: </label>{{user.usr_bday}}</p>  
+            <p><label>Joined: </label>{{user.usr_joined}}</p>
+          </div>  
         </div>
       </li>
     </ul>
@@ -72,11 +75,11 @@ export default {
     pointer-events: none;
     color: rgb(230, 230, 230);
     font-family: 'Bebas Neue', cursive;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   p{
     pointer-events: none;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .title{
@@ -103,34 +106,44 @@ export default {
     list-style: none;
     
   }
-  .users-list p{
-    pointer-events: none;
-    margin-left: 2rem;
-  }
+
   .users-list li {
     background-color: rgb(48, 48, 48);
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
   }
   .users-list li:hover{
+    background-color: rgb(62, 62, 62);
     cursor: pointer;
   }
   .item-inactive{
     min-height: 5.5rem;
-    width: 40rem;
+    width: 50rem;
     margin-top: 1rem;
     display: flex;
     align-items: center;
   }
+  .item-inactive p{
+    pointer-events: none;
+    margin-left: 2rem;
+  }
   .item-active{
     height: 20rem;
     border-radius: 10px;
-    width: 40rem;
+    width: 50rem;
     margin-top: 1rem;
-    display: grid;
-    vertical-align: top;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: rgb(62, 62, 62);
     border-top: 2px solid #eb2626;
     border-bottom: 2px solid #eb2626;
     transition: height 2s;
+  }
+  .item-active p{
+    margin-top: 1rem;
+  }
+  .item-active div{
+    margin-right: 2rem;
   }
   .users-list .user-profile{
     pointer-events: none;
