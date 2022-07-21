@@ -60,8 +60,9 @@ export default {
   }
 }
 </script>
-
 <style scoped>
+
+  
   .container{
     position: absolute;
     background-color: rgb(77, 77, 77);
@@ -104,6 +105,10 @@ export default {
     height: 100vh;
     width: 15rem;
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
+    z-index:999;
+  }
+  .menu-list{
+     
   }
   .menu-list li{
     /* border-radius: 10px; */
@@ -113,8 +118,11 @@ export default {
     display: flex;
     justify-content: left;
     align-items: center;
-    box-shadow: 0 0 20px 0.5px rgb(19, 19, 19);
+    /* box-shadow: 0 0 20px 0.5px rgb(19, 19, 19); */
+    box-shadow: 0 0 20px 0.5px rgb(31, 31, 31);
+   
   }
+  
   .menu-list li:hover{
     background-color: #940000;
     transition: 0.3s;

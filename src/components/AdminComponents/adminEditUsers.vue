@@ -31,7 +31,22 @@
         </div>
       </li>
     </ul>
-    <div class="create-container">
+    <div>
+      <table>
+        <tr>
+          <th>Name:</th>
+          <th>Username:</th>
+          <th>Email:</th>
+          <th>Birthday:</th>
+        </tr>
+        <tr>
+          <td v-for="user in users" :key="user.usr_id">
+            <div>
+            </div>{{user.usr_id}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="create-container" v-if="false">
 
     </div>
   </div>
