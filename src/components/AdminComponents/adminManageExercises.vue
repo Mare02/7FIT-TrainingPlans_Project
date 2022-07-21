@@ -2,26 +2,30 @@
     <div class="container">
         <div class="exerises-list-wrapper">
             <ul class="exercises-list">
-                <li  v-for="(exercise, exe_id) in this.allExercises" @click="setActiveExercise(exe_id)" :key="exercise.exe_id">
-                    <div v-if="isExpanded !== exe_id" class="exercise">
+                <li  v-for="(exercise, index) in this.allExercises"  :key="exercise.exe_id" >
+                    <div  v-if="isExpanded !== index" class="exercise" @click="setActiveExercise(index)">
                         <div class="exercise-picture">
                             <img :src=exercise.file_url alt="">
                         </div>
                         <p>Name: {{exercise.exe_name}}</p>
                         <p>Level: {{exercise.lev_name}}</p>   
-                    </div>     
-                    <div v-if="isExpanded === exe_id" class="exercise-expanded">
-                        <div class="exercise-picture-expanded">
+                    </div>    
+                    <div v-if="isExpanded === index" class="exercise-expanded" >
+                        <div class="exercise-expanded-picture">
                             <img :src=exercise.file_url alt="">
                         </div>
-                        <div class="exercise-content">
+                        <div class="exercise-expanded-content">
                             <p>Name:{{exercise.exe_name}}</p>
                             <p>Level: {{exercise.lev_name}}</p>
-                            <p>Goals: {{exercise.name}} </p>
-                            <p>Muscles: {{exercise.name}} </p>
-                            <p>Description: {{exercise.description}} </p>
+                            <p>Goals: {{exercise.goals}} </p>
+                            <p>Muscles: {{exercise.muscles}} </p>
+                            <p>Description: {{exercise.exe_desc}} </p>
                         </div>
-
+                        <div class="exercise-expanded-buttons">
+                            <button id="exercise-expanded-button-edit" @click="this.isEdit = index">EDIT EXERCISE</button>
+                            <button id="exercise-expanded-button-delete">DELETE EXERCISE</button>
+                        </div>
+                        <span class="close-button" @click="setActiveExercise(null)">❌</span>
                     </div>
                 </li>
             </ul>
@@ -39,7 +43,8 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            isExpanded: '',
+            isExpanded: null,
+            isEdit:false,
             allExercises: [],
         }
     },
@@ -58,8 +63,8 @@ export default {
                 console.log(error);
             }            
         },
-        setActiveExercise(exe_id){
-            this.isExpanded = exe_id;
+        setActiveExercise(index){
+            this.isExpanded == index ? this.isExpanded = null : this.isExpanded = index
         }
     }
 }
@@ -143,21 +148,37 @@ export default {
     border-radius: 10px;
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
     width: 100%;
-    height: 35rem;
+    max-height: 35rem;
     margin-top: 3rem;
-    
+    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     align-items: top;
     border-top: 1px solid rgb(192, 192, 192);
     border-bottom: 1px solid rgb(192, 192, 192);
     padding: 2rem;
+    transition: height 300ms;
+    position: relative;
 }
-.exercise-content{
-    width: 50%;
+.exercise-expanded-content{
+    width: 40%;
     display: block;
 }
+.exercise-expanded-buttons{
+    display: flex;
+    flex-direction: column;   
+    justify-content: space-around;
+    z-index: 1;
+}
+.exercise-expanded-buttons button{
+    width: 10rem;
+    height: 4rem;
+    margin: 1rem 0 1rem 0;
+}
 
+#exercise-expanded-button-delete:hover{
+    background-color: gray;
+}
 .exercise-expanded p{
     margin: 15px;
     max-width: 70%;
@@ -167,5 +188,15 @@ export default {
     max-height: 15rem;
     border-radius: 5%;
 }
-
+.close-button{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    opacity: 0.5;  
+}
+.close-button:hover{
+    opacity: 1;
+}
 </style>
