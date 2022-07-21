@@ -65,7 +65,7 @@ export default {
   .container{
     position: absolute;
     background-color: rgb(36, 36, 36);
-    height: 100%;
+    min-height: 100%;
     width: 100%;
   }
   
@@ -88,7 +88,6 @@ export default {
     margin-left: 4rem;
   }
    .menu-logo{
-    border-bottom-right-radius: 20px;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -98,7 +97,7 @@ export default {
   }
 
   .nav{
-    /* overflow: hidden; */
+    z-index: 999;
     position: fixed;
     color: white;
     background-color: rgb(48, 48, 48);
@@ -107,7 +106,7 @@ export default {
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
   }
   .menu-list li{
-    border-radius: 10px;
+    /* border-radius: 10px; */
     margin-top: 0.5rem;
     width: 100%;
     height: 5.5rem;
@@ -115,13 +114,9 @@ export default {
     justify-content: left;
     align-items: center;
     box-shadow: 0 0 20px 0.5px rgb(19, 19, 19);
-    border-bottom: 1px solid rgb(192, 192, 192);
   }
   .menu-list li:hover{
-    /* clip-path: inset(0px -15px 0px 0px); */
-    /* box-shadow: 0 0 10px 0.5px gray; */
     background-color: #940000;
-    border-radius: 10px;
     transition: 0.3s;
     cursor: pointer; 
   }
@@ -134,9 +129,7 @@ export default {
   }
   .active{
     background-color: #eb2626;
-    position: relative;
-    left: 1rem;
-    border-radius: 10px;
+    transform: translateX(1rem);
   }
 
   .nav-active{
