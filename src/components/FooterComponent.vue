@@ -50,7 +50,7 @@ export default {
     list-style: none;
   }
   .footer-list li{
-    margin-right: 1.5rem;
+    margin-right: 1rem;
   }
   .footer-list li img{
     position: relative;
@@ -59,5 +59,17 @@ export default {
   }
   .footer-list .email{
     font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  @media only screen and (max-width: 800px){
+    .footer-contact{
+      font-size: 1.3rem;
+    }
+    .footer-list .email{
+      font-size: 1.2rem;
+    }
+    .footer-list ul img{
+      width: 1.5rem;
+    }
   }
 </style>

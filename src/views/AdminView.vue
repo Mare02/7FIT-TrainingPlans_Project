@@ -64,7 +64,7 @@ export default {
 <style scoped>
   .container{
     position: absolute;
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(77, 77, 77);
     min-height: 100%;
     width: 100%;
   }
@@ -102,14 +102,14 @@ export default {
     color: white;
     background-color: rgb(48, 48, 48);
     height: 100vh;
-    width: 16rem;
+    width: 15rem;
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
   }
   .menu-list li{
     /* border-radius: 10px; */
     margin-top: 0.5rem;
     width: 100%;
-    height: 5.5rem;
+    height: 3.5rem;
     display: flex;
     justify-content: left;
     align-items: center;

@@ -173,7 +173,42 @@ export default {
     }
     
   }
-
+  @media only screen and (max-width: 600px){
+    .content-everyone .content-everyone-text .text{
+      font-size: 1.7rem;
+    }
+    .content-everyone .content-everyone-text .text-title{
+      font-size: 1.8rem;
+      margin-left: 0;
+      text-align: left;
+      margin-left: 0.3rem;
+    }
+    .exercises p{
+      font-size: 2rem;
+    }
+    .content-everyone .content-everyone-text ul{
+      display: grid;
+      text-align: left;
+    }
+  }
+  @media only screen and (max-width: 480px){
+    .container .exercises{
+      height: 105rem;
+    }
+    .content-everyone .content-everyone-text .text{
+      font-size: 1.6rem;
+    }
+  }
+  @media only screen and (max-width: 470px){
+    .content-everyone .iphone-img{
+      top: 42rem;
+    }
+  }
+  @media only screen and (max-width: 468px){
+    .content-everyone .iphone-img{
+      top: 43rem;
+    }
+  }
   @media only screen and (max-width: 1450px){
     .image-1 img{
       left: 5%;

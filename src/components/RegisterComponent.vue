@@ -157,7 +157,7 @@ export default {
     position: relative;
     bottom: 4.5rem;
     text-align: left;
-    padding-top: 9rem;
+    padding-top: 5.5rem;
   }
 
   .register-div {

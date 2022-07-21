@@ -23,11 +23,15 @@
             <p><label>Email: </label>{{user.usr_email}}</p>
             <p><label>Birthday: </label>{{user.usr_bday}}</p>  
             <p><label>Joined: </label>{{user.usr_joined}}</p>
+            <p><label>Gender: </label>{{user.sex_name}}</p>
+          </div>
+          <div class="button">
+            <button class="btn-delete">Delete</button>
           </div>  
         </div>
       </li>
     </ul>
-    <div class="create-container" v-if="false">
+    <div class="create-container">
 
     </div>
   </div>
@@ -50,6 +54,9 @@ export default {
       showExtraInfo: null,
       allUsers: []
     }
+  },
+  computed(){
+    
   },
   methods:{
     async getAllUsers(){
@@ -75,11 +82,11 @@ export default {
     pointer-events: none;
     color: rgb(230, 230, 230);
     font-family: 'Bebas Neue', cursive;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   p{
     pointer-events: none;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .title{
@@ -116,7 +123,7 @@ export default {
     cursor: pointer;
   }
   .item-inactive{
-    min-height: 5.5rem;
+    min-height: 3.5rem;
     width: 50rem;
     margin-top: 1rem;
     display: flex;
@@ -151,8 +158,8 @@ export default {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    width: 4rem;
-    height: 4rem;
+    width: 3.2rem;
+    height: 3.2rem;
     border: 2px solid rgb(192, 192, 192);
     border-radius: 100%;
   }
@@ -163,7 +170,7 @@ export default {
   }
   .users-list .user-profile-active{
     pointer-events: none;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     margin-top: 1rem;
     display: flex;
     justify-content: center;
@@ -175,12 +182,12 @@ export default {
   }
   .create-container{
     position: fixed;
-    right: 1.7rem;
+    right: 6.5rem;
+    top: 2.3rem;
     margin-top: 2rem;
     width: 37.3rem;
-    height: 30rem;
+    height: 52.5rem;
     background-color: rgb(48, 48, 48);
-    border-radius: 10px;
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
   }
 </style>
