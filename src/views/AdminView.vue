@@ -178,7 +178,7 @@ export default {
   }
   
   .menu-list li:hover{
-    background-color: #525252;
+    background-color: #750000;
     transition: 0.3s;
     cursor: pointer; 
   }
@@ -202,7 +202,7 @@ export default {
       width: 10rem;
     }
     .nav-title p{
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     .nav-title img{
       margin-left: 0.2rem;
@@ -218,7 +218,7 @@ export default {
       width: 100%;
     }
     .nav{
-      background-color: rgb(48, 48, 48, 0.5);
+      background-color: rgb(48, 48, 48, 0.8);
       overflow: hidden;
       width: 100%;
       height: auto;
