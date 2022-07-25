@@ -115,7 +115,7 @@ export default {
     z-index: 999;
     position: absolute;
     height: 100vh;
-    overflow-y: hidden;
+    overflow: hidden;
   } 
   .nav-title{
     height: 4rem;
