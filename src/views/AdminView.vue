@@ -37,7 +37,7 @@
       </ul>
     </nav>
   </div>
-<div class="container">
+<div class="router-container">
   <router-view/>
 </div>
 
@@ -133,7 +133,7 @@ export default {
     width: 4rem;
     margin-left: 0.6rem;
   }
-  .container{
+  .router-container{
     overflow: hidden;
     position: absolute;
     background-color: rgb(77, 77, 77);
@@ -207,13 +207,13 @@ export default {
   }
 
   @media (min-width: 650px){
-    .container{
-      padding-left: 5.5rem;
+    .router-container{
+      padding-left: 11.5rem;
     }
   }
   @media (min-width: 900px){
-    .container{
-      padding-left: 8rem;
+    .router-container{
+      padding-left: 16.5rem;
     }
   }
   @media (max-width: 900px){
