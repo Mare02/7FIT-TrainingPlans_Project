@@ -16,6 +16,7 @@
   import RegisterComponent from '../components/RegisterComponent.vue'
   import axios from 'axios'
 
+
   export default {
     mounted(){
 
@@ -30,8 +31,8 @@
       RegisterComponent
     },
     methods:{
-      async formValidation({funcChange, email, username, password, password_confirm}){
-        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm})
+      async formValidation({funcChange, email, username, password, password_confirm, bday}){
+        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm, bday})
         .then(res => {
           console.log(res);
           if(res.status == 200){
@@ -47,6 +48,7 @@
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
+          localStorage.setItem('isLoggedIn', true)
           this.$router.push('/')
         });
       },
