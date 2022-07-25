@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title">
-      <label>Users</label>
+      <label>Users: </label>
     </div>
     <div class="tools">
       <div>
@@ -18,18 +18,23 @@
     </div>
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
-        <div class="user-profile">
-          <img :src="user.file_url" alt="">
+        <div class="info-wrapper">
+          <div class="user-profile">
+            <img :src="user.file_url" alt="">
+          </div>
+          <div class="user-info">
+            <div>
+              <label>name: </label>
+              <p>{{user.usr_name}}</p>
+            </div>
+            <div>
+              <label>email: </label>
+              <p>{{user.usr_email}}</p>
+            </div>
+          </div>
         </div>
-        <div class="user-info">
-          <div>
-            <label>name: </label>
-            <p>{{user.usr_name}}</p>
-          </div>
-          <div>
-            <label>username: </label>
-            <p>{{user.usr_username}}</p>
-          </div>
+        <div class="button-wrapper">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
       </li>
     </ul>
@@ -77,16 +82,26 @@ export default {
   .container{
     position: relative;
     background: transparent;
-    padding-left: 1rem;
+    padding-top: 2rem;
   }
   .users-list{
     list-style: none;
     margin-top: 2rem;
-    /* margin-left: 12rem; */
+  }
+  .info-wrapper{
+    display: flex;
+    align-items: center;
+  }
+  .users-list .user-info div{
+    display: flex;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    position: relative;
+    bottom: 0.25rem;
   }
   .users-list li{
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     height: 5rem;
     width: 40rem;
@@ -110,11 +125,16 @@ export default {
     height: 100%;
   }
   .title label{
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   .tools{
     display: flex;
     align-items: center;
+    margin-top: 1rem;
+  }
+  .fa-ellipsis-vertical{
+    filter: invert();
+    
   }
   @media (max-width: 650px){
     .container{

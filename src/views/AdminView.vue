@@ -139,7 +139,7 @@ export default {
     background-color: rgb(77, 77, 77);
     min-height: 100%;
     width: 100%;
-    padding-left: 1rem;
+    padding-left: 0.5rem;
   }
   
   span{
@@ -208,12 +208,12 @@ export default {
 
   @media (min-width: 650px){
     .container{
-      padding-left: 11rem;
+      padding-left: 5.5rem;
     }
   }
   @media (min-width: 900px){
     .container{
-      padding-left: 17rem;
+      padding-left: 8rem;
     }
   }
   @media (max-width: 900px){
@@ -229,11 +229,6 @@ export default {
     .nav-title img{
       margin-left: 0.2rem;
       width: 2.3rem;
-    }
-  }
-  @media (min-width: 650px){
-    .container{
-      
     }
   }
   @media (max-width: 650px){
