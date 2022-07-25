@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="users-container">
     <div class="title">
       <label>Users: </label>
     </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="button-wrapper">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
         </div>
       </li>
     </ul>
@@ -79,7 +79,7 @@ export default {
   label{
     font-family: 'Bebas Neue', cursive;
   }
-  .container{
+  .users-container{
     position: relative;
     background: transparent;
     padding-top: 2rem;
@@ -137,7 +137,7 @@ export default {
     
   }
   @media (max-width: 650px){
-    .container{
+    .users-container{
       padding-top: 5rem;
     }
     .users-list{
