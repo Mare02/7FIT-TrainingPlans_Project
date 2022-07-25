@@ -12,8 +12,8 @@
            <option value="3">User</option>
         </select>
       </div>
-      <button @click="getAllUsers(this.sortParams.role,
-                                  this.sortParams.sex)">Sort</button>
+      <button @click="getAllUsers({role: this.sortParams.role,
+                                  sex: this.sortParams.sex})">Sort</button>
       <!-- <div>
         <label>search: </label>
         <input type="text">
@@ -69,7 +69,11 @@ export default {
   },
   methods:{
     async getAllUsers(param){
-      console.log(param);
+      let sortParams = new FormData()
+      for(let i of arguments){
+        console.log(i);
+      }
+      
       try {
         if(param === undefined){
           await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter')
