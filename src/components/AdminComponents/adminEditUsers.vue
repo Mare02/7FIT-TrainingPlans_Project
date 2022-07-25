@@ -3,7 +3,7 @@
     <div class="title">
       <label>Users: </label>
     </div>
-    <div class="tools">
+    <!-- <div class="tools">
       <div>
         <label>Role:</label>
         <select>
@@ -15,7 +15,7 @@
         <label>search: </label>
         <input type="text">
       </div>
-    </div>
+    </div> -->
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
         <div class="info-wrapper">
@@ -33,9 +33,10 @@
             </div>
           </div>
         </div>
-        <div class="button-wrapper">
+        <span class="button-wrapper">
           <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
-        </div>
+        </span>
+          
       </li>
     </ul>
   </div>
@@ -87,6 +88,7 @@ export default {
   .users-list{
     list-style: none;
     margin-top: 2rem;
+    max-width: 50rem;
   }
   .info-wrapper{
     display: flex;
@@ -104,7 +106,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 5rem;
-    width: 40rem;
     background: transparent;
     border-top: 1px solid rgb(145, 145, 145);
   }
@@ -132,10 +133,16 @@ export default {
     align-items: center;
     margin-top: 1rem;
   }
-  .fa-ellipsis-vertical{
-    filter: invert();
-    
+  .button-wrapper{
+    margin-right: 1.5rem;
+    border-radius: 100%;
   }
+  .button-wrapper:hover{
+    color: red;
+    cursor: pointer;
+    background-color: gray;
+  }
+  
   @media (max-width: 650px){
     .users-container{
       padding-top: 5rem;
