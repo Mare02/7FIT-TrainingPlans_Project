@@ -1,6 +1,5 @@
 <template>
-<div class="container">
-  <div class="nav-container">
+<div class="nav-container">
     <div class="nav-title">
       <div class="open-nav-btn" id="open-nav-btn" @click="openNav">
         <div></div>
@@ -38,11 +37,14 @@
       </ul>
     </nav>
   </div>
+<div class="container">
+  <router-view/>
 </div>
-<router-view/>
+
 </template>
 
 <script>
+import $ from 'jquery'
 
 export default {
   data(){
@@ -50,11 +52,11 @@ export default {
       showNavbar: true,
     }
   },
+  mounted(){
+    window.addEventListener('resize', this.resizeNav)
+  },
   components:{
     
-  },
-  computed(){
-
   },
   methods:{
     selectActive(event){
@@ -72,6 +74,12 @@ export default {
     },
     openNav(){
       this.showNavbar = !this.showNavbar      
+    },
+    resizeNav(e){
+      if($(window).height() > 650){
+        this.showNavbar = true
+      }
+      
     }
   }
 }
@@ -105,6 +113,9 @@ export default {
     box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
     position: fixed;
     z-index: 999;
+    position: absolute;
+    height: 100vh;
+    overflow-y: hidden;
   } 
   .nav-title{
     height: 4rem;
@@ -128,6 +139,7 @@ export default {
     background-color: rgb(77, 77, 77);
     min-height: 100%;
     width: 100%;
+    padding-left: 1rem;
   }
   
   span{
@@ -194,6 +206,16 @@ export default {
     transform: translateX(1rem);
   }
 
+  @media (min-width: 650px){
+    .container{
+      padding-left: 11rem;
+    }
+  }
+  @media (min-width: 900px){
+    .container{
+      padding-left: 17rem;
+    }
+  }
   @media (max-width: 900px){
     .nav{
       width: 10rem;
@@ -207,6 +229,11 @@ export default {
     .nav-title img{
       margin-left: 0.2rem;
       width: 2.3rem;
+    }
+  }
+  @media (min-width: 650px){
+    .container{
+      
     }
   }
   @media (max-width: 650px){

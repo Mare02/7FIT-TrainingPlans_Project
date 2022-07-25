@@ -15,7 +15,6 @@
         <label>search: </label>
         <input type="text">
       </div>
-      
     </div>
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
@@ -78,11 +77,12 @@ export default {
   .container{
     position: relative;
     background: transparent;
+    padding-left: 1rem;
   }
   .users-list{
     list-style: none;
     margin-top: 2rem;
-    margin-left: 12rem;
+    /* margin-left: 12rem; */
   }
   .users-list li{
     display: flex;
@@ -109,10 +109,15 @@ export default {
     width: auto;
     height: 100%;
   }
-
+  .title label{
+    font-size: 1.3rem;
+  }
+  .tools{
+    display: flex;
+    align-items: center;
+  }
   @media (max-width: 650px){
     .container{
-      padding-left: 1rem;
       padding-top: 5rem;
     }
     .users-list{
