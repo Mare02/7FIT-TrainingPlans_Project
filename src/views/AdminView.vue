@@ -10,25 +10,25 @@
     </div>
     <nav class="nav" id="nav" v-if="showNavbar">  
       <ul class="menu-list">
-        <router-link to="/admin/manage-users">
+        <router-link to="/admin/manage-users" @click="closeNavOnSelect()">
           <li id="item-users" @click="selectActive">
             <img class="menu-img" src="../assets/icons/user.png" alt="">
             <span>users</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-plans">
+        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
           <li id="item-plans" @click="selectActive">
             <img class="menu-img" src="../assets/icons/planning.png" alt="">
             <span>plans</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-exercises">
+        <router-link to="/admin/manage-exercises" @click="closeNavOnSelect()">
           <li id="item-exercises" @click="selectActive">
             <img class="menu-img" src="../assets/icons/exercise.png" alt="">
             <span>exercises</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-users">
+        <router-link to="/admin/manage-users" @click="closeNavOnSelect()">
           <li id="item-statistics" @click="selectActive">
             <img class="menu-img" src="../assets/icons/statistics.png" alt="">
             <span>statistics</span>
@@ -75,8 +75,13 @@ export default {
     openNav(){
       this.showNavbar = !this.showNavbar      
     },
+    closeNavOnSelect(){
+      if($(window).width() <= 650){
+        this.showNavbar = false
+      }
+    },
     resizeNav(e){
-      if($(window).height() > 650){
+      if($(window).width() > 650){
         this.showNavbar = true
       }
       
@@ -110,14 +115,14 @@ export default {
   }
 
   .nav-container{
-    box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
+    /* width: 16rem; */
     position: fixed;
-    z-index: 999;
-    position: absolute;
-    height: 100vh;
-    overflow: hidden;
+    z-index: 1;
+    
+    height: auto;
   } 
   .nav-title{
+    box-shadow: 7px 4px 5px -2px rgb(39, 39, 39);
     height: 4rem;
     display: flex;
     width: 15rem;
@@ -170,12 +175,12 @@ export default {
   }
 
   .nav{
+    box-shadow: 7px 0 5px -2px rgb(39, 39, 39);
     z-index: 999;
     color: white;
     background-color: rgb(48, 48, 48);
     height: 100vh;
     width: 15rem;
-    z-index:999;
   }
   
   .menu-list li{
@@ -240,7 +245,7 @@ export default {
       width: 100%;
     }
     .nav{
-      background-color: rgb(48, 48, 48, 0.8);
+      background-color: rgb(48, 48, 48, 0.9);
       overflow: hidden;
       width: 100%;
       height: auto;
@@ -268,7 +273,7 @@ export default {
     }
     .menu-list li{
       width: 100%;
-      justify-content: center;
+      justify-content: left;
     }
     .active{
       transform: translateX(0);
