@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import VueAnimateOnScroll from 'vue3-animate-onscroll';
 
-
 createApp(App).
 use(store).
 use(router).

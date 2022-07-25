@@ -7,27 +7,42 @@
 </div>
 </template>
 
+  <script>
+  export default{
+    components:{
+      
+    }
+  }
+  </script>
+  
+
   <style>
   *{
     padding: 0;
     margin: 0;
-    -webkit-user-select: none;
+    box-sizing: border-box;
     -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+    -khtml-user-select: none;
     -moz-user-select: none; 
     -ms-user-select: none; 
     user-select: none;    
   }
-  .nav-home, button{
+
+  button{
     font-family: 'Bebas Neue', cursive;
   }
+
   body{
-    background-color: rgb(0, 0, 0); 
     overflow-x: hidden;
     width: 100%;
     position: relative;
-  }
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+  } 
 
-  label, p{
+  label, input, p{
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
   }
@@ -36,7 +51,7 @@
     text-decoration: none;
     color: white;
   }
-
+  
   ::-webkit-scrollbar{
     width: 5px;
   }
@@ -44,7 +59,7 @@
     background-color: gray;
   }
   ::-webkit-scrollbar-thumb{
-    background-color: #ee441d;
+    background-color: #eb2626;
     border-radius: 20px;
   }
   ::-webkit-scrollbar-button{

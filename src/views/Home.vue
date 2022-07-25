@@ -1,19 +1,5 @@
 <template>
-    <nav class="nav-home">
-      <div>
-        <img src="../assets/logo.png" alt="">
-      </div>
-      <div class="list-div">
-        <ul class="nav-list">
-          <li>
-            <a href="/about">About us</a> 
-          </li>
-          <li>
-            <a href="/register">Sign up</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <NavbarComponent/>    
   <div class="container">
     <div class="content">
       <div class="image-1">
@@ -23,22 +9,55 @@
     </div>
     <div class="exercises">
       <p>
-        Choose a category that best suits <br> the workout you're searching for.
+        Improving Health with Fitness for <b>Everyone</b> 
       </p>
-        <div class="image-2">
-          <!-- <img src="../assets/workout_squats.gif" alt=""> -->
-          <img src="../assets/workout.gif" alt="">
+      <div class="content-everyone">
+        <div class="iphone-img">
+          <img src="../assets/iphone-x-app.png" alt="">
         </div>
+        <div class="content-everyone-text">
+          <p class="text-title">Whether your goal is:</p>
+          <ul>
+            <li>
+              <img src="../assets/next.png" alt="">
+              Weight Loss
+            </li>
+            <li>
+              <img src="../assets/next.png" alt="">
+              Muscle Gain
+            </li>
+            <li>
+              <img src="../assets/next.png" alt="">
+              Increased Endurance
+            </li>
+          </ul>
+          <p class="text">
+            <b>7</b>FIT provides the <b>support</b> and <b>motivation</b> people<br> 
+            need to reach their wellness goals and take <br> 
+            control of their health — anytime, anywhere, <br> 
+            any age, any fitness level.
+          </p>
+          <p class="text">
+            <b>7</b>FIT provides personalized fitness programs <br> 
+            for building strength, losing weight, increasing <br> 
+            flexibility, and conquering pain.
+          </p>
+        </div>
+      </div>
     </div>
+    <FooterComponent/>
   </div>
 </template> 
 
 <script>
+import NavbarComponent from '../components/NavbarComponent.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 
 export default {
   name: 'Home',
   components: {
-    
+    NavbarComponent,
+    FooterComponent
   },
   mounted(){
     
@@ -50,69 +69,6 @@ export default {
 </script>
 
 <style scoped> 
-  :root {
-    --red: #ee441d;
-  }
-
-  /* scroll animations */
-  .fade-right{
-    
-  }
-
-  .nav-home{
-    position: sticky;
-    top: 0;
-    height: 4.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1;
-  }
-  .nav-home img{
-    width: 7rem;
-    margin-left: 1rem;
-    margin-top: 4px;
-  }
-  .nav-list{
-    font-size: 1.8rem;
-    display: flex;
-    color: white;
-    list-style: none;
-  }
-  .nav-list li {
-    position: relative;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: 1.5rem;
-    text-shadow: 0 0 10px black;
-  }
-
-  .nav-list a:hover {
-    transition: 0.5s;
-    color:#ee441d;
-  }
-
-  .nav-list a::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #ee441d;
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-  }
-
-  .nav-list a:hover::before {
-    transform: scaleX(1);
-  }
-  .list-div{
-    margin-right: 1.5rem;
-  }
-
   .content{
     display: flex;
     justify-content: center;
@@ -126,7 +82,7 @@ export default {
     text-align: center;
   }
   b{
-    color: #ee441d;
+    color: #eb2626;
   }
 
   .image-1{
@@ -142,30 +98,68 @@ export default {
   }
 
   .exercises{
-    background-color: rgb(49, 49, 49);
-    height: 40rem;
-    border-top-right-radius: 100px;
-    border-top-style:groove;
+    background-color: rgb(36, 36, 36);
+    height: 55rem;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
   }
   .exercises p{
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     font-weight: 100;
     text-align: center;
     position: relative;
     top: 2rem;
   }
-
-  .image-2{
-    display: flex;
-    justify-content: space-around;
+  .contact{
+    height: 100rem;
   }
-  .image-2 img{
-    border: 2px solid #b9b9b9;
-    border-radius: 20px;
-    position: relative;
-    margin-left: 5rem;
-    margin-right: 5rem;
+
+  .content-everyone{
     margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+  }
+  .iphone-img{
+     position: relative;
+     right: 7rem;
+     top: 1.5rem;
+  }
+  .iphone-img img{
+    width: 18rem;
+
+  }
+  .content-everyone-text{
+    position: relative;
+    left: 4rem;
+  }
+  .content-everyone-text .text-title{
+    margin-left: -22rem;
+    font-size: 2rem;
+  }
+  .content-everyone-text ul{
+    position: relative;
+    top: 2rem;
+    left: 1rem;
+    color: white;
+    list-style: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+    color: rgb(212, 212, 212);
+  }
+  .content-everyone-text li{
+    margin-top: 2rem;
+  }
+  .content-everyone-text img{
+    position: relative;
+    top: 2px;
+    right: 10px;
+    width: 20px;
+    filter: invert();
+  }
+  .content-everyone-text .text{
+    margin-top: 2rem;
+    font-size: 2rem;
+    text-align: left;
   }
 
   
@@ -177,14 +171,44 @@ export default {
       font-size: 2.5rem;
       top: 25rem;
     }
-    .nav-list{
-      font-size: 1.5rem;
+    
+  }
+  @media only screen and (max-width: 600px){
+    .content-everyone .content-everyone-text .text{
+      font-size: 1.7rem;
     }
-    .nav-home img{
-      width: 5rem;
+    .content-everyone .content-everyone-text .text-title{
+      font-size: 1.8rem;
+      margin-left: 0;
+      text-align: left;
+      margin-left: 0.3rem;
+    }
+    .exercises p{
+      font-size: 2rem;
+    }
+    .content-everyone .content-everyone-text ul{
+      display: grid;
+      text-align: left;
     }
   }
-
+  @media only screen and (max-width: 480px){
+    .container .exercises{
+      height: 105rem;
+    }
+    .content-everyone .content-everyone-text .text{
+      font-size: 1.6rem;
+    }
+  }
+  @media only screen and (max-width: 470px){
+    .content-everyone .iphone-img{
+      top: 42rem;
+    }
+  }
+  @media only screen and (max-width: 468px){
+    .content-everyone .iphone-img{
+      top: 43rem;
+    }
+  }
   @media only screen and (max-width: 1450px){
     .image-1 img{
       left: 5%;
@@ -194,7 +218,59 @@ export default {
     .image-1 img{
       left: 0;
     }
+    .content-everyone-text{
+      left: 3rem;
+    }
+    .iphone-img{
+      right: 3.5rem;
+    }
   }
+  @media only screen and (max-width: 1040px){
+    .iphone-img{
+      right: 2rem;
+    }
+    .iphone-img img{
+      width: 17rem;
+    }
+    .exercises{
+      height: 54rem;
+    }
+    .content-everyone-text{
+      left: 2rem;
+    }
+    .content-everyone-text .text{
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    .content-everyone-text .text-title{
+      margin-left: -18rem;
+    }
+  }
+  @media only screen and (max-width: 900px){
+    .exercises{
+      height: 100rem;
+    }
+    .content-everyone{
+      display: grid;
+    }
+    .content-everyone-text{
+      left: 0px;
+      position: relative;
+      bottom: 52rem;
+    }
+    .iphone-img{
+      position: relative;
+      top: 38rem;
+      right: 0px;
+      display: flex;
+      justify-content: center;
+    }
+    .iphone-img img{
+      width: 25rem;
+    }
+  }
+
+
   @media only screen and (max-width: 1050px){
     .image-1 img{
       left: initial;
