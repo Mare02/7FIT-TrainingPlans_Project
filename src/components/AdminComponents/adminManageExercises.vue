@@ -2,28 +2,31 @@
     <div class="container">
         <div class="exerises-list-wrapper">
             <ul class="exercises-list">
-                <li  v-for="(exercise, index) in this.allExercises"  :key="exercise.exe_id" >
-                    <div  v-if="isExpanded !== index" class="exercise" @click="setActiveExercise(index)">
+                <li v-for="(exercise, index) in this.allExercises" :key="exercise.exe_id">
+                    <div v-if="isExpanded !== index" class="exercise" @click="setActiveExercise(index)">
                         <div class="exercise-picture">
                             <img :src=exercise.file_url alt="">
                         </div>
                         <p>Name: {{exercise.exe_name}}</p>
-                        <p>Level: {{exercise.lev_name}}</p>   
-                    </div>    
-                    <div v-if="isExpanded === index" class="exercise-expanded" >
+                        <p>Level: {{exercise.lev_name}}</p>
+                    </div>
+                    <div v-if="isExpanded === index" class="exercise-expanded">
                         <div class="exercise-expanded-picture">
                             <img :src=exercise.file_url alt="">
                         </div>
-                        <div class="exercise-expanded-content">
-                            <p>Name:{{exercise.exe_name}}</p>
-                            <p>Level: {{exercise.lev_name}}</p>
-                            <p>Goals: {{exercise.goals}} </p>
-                            <p>Muscles: {{exercise.muscles}} </p>
-                            <p>Description: {{exercise.exe_desc}} </p>
-                        </div>
-                        <div class="exercise-expanded-buttons">
-                            <button id="exercise-expanded-button-edit" @click="this.isEdit = index">EDIT EXERCISE</button>
-                            <button id="exercise-expanded-button-delete">DELETE EXERCISE</button>
+                        <div class="exercise-expanded-content-wrapper">
+                            <div class="exercise-expanded-content">
+                                <p>Name:{{exercise.exe_name}}</p>
+                                <p>Level: {{exercise.lev_name}}</p>
+                                <p>Goals: {{exercise.goals}} </p>
+                                <p>Muscles: {{exercise.muscles}} </p>
+                                <p>Description: {{exercise.exe_desc}} </p>
+                            </div>
+                            <div class="exercise-expanded-buttons">
+                                <button id="exercise-expanded-button-edit" @click="this.isEdit = index">EDIT
+                                    EXERCISE</button>
+                                <button id="exercise-expanded-button-delete" @click="deleteExericse">DELETE EXERCISE</button>
+                            </div>
                         </div>
                         <span class="close-button" @click="setActiveExercise(null)">❌</span>
                     </div>
@@ -65,6 +68,9 @@ export default {
         },
         setActiveExercise(index){
             this.isExpanded == index ? this.isExpanded = null : this.isExpanded = index
+        },
+        deleteExericse(){
+            confirm("Are you sure")
         }
     }
 }
@@ -79,7 +85,7 @@ export default {
     margin-left: 16rem;
     padding-left: 1rem;
     /* border: 1px solid black; */
-    width: 100vw;
+    width: 70vw;
 }
 .exerises-list-wrapper{
     margin: 0 2rem 2rem 2rem;
@@ -188,6 +194,9 @@ export default {
     max-height: 15rem;
     border-radius: 5%;
 }
+.exercise-expanded-content-wrapper{
+    display: flex;
+}
 .close-button{
     position: absolute;
     top: 10px;
@@ -195,8 +204,11 @@ export default {
     width: 32px;
     height: 32px;
     opacity: 0.5;  
+    color:black;
 }
 .close-button:hover{
     opacity: 1;
+    color: red
+    
 }
 </style>
