@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import test_vezbe from '../views/test_vezbe.vue'
 import AdminView from '../views/AdminView.vue'
+import TestHome from '../components/TestHome.vue'
 import store from '../store'
 
 const routes = [{
@@ -24,6 +25,12 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: AuthorizationView,
+
+    },
+    {
+        path: '/testhome',
+        name: 'TestHome',
+        component: TestHome,
 
     },
     {

@@ -7,9 +7,10 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^0.27.2",
     "core-js": "^3.6.5",
-    "dayjs": "^1.11.3",
+    "dayjs": "^1.11.4",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vue3-animate-onscroll": "^1.0.6",
