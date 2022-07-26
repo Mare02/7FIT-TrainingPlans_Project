@@ -3,7 +3,7 @@
   <div class="container">
     <div class="content">
       <div class="image-1">
-        <img src="../assets/guy.jpg" alt="">
+        <img src="../assets/guy_cut.jpg" alt="">
       </div>
       <p>Get the body <b>you</b> have <br> always dreamed about <b>.</b></p>
     </div>
@@ -56,11 +56,11 @@
         <div class="general">
         <div class="plancontent">
        <p  style="font-size:34px;"> <b>7</b>FIT does not ask you to be a <b>professional</b> or<br>
-that you have previous <b>experience in training</b> is<br> all we are looking for
-is the will, the desire, and leave<br> the <b>rest to us!</b></p>
+that you have previous <b>experience in training</b>,<br> all we are looking for
+is the will, the desire and leave<br> the <b>rest to us!</b></p>
  </div>
  <div class="planbutton">
-   <a href="#" @click=" apush()"><span>SELECT PLAN</span></a>
+   <a href="#" @click=" apush()"><span>start your plan</span></a>
  </div>
  </div>
         </div>
@@ -212,15 +212,18 @@ font-size: 45px;
     color: #eb2626;
   }
 
+  .container{
+    overflow-x: hidden;
+  }
   .image-1{
     display: flex;
     justify-content: center;
   }
   .image-1 img{
     opacity: 60%;
-    width: 100rem;
+    width: 38rem;
     position: relative;
-    top: -5rem;
+    /* top: -5rem; */
     left: 20%;
   }
 
@@ -323,22 +326,25 @@ font-size: 45px;
       height: 105rem;
     }
     .content-everyone .content-everyone-text .text{
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+      left: 0.2rem;
+      margin-top: 4rem;
     }
   }
   @media only screen and (max-width: 470px){
     .content-everyone .iphone-img{
       top: 42rem;
     }
+    .content-everyone .iphone-img img{
+      width: 22rem;
+    }
+    .content-everyone-text .text-title{
+      margin-top: 6rem;
+    }
   }
   @media only screen and (max-width: 468px){
     .content-everyone .iphone-img{
       top: 43rem;
-    }
-  }
-  @media only screen and (max-width: 1450px){
-    .image-1 img{
-      left: 5%;
     }
   }
   @media only screen and (max-width: 1200px){
