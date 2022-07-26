@@ -16,6 +16,7 @@
           <img src="../assets/iphone-x-app.png" alt="">
         </div>
         <div class="content-everyone-text">
+             <div class="exewrapper">
           <p class="text-title">Whether your goal is:</p>
           <ul>
             <li>
@@ -31,6 +32,7 @@
               Increased Endurance
             </li>
           </ul>
+                      </div>
           <p class="text">
             <b>7</b>FIT provides the <b>support</b> and <b>motivation</b> people<br> 
             need to reach their wellness goals and take <br> 
@@ -45,6 +47,25 @@
         </div>
       </div>
     </div>
+        <div class="wrapper1">
+
+        <div class="wrapper2">
+        <div class="imgwrap">
+          <img src="https://media.istockphoto.com/photos/handsome-power-athletic-man-turned-back-picture-id487768400?k=6&m=487768400&s=612x612&w=0&h=K_cR8V-9mkAI9QVMc4p9kTqgRqTseMBQ4bPOp-NnaUg=" alt="GymModelPhoto">
+        </div>
+        <div class="general">
+        <div class="plancontent">
+       <p  style="font-size:34px;"> <b>7</b>FIT does not ask you to be a <b>professional</b> or<br>
+that you have previous <b>experience in training</b> is<br> all we are looking for
+is the will, the desire, and leave<br> the <b>rest to us!</b></p>
+ </div>
+ <div class="planbutton">
+   <a href="#" @click=" apush()"><span>SELECT PLAN</span></a>
+ </div>
+ </div>
+        </div>
+        
+      </div>
     <FooterComponent/>
   </div>
 </template> 
@@ -63,12 +84,118 @@ export default {
     
   },
   methods:{
+       apush(){
+         this.$router.push('/login')
+       }
     
   }
 }
 </script>
 
 <style scoped> 
+
+.wrapper1{
+  display: flex;
+justify-content: center;
+
+}
+.wrapper2{
+  padding-top: 50px;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+}
+.general{
+  display: flex;
+  flex-direction: column;
+}
+
+.imgwrap{
+     position: relative;
+      right: 0px;
+      display: flex;
+      justify-content: center;
+}
+  .plancontent{
+    padding-top: 40px;
+  }
+
+a{
+  margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 60px;
+  line-height: 40px;
+  font-size: 28px;
+  font-weight: bold;
+ font-family: 'Bebas Neue', cursive;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+   border: 2px solid red;
+  border-radius: 20px;
+}
+
+a span{
+  position: relative;
+  z-index: 2;
+}
+
+a:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: red;
+  transition: all .50s;
+      border-radius: 20px;
+}
+
+a:hover{
+  color: #fff;
+}
+
+a:hover:after{
+  width: 100%;
+}
+  @media only screen and (max-width: 1100px){
+    .wrapper2{
+      
+      display: block;
+      align-items: center;
+    }
+    .planbutton{
+     display: flex;
+      justify-content: center;
+      padding-bottom: 90px;
+
+    }
+  }
+  
+  @media only screen and(max-width: 570px){
+    .exewrapper{
+      display: flex;
+      justify-content: center;
+
+
+
+    }
+  }
+
+.pwrap{
+font-size: 45px;
+
+}
   .content{
     display: flex;
     justify-content: center;
