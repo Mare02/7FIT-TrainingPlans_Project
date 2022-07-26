@@ -16,19 +16,19 @@
             <span>users</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
-          <li id="item-plans" @click="selectActive">
-            <img class="menu-img" src="../assets/icons/planning.png" alt="">
-            <span>plans</span>
-          </li>
-        </router-link>
         <router-link to="/admin/manage-exercises" @click="closeNavOnSelect()">
           <li id="item-exercises" @click="selectActive">
             <img class="menu-img" src="../assets/icons/exercise.png" alt="">
             <span>exercises</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-users" @click="closeNavOnSelect()">
+        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
+          <li id="item-plans" @click="selectActive">
+            <img class="menu-img" src="../assets/icons/planning.png" alt="">
+            <span>plans</span>
+          </li>
+        </router-link>  
+        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
           <li id="item-statistics" @click="selectActive">
             <img class="menu-img" src="../assets/icons/statistics.png" alt="">
             <span>statistics</span>
@@ -145,6 +145,7 @@ export default {
     min-height: 100%;
     width: 100%;
     padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   
   span{

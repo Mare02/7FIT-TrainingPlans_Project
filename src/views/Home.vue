@@ -403,7 +403,6 @@ font-size: 45px;
     }
   }
 
-
   @media only screen and (max-width: 1050px){
     .image-1 img{
       left: initial;

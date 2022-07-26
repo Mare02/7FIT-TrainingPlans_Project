@@ -1,170 +1,196 @@
 <template>
-    <div class="container">
-        <div class="exerises-list-wrapper">
-            <ul class="exercises-list">
-                <li  v-for="(exercise, exe_id) in this.allExercises" @click="setActiveExercise(exe_id)" :key="exercise.exe_id">
-                    <div v-if="isExpanded !== exe_id" class="exercise">
-                        <div class="exercise-picture">
-                            <img :src=exercise.file_url alt="">
-                        </div>
-                        <p>Name: {{exercise.exe_name}}</p>
-                        <p>Level: {{exercise.lev_name}}</p>   
-                    </div>     
-                    <div v-if="isExpanded === exe_id" class="exercise-expanded">
-                        <div class="exercise-picture-expanded">
-                            <img :src=exercise.file_url alt="">
-                        </div>
-                        <div class="exercise-content">
-                            <p>Name:{{exercise.exe_name}}</p>
-                            <p>Level: {{exercise.lev_name}}</p>
-                            <p>Goals: {{exercise.name}} </p>
-                            <p>Muscles: {{exercise.name}} </p>
-                            <p>Description: {{exercise.description}} </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="exercises-add-wrapper">
-            <div class="exercise-add">
-                ADD EXERCISE
-            </div>
-        </div>
+  <div class="exercises-container">
+    <div class="title">
+      <label>Exercises: </label>
     </div>
+    <div class="tools">
+      <!-- <div>
+        <label>Role:</label>
+        <select v-model="this.sortParams.role">
+          <option value="1">Admin</option>
+          <option value="2">Trainer</option>
+           <option value="3">User</option>
+        </select>
+      </div> -->
+      <button @click="getAllExercises({name: this.sortParams.name,
+                                    })">Sort</button>
+      <div>
+        <label>search: </label>
+        <input type="text" v-model="sortParams.name">
+      </div>
+    </div>
+    <ul class="exercises-list">
+      <li v-for="(exercise, index) in this.allExercises" :key="exercise.exe_id" :id="index">
+        <div class="info-wrapper">
+          <div class="exercise-image">
+            <img :src="exercise.file_url" alt="">
+          </div>
+          <div class="exercise-info">
+            <div>
+              <p>{{exercise.exe_name}}</p>
+            </div>
+            <div>
+              <label>Description: </label>
+              <p>{{exercise.exe_desc}}</p>
+            </div>
+          </div>
+        </div>
+        <span class="button-wrapper">
+          <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
+
 export default {
-    data(){
-        return{
-            isExpanded: '',
-            allExercises: [],
-        }
-    },
-    mounted(){
-        this.getAllExercises()
-    },
-    methods:{
-        async getAllExercises(){
-            try{
-                axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises')
-                .then(res => {
-                    console.log(res)
-                    this.allExercises = res.data.exercises
-            })
-            }catch(error){
-                console.log(error);
-            }            
-        },
-        setActiveExercise(exe_id){
-            this.isExpanded = exe_id;
-        }
+  props:[
+
+  ],
+  mounted(){
+    this.getAllExercises();
+  },
+  data(){
+    return{
+      allExercises: [],
+
+      sortParams:{
+        name: '' 
+      }
     }
+  },
+  computed(){
+    
+  },
+  methods:{
+    async getAllExercises(param){
+      console.log(param);
+      try {
+        if(param === undefined){
+          await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises')
+          .then(res => {
+            console.log(res);
+            this.allExercises = res.data.msg
+          })
+        }
+        if(param !== undefined){
+          await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises', {
+            params: param
+          })
+          .then(res => {
+            console.log(res);
+            this.allExercises = res.data.msg
+          })
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
 }
 </script>
 
 <style scoped>
-
-.container{
-    display: flex;
-    position: absolute;
-    margin:2rem, 2rem, 2rem;
-    margin-left: 16rem;
-    padding-left: 1rem;
-    /* border: 1px solid black; */
-    width: 100vw;
-}
-.exerises-list-wrapper{
-    margin: 0 2rem 2rem 2rem;
-    /* border: 1px solid black; */
-    width: 60%;
-}
-.exercises-add-wrapper{
-    border: 1px solid black;
-    min-width:  32rem;
+  label{
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+  .tools input{
+    color: black;
+  }
+  .exercises-container{
+    position: relative;
+    background: transparent;
+    padding-top: 2rem;
+  }
+  .exercises-list{
+    list-style: none;
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-right: 2rem;
-    
-}
-.exercises-list{
-    margin-right: 2rem;
-    list-style-type: none;
-}
-.exercises-list p{
-    margin-left: 2rem;
-    pointer-events: none;
-}
-.exercise{
-    background-color: rgb(48, 48, 48);
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
-    width: 100%;
-    height: 7rem;
-    margin-top: 3rem;
-    
+    max-width: 50rem;
+  }
+  .info-wrapper{
     display: flex;
     align-items: center;
-    border-top: 1px solid rgb(192, 192, 192);
-    border-bottom: 1px solid rgb(192, 192, 192);
-}
-.exercises-list .exercise-picture{
-    margin-left: 1rem;
+  }
+  .exercises-list .exercise-info div{
     display: flex;
-    overflow: hidden;
-    width: 5rem;
-    height: 5rem;
-    border: 2px solid rgb(192, 192, 192);
-    border-radius: 100%;
-}
-.exercise-picture{
-    
     margin-left: 1rem;
-    margin-right: 1rem;
+    margin-top: 0.5rem;
+    position: relative;
+    bottom: 0.25rem;
+  }
+  .exercises-list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10rem;
+    background: transparent;
+    border-top: 1px solid rgb(145, 145, 145);
+    background-color: rgb(65, 65, 65);
+  }
+  .exercise-image{
+    margin-left: 5px;
+    width: 8rem;
+    height: 8rem;
+    box-shadow: 0 0 2px 2px rgb(41, 41, 41);
+    overflow: hidden;
     display: flex;
     justify-content: center;
-    overflow: hidden;
-    min-width: 5rem;
-    min-height: 5rem;
-    border: 2px solid rgb(192, 192, 192);
-    border-radius: 100%;
-}
-.exercises-list button{
-    margin-right: 0;
-    margin-left: auto;
-    min-width: 6rem;
-    min-height: 2rem;
-    margin-right: 3rem;
-}
-.exercise-expanded{
-    background-color: rgb(48, 48, 48);
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0.5px rgb(0, 0, 0);
-    width: 100%;
-    height: 35rem;
-    margin-top: 3rem;
-    
+    align-items: center;
+  }
+  .exercise-image img{
+    object-fit: cover;
+    width: auto;
+    height: 100%;
+  }
+  .exercise-info p{
+    font-size: 1.2rem;
+  }
+  .exercise-info label{
+    font-size: 1.2rem;
+  }
+  .title label{
+    font-size: 1.7rem;
+    font-family: 'Bebas Neue', cursive;
+  }
+  .tools{
     display: flex;
-    flex-wrap: wrap;
-    align-items: top;
-    border-top: 1px solid rgb(192, 192, 192);
-    border-bottom: 1px solid rgb(192, 192, 192);
-    padding: 2rem;
-}
-.exercise-content{
-    width: 50%;
-    display: block;
-}
-
-.exercise-expanded p{
-    margin: 15px;
-    max-width: 70%;
-}
-.exercise-expanded img{
-    max-width: 15rem;
-    max-height: 15rem;
-    border-radius: 5%;
-}
-
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .button-wrapper{
+    margin-right: 1rem;
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+    color: white;
+  }
+  .button-wrapper:hover{
+    cursor: pointer;
+    background-color: gray;
+  }
+  .fa-ellipsis-vertical{
+    border-radius: 50%;
+    position: relative;
+    left: 1.3rem;
+    top: 1rem;
+    z-index: 2;
+  }
+  .fa-ellipsis-vertical:hover{
+    background-position: center;
+  }
+  
+  @media (max-width: 650px){
+    .exercises-container{
+      padding-top: 5rem;
+    }
+    .exercises-list{
+      margin-left: 0;
+    }
+    .button-wrapper{
+      z-index: 5;
+    }
+  }
 </style>
