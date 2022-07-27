@@ -41,7 +41,7 @@ const routes = [{
                         path: '/admin/manage-users/:id',
                         name: 'editUser',
                         component: () =>
-                          import ('../components/AdminComponents/adminSingleUser.vue')
+                          import ('../components/AdminComponents/adminSIngleUser.vue')
                     }]
             },
             {

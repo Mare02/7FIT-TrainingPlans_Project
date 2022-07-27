@@ -93,7 +93,6 @@ export default {
       }
     },
     showUserOptions(user){
-      console.log(user.usr_id);
       this.$router.push({name: 'editUser', params: {id: user.usr_id}})
     },
     sayhello(){
