@@ -1,32 +1,41 @@
 <template>
-  <div class="edit-user-container" @click="getBack">
-    <div class="user-wrapper">
+  <div class="edit-user-container" @click="getBack" id="edit_user_container">
+    <div class="user-wrapper" id="user_wrapper">
       <div class="picture-space">
         <div class="user-picture">
           <img :src="user.file_url" alt="">
         </div>
+        <img class="image-icon" src="../../assets/icons/image_edit.png" alt="">
       </div>
       <div class="user-details">
-        <div>
-          <div class="detail-name">
-            <p>{{user.usr_name}}</p>
+        <div class="details-name">
+          <p>{{user.usr_name}}</p>
+        </div>
+        <div class="line"></div>
+        <div class="details">
+          <div id="username">
+            <p><b>Username:</b> {{user.usr_username}}</p>
+            <button class="edit-btn">Edit</button>
           </div>
-          <div class="line"></div>
-          <div class="detail">
-            <label>Username: </label>
-            <p>{{user.usr_username}}</p>
+          <div id="email">
+            <p><b>Email:</b> {{user.usr_email}}</p>
+            <button id="">Edit</button>
           </div>
-          <div class="detail">
-            <label>Email: </label>
-            <p>{{user.usr_email}}</p>
+          <div id="age">
+            <p><b>Age:</b> {{user.age}}</p> 
+            <button>Edit</button>
           </div>
-          <div class="detail">
-            <label>Age: </label>
-            <p>{{user.age}}</p>
+          <div id="sex">
+             <p><b>Gender:</b> {{user.sex_name}}</p>
+             <button>Edit</button>
+          </div> 
+          <div id="usr_bday">
+            <p><b>Birthdate:</b> {{user.usr_bday}}</p>
+            <button>Edit</button>
           </div>
-          <div class="detail">
-            <label>Gender: </label>
-            <p>{{user.sex_name}}</p>
+          <div>
+            <p><b>Joined:</b> {{user.usr_joined}}</p>
+            <button>Edit</button>
           </div>
         </div>
       </div>
@@ -57,8 +66,11 @@ export default {
         
       }
     },
-    getBack(){
-      this.$router.push('/admin/manage-users')
+    getBack(event){
+      const container = document.getElementById('edit_user_container')
+      if(event.target == container){
+        this.$router.push('/admin/manage-users')
+      }
     },
     transition(){
       
@@ -68,6 +80,10 @@ export default {
 </script>
 
 <style scoped>
+  b{
+    color: lightgray;
+    font-weight: 500;
+  }
   *{
     padding: 0;
   }
@@ -84,78 +100,101 @@ export default {
     z-index: 999;
   }
   .user-wrapper{
+    display: flex;
+    flex-direction: column;
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
-    width: 30rem;
-    height: 30rem;
+    width: 40rem;
+    height: 40rem;
     background-color: rgb(58, 58, 58);
   }
   .picture-space{
     display: flex;
     justify-content: center;
+    background-color: rgb(83, 83, 83);
+    height: 5.8rem;
+    border-bottom: 2px solid gray;
+  }
+  .picture-space .image-icon{
+    position: absolute;
+    top: 15.15rem;
+    z-index: 2;
+    width: 2.5rem;
+    pointer-events: none;
+    /* opacity: 0; */
   }
   .user-picture{
     display: flex;
     justify-content: center;
     overflow: hidden;
-    width: 10rem;
-    height: 10rem;
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     border: 2px solid lightgray;
-    background-color: rgb(105, 105, 105);
+    background-color: rgb(58, 58, 58);
     position: relative;
-    bottom: 5rem;
+    top: 1.8rem;
   }
   .user-picture img{
     object-fit: cover;
     height: 100%;
     width: auto;
     display: block;
+    z-index: 999;
+  }
+  .user-picture img:hover{
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 1;
   }
   .user-details{
-    position: relative;
-    bottom: 4rem;
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .details-name{
+    margin-top: 5rem;
     display: flex;
     justify-content: center;
   }
-  .detail{
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-    position: relative;
-    right: 6rem;
-  }
-  .detail p{
-    font-family: 'Roboto Condensed', sans-serif;
-    margin-left: 0.4rem;
-    font-size: 1.4rem;
-  }
-  .detail label{
-    color: lightgray;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1.4rem;
-  }
-  .detail-name{
-    font-family: 'Roboto Condensed', sans-serif;
-    display: flex;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: 2.5rem;
+  .details-name p{
+    font-size: 1.7rem;
   }
   .line{
-    position: absolute;
-    left: 0;
-    top: 3.5rem;
-    width: 100%;
+    margin-top: 1rem;
     height: 2px;
+    width: 100%;
     background-color: gray;
   }
+  .details{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+  .details p{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+  .details div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .details div img{
+    position: relative;
+    top: 0.4rem;
+    margin-left: 2rem;
+    width: 1.7rem;
+  }
+
   @media (max-width: 650px){
     .user-wrapper{
       width: 100%;
     }
-    .detail{
-      right: 3.5rem;
+    .picture-space .image-icon{
+      top: 11.1rem;
     }
   }
 </style>
