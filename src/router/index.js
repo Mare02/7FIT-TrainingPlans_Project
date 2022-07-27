@@ -34,7 +34,13 @@ const routes = [{
                 path: '/admin/manage-users',
                 name: 'AdminManageUsers',
                 component: () =>
-                    import ('../components/AdminComponents/adminEditUsers.vue')
+                    import ('../components/AdminComponents/adminEditUsers.vue'),
+                children: [{
+                        path: '/admin/manage-users/:id',
+                        name: 'editUser',
+                        component: () =>
+                          import ('../components/AdminComponents/adminSingleUser.vue')
+                    }]
             },
             {
                 path: '/admin/manage-plans',

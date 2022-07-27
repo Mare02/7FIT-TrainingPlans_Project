@@ -6,18 +6,21 @@
     <div class="tools">
       <div>
         <label>Role:</label>
-        <select v-model="this.sortParams.role">
+        <select v-model="this.sortParams.role" @change="sayhello()">
           <option value="1">Admin</option>
           <option value="2">Trainer</option>
-           <option value="3">User</option>
+          <option value="3">User</option>
         </select>
       </div>
-      <button @click="getAllUsers({role: this.sortParams.role,
-                                  sex: this.sortParams.sex})">Sort</button>
-      <!-- <div>
+      <div>
         <label>search: </label>
-        <input type="text">
-      </div> -->
+        <input type="text" v-model="this.sortParams.text">
+      </div>
+      <button @click="getAllUsers({text: this.sortParams.text,
+                                   role: this.sortParams.role,
+                                   sex: this.sortParams.sex})">
+      filter</button>
+      <button @click="getAllUsers()">reset</button>
     </div>
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
@@ -27,21 +30,22 @@
           </div>
           <div class="user-info">
             <div>
-              <label>name: </label>
+              <!-- <label>name: </label> -->
               <p>{{user.usr_name}}</p>
             </div>
             <div>
-              <label>email: </label>
+              <!-- <label>email: </label> -->
               <p>{{user.usr_email}}</p>
             </div>
           </div>
         </div>
-        <span class="button-wrapper">
+        <span class="button-wrapper" @click="showUserOptions(user)">
           <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
         </span>
       </li>
     </ul>
   </div>
+  <router-view/>
 </template>
 
 <script>
@@ -59,8 +63,9 @@ export default {
       allUsers: [],
 
       sortParams:{
-        role: '1',
-        sex: '1'
+        role: '0',
+        sex: '0',
+        text: ''
       }
     }
   },
@@ -69,11 +74,6 @@ export default {
   },
   methods:{
     async getAllUsers(param){
-      let sortParams = new FormData()
-      for(let i of arguments){
-        console.log(i);
-      }
-      
       try {
         if(param === undefined){
           await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter')
@@ -82,13 +82,9 @@ export default {
             this.allUsers = res.data.msg
           })
         }
-        if(param != undefined){
-          let params = new FormData()
-          params.append('role', param)
+        if(param !== undefined){
           await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter', {
-            params:{
-              
-            }
+            params: param
           })
           .then(res => {
             console.log(res);
@@ -99,6 +95,13 @@ export default {
         console.log(error);
       }
     },
+    showUserOptions(user){
+      console.log(user.usr_id);
+      this.$router.push({name: 'editUser', params: {id: user.usr_id}})
+    },
+    sayhello(){
+      console.log('hello');
+    }
   }
 }
 </script>
@@ -106,6 +109,9 @@ export default {
 <style scoped>
   label{
     font-family: 'Bebas Neue', cursive;
+  }
+  input{
+    color: black;
   }
   .users-container{
     position: relative;

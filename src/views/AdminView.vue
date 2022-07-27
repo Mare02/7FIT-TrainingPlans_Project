@@ -90,7 +90,7 @@ export default {
 }
 </script>
 <style scoped>
-  .open-nav-btn{
+ .open-nav-btn{
     opacity: 0;
     position: absolute;
     background: white;
