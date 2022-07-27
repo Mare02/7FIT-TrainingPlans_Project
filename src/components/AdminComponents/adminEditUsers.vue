@@ -3,7 +3,7 @@
     <div class="title">
       <label>Users: </label>
     </div>
-    <!-- <div class="tools">
+    <div class="tools">
       <div>
         <label>Role:</label>
         <select v-model="this.sortParams.role" @change="sayhello()">
@@ -12,13 +12,14 @@
           <option value="3">User</option>
         </select>
       </div>
-      <button @click="getAllUsers({role: this.sortParams.role,
-                                  sex: this.sortParams.sex})">Sort</button>
-      <div>
-        <label>search: </label>
+      
+      <div class="search-bar">
+        <label>Search: </label>
         <input type="text">
       </div>
-    </div> -->
+      <button @click="getAllUsers({role: this.sortParams.role,
+                                  sex: this.sortParams.sex})">Submit</button>
+    </div>
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
         <div class="info-wrapper">
@@ -60,8 +61,8 @@ export default {
       allUsers: [],
 
       sortParams:{
-        role: '0',
-        sex: '0',
+        role: '',
+        sex: '',
         text: ''
       }
     }
@@ -103,11 +104,33 @@ export default {
 </script>
 
 <style scoped>
+  button{
+    height: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  } 
+  .search-bar{
+    
+  }
   label{
-    font-family: 'Bebas Neue', cursive;
+    font-size: 1.2rem;
+    font-family: 'Roboto Condensed', sans-serif;
   }
   input{
-    color: black;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    border: 2px solid white;
+    border-radius: 5px;
+    outline: none;
+    min-width: 7rem;
+    height: 1.7rem;
+    color: white;
+    background-color: rgb(68, 68, 68);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   .users-container{
     position: relative;

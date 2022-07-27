@@ -43,7 +43,8 @@
     </div>
     <div class="edit-input-container" v-show="showEditInput">
       <div class="input-div"> 
-        <input placeholder="" type="text" v-model="editText" id="input">
+        <input placeholder="" type="text" id="input" v-if="!getIfDate()" v-model="editText">
+        <input placeholder="" type="date" id="input" v-if="getIfDate()" v-model="editText">
       </div>
       <div class="save-btn-wrapper">
         <button @click="closeEdit()" class="cancel">Cancel</button>
@@ -55,13 +56,15 @@
 
 <script>
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 export default {
   data(){
     return{
+      dayjs,
+
       user: {},
       editText: '',
-      editDate: null,
       showEditInput: false,
     }
   },
@@ -84,6 +87,15 @@ export default {
         
       }
     },
+    getIfDate(){
+      let currentParam = localStorage.getItem('currentParam')
+      if(currentParam == 'usr_bday' || currentParam == 'usr_joined'){
+        return true
+      }
+      else{
+        return false
+      }
+    },
     getBack(event){
       const container = document.getElementById('edit_user_container')
       if(event.target == container){
@@ -96,14 +108,15 @@ export default {
       if(this.showEditInput != true){
         this.showEditInput = !this.showEditInput
       }
-      if(this.editText == ''){
-        console.log('kurac');
-      }
+      // if(this.editText == ''){
+      //   console.log('kurac');
+      // }
       let param = event.target.parentElement.id
       console.log('original param:');
       console.log(param);
     },
     saveEdit(){
+      console.log('saveedit');
       let param = localStorage.getItem('currentParam')
       this.editUser(param)
     },
@@ -112,20 +125,36 @@ export default {
       localStorage.removeItem('currentParam')
     },
     async editUser(param){
+      console.log('ulaz');
       if(param != null && param != undefined && param != ''){
+        console.log('ulaz 1');
         try {
           if(this.editText != ''){
-            console.log('uslo je');
-            console.log(param);
-            await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
-                                                                              [param]: this.editText})
-            .then((res) => {
-              console.log(res);
-              this.showEditInput = false
-              location.reload();
-              this.editText = ''
-              localStorage.removeItem('currentParam')
-            })          
+            console.log('ulaz 2');
+            if(this.editText instanceof Date){
+              console.log('ulaz 3');
+              const date = dayjs(this.editText).format('YYYY-MM-DD')
+              await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
+                                                                                [param]: date})
+              .then((res) => {
+                console.log(res);
+                this.showEditInput = false
+                // location.reload();
+                this.editText = ''
+                localStorage.removeItem('currentParam')
+              })   
+            }
+            else{
+              await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
+                                                                                [param]: this.editText})
+              .then((res) => {
+                console.log(res);
+                this.showEditInput = false
+                location.reload();
+                this.editText = ''
+                localStorage.removeItem('currentParam')
+              })   
+            }
           }
           else{
             console.log('prazan string');
