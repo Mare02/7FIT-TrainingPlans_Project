@@ -3,7 +3,7 @@
     <div class="title">
       <label>Users: </label>
     </div>
-    <div class="tools">
+    <!-- <div class="tools">
       <div>
         <label>Role:</label>
         <select v-model="this.sortParams.role" @change="sayhello()">
@@ -12,16 +12,13 @@
           <option value="3">User</option>
         </select>
       </div>
+      <button @click="getAllUsers({role: this.sortParams.role,
+                                  sex: this.sortParams.sex})">Sort</button>
       <div>
         <label>search: </label>
-        <input type="text" v-model="this.sortParams.text">
+        <input type="text">
       </div>
-      <button @click="getAllUsers({text: this.sortParams.text,
-                                   role: this.sortParams.role,
-                                   sex: this.sortParams.sex})">
-      filter</button>
-      <button @click="getAllUsers()">reset</button>
-    </div>
+    </div> -->
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
         <div class="info-wrapper">
@@ -141,6 +138,7 @@ export default {
     height: 5rem;
     background: transparent;
     border-top: 1px solid rgb(145, 145, 145);
+    background-color: rgb(65, 65, 65);
   }
   .user-profile{
     margin-left: 5px;
@@ -166,7 +164,7 @@ export default {
     font-size: 1.2rem;
   }
   .title label{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
   .tools{
     display: flex;
@@ -174,7 +172,7 @@ export default {
     margin-top: 1rem;
   }
   .button-wrapper{
-    margin-right: 1.5rem;
+    margin-right: 1rem;
     border-radius: 100%;
     width: 3rem;
     height: 3rem;
