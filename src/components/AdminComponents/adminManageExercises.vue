@@ -6,7 +6,6 @@
     <div class="tools-wrapper">
       <div class="tools">
         <div>
-          <input type="text" v-model="sortParams.name">
           <label>Level:</label>
           <select v-model="this.sortParams.level">
             <option value="">All</option>
@@ -18,10 +17,10 @@
         </div>   
         <div class="search-bar">
           <label>Search: </label>
-          <input type="text" v-model="sortParams.text">
+          <input type="text" v-model="sortParams.name">
         </div>
         <div>
-          <button @click="getAllUsers({role: this.sortParams.role,
+          <button @click="getAllExercises({role: this.sortParams.role,
                                       sex: this.sortParams.sex,
                                       text: this.sortParams.text})">Submit</button>
           <button @click="reset()">reset</button>
@@ -101,6 +100,13 @@ export default {
     showExerciseOptions(exercise){
       this.$router.push({name: 'editExercise', params: {id: exercise.exe_id}})
     },
+    reset(){
+      for(let elem in this.sortParams){
+        console.log(elem);
+        this.sortParams[elem] = null
+      }
+      this.getAllExercises()
+    }
   }
 }
 </script>

@@ -253,7 +253,7 @@ export default {
     padding-right: 0.5rem;
   }
   .edit-user-container{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
