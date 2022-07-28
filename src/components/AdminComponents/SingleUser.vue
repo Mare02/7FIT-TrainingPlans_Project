@@ -2,7 +2,7 @@
   <div class="edit-user-container" @click="getBack" id="edit_user_container">
     <div class="user-wrapper" id="user_wrapper">
       <div class="picture-space">
-        <div class="user-picture">
+        <div class="user-picture" id="file" @click="showEdit($event, edit = this.editUser)"> 
           <img :src="user.file_url" alt="">
         </div>
         <img class="image-icon" src="../../assets/icons/image_edit.png" alt="">
@@ -10,7 +10,7 @@
       <div class="user-details">
         <div class="details-name" id="name">
           <p>{{user.usr_name}}</p>
-          <button @click="showEdit($event, edit = this.editUser)">Edit</button>
+          <button @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
         </div>
         <div class="line"></div>
         <div class="details" id="details">
@@ -20,23 +20,21 @@
           </div>
           <div id="email">
             <p><b>Email:</b> {{user.usr_email}}</p>
-            <button @click="showEdit($event, edit = this.editUser)">Edit</button>
+            <button @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
           </div>
-          <div id="age">
+          <div>
             <p><b>Age:</b> {{user.age}}</p> 
-            <button @click="showEdit($event, edit = this.editUser)">Edit</button>
           </div>
           <div id="sex">
              <p><b>Gender:</b> {{user.sex_name}}</p>
-             <button @click="showEdit($event, edit = this.editUser)">Edit</button>
+             <button @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
           </div> 
-          <div id="usr_bday">
+          <div id="bday">
             <p><b>Birthdate:</b> {{user.usr_bday}}</p>
-            <button @click="showEdit($event, edit = this.editUser)">Edit</button>
+            <button @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
           </div>
-          <div id="usr_joined">
+          <div>
             <p><b>Joined:</b> {{user.usr_joined}}</p>
-            <button @click="showEdit($event, edit = this.editUser)">Edit</button>
           </div>
         </div>
       </div>
@@ -44,7 +42,12 @@
     <div class="edit-input-container" v-show="showEditInput">
       <div class="input-div"> 
         <input placeholder="" type="text" id="input" v-if="!getIfDate()" v-model="editText">
-        <input placeholder="" type="date" id="input" v-if="getIfDate()" v-model="editText">
+        <input placeholder="" type="date" id="input" v-if="getIfDate() == 'bday'" v-model="editText">
+        <select v-model="editText" v-if="getIfDate() == 'sex'">
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+        <input type="file" @change="getFile($event)" v-if="getIfDate() == 'file'">
       </div>
       <div class="save-btn-wrapper">
         <button @click="closeEdit()" class="cancel">Cancel</button>
@@ -89,12 +92,22 @@ export default {
     },
     getIfDate(){
       let currentParam = localStorage.getItem('currentParam')
-      if(currentParam == 'usr_bday' || currentParam == 'usr_joined'){
-        return true
+      if(currentParam == 'bday'){
+        return 'bday'
       }
-      else{
+      if(currentParam == 'sex'){
+        return 'sex'
+      }
+      if(currentParam == 'file'){
+        return 'file'
+      }
+      if(currentParam != 'sex' && currentParam != 'bday' && currentParam != 'file'){
         return false
       }
+    },
+    getFile(event){
+      console.log(event);
+      this.editText = event.target.files[0]
     },
     getBack(event){
       const container = document.getElementById('edit_user_container')
@@ -103,15 +116,18 @@ export default {
       }
     },
     async showEdit(event){
-      let id = event.target.parentElement.id;
+      let id;
+      if (event.target.id == 'file'){
+        id = event.target.id
+      }
+      else{
+        id = event.target.parentElement.id;
+      }
       localStorage.setItem('currentParam', id)
       if(this.showEditInput != true){
         this.showEditInput = !this.showEditInput
       }
-      // if(this.editText == ''){
-      //   console.log('kurac');
-      // }
-      let param = event.target.parentElement.id
+      let param = localStorage.getItem('currentParam');
       console.log('original param:');
       console.log(param);
     },
@@ -130,8 +146,8 @@ export default {
         console.log('ulaz 1');
         try {
           if(this.editText != ''){
-            console.log('ulaz 2');
-            if(this.editText instanceof Date){
+            console.log(this.editText);
+            if(param == 'bday'){
               console.log('ulaz 3');
               const date = dayjs(this.editText).format('YYYY-MM-DD')
               await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
@@ -139,12 +155,12 @@ export default {
               .then((res) => {
                 console.log(res);
                 this.showEditInput = false
-                // location.reload();
+                location.reload();
                 this.editText = ''
                 localStorage.removeItem('currentParam')
               })   
             }
-            else{
+            if(param != 'bday' && param != 'file'){
               await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
                                                                                 [param]: this.editText})
               .then((res) => {
@@ -154,6 +170,19 @@ export default {
                 this.editText = ''
                 localStorage.removeItem('currentParam')
               })   
+            }
+            if(param == 'file'){
+              let formdata = new FormData()
+              formdata.append('id', this.$route.params.id)
+              formdata.append('file', this.editText)
+              await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', formdata)
+              .then((res) => {
+                console.log(res);
+                this.showEditInput = false
+                location.reload();
+                this.editText = ''
+                localStorage.removeItem('currentParam')
+              }) 
             }
           }
           else{
@@ -178,6 +207,9 @@ export default {
   }
   *{
     padding: 0;
+  }
+  .edit-btn{
+    font-size: 1.2rem;
   }
   .save-btn-wrapper{
     position: relative;
@@ -225,11 +257,10 @@ export default {
     top: 0;
     left: 0;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: rgb(0, 0, 0, 0.7);
     z-index: 999;
   }
   .user-wrapper{
@@ -240,6 +271,7 @@ export default {
     width: 40rem;
     height: 40rem;
     background-color: rgb(58, 58, 58);
+    margin-right: 3rem;
   }
   .picture-space{
     display: flex;
@@ -334,6 +366,17 @@ export default {
     }
     .picture-space .image-icon{
       top: 11.1rem;
+    }
+  }
+  @media (max-width: 1750px){
+    .edit-user-container{
+      background-color: rgb(0, 0, 0, 0.5);
+      justify-content: center;
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
+    .user-wrapper{
+      margin-right: 0;
     }
   }
 </style>

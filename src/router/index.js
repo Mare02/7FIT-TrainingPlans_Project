@@ -38,11 +38,11 @@ const routes = [{
                 component: () =>
                     import ('../components/AdminComponents/adminEditUsers.vue'),
                 children: [{
-                        path: '/admin/manage-users/:id',
-                        name: 'editUser',
-                        component: () =>
-                          import ('../components/AdminComponents/adminSIngleUser.vue')
-                    }]
+                    path: '/admin/manage-users/:id',
+                    name: 'editUser',
+                    component: () =>
+                        import ('../components/AdminComponents/SingleUser.vue')
+                }]
             },
             {
                 path: '/admin/manage-plans',
@@ -54,7 +54,13 @@ const routes = [{
                 path: '/admin/manage-exercises',
                 name: 'AdminManageExercises',
                 component: () =>
-                    import ('../components/AdminComponents/adminManageExercises.vue')
+                    import ('../components/AdminComponents/adminManageExercises.vue'),
+                children: [{
+                    path: '/admin/manage-exercises/:id',
+                    name: 'editExercise',
+                    component: () =>
+                        import ('../components/AdminComponents/SingleExercise.vue')
+                }]
             }
         ]
     },

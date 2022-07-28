@@ -3,23 +3,36 @@
     <div class="title">
       <label>Users: </label>
     </div>
-    <div class="tools">
-      <div>
-        <label>Role:</label>
-        <select v-model="this.sortParams.role" @change="sayhello()">
-          <option value="1">Admin</option>
-          <option value="2">Trainer</option>
-          <option value="3">User</option>
-        </select>
+    <div class="tools-wrapper">
+      <div class="tools">
+        <div>
+          <label>Role:</label>
+          <select v-model="this.sortParams.role">
+            <option value="">All</option>
+            <option value="1">Admin</option>
+            <option value="2">Trainer</option>
+            <option value="3">User</option>
+          </select>
+          <label>Gender:</label>
+          <select v-model="this.sortParams.sex">
+            <option value="">All</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+        </div>   
+        <div class="search-bar">
+          <label>Search: </label>
+          <input type="text" v-model="sortParams.text">
+        </div>
+        <div>
+          <button @click="getAllUsers({role: this.sortParams.role,
+                                    sex: this.sortParams.sex,
+                                    text: this.sortParams.text})">Submit</button>
+          <button @click="reset()">reset</button>
+        </div>
       </div>
-      
-      <div class="search-bar">
-        <label>Search: </label>
-        <input type="text">
-      </div>
-      <button @click="getAllUsers({role: this.sortParams.role,
-                                  sex: this.sortParams.sex})">Submit</button>
     </div>
+    
     <ul class="users-list">
       <li v-for="(user, index) in this.allUsers" :key="user.usr_id" :id="index">
         <div class="info-wrapper">
@@ -28,11 +41,9 @@
           </div>
           <div class="user-info">
             <div>
-              <!-- <label>name: </label> -->
               <p>{{user.usr_name}}</p>
             </div>
             <div>
-              <!-- <label>email: </label> -->
               <p>{{user.usr_email}}</p>
             </div>
           </div>
@@ -61,34 +72,29 @@ export default {
       allUsers: [],
 
       sortParams:{
-        role: '',
-        sex: '',
+        role: null,
+        sex: null,
         text: ''
-      }
+      },
     }
   },
   computed(){
     
   },
   methods:{
-    async getAllUsers(param){
+    async getAllUsers(){
+      const params = {};
+      for (const key in this.sortParams) {
+        if (this.sortParams[key] !== null && this.sortParams[key] !== '') {
+          params[key] = this.sortParams[key];
+        }
+      }
       try {
-        if(param === undefined){
-          await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter')
-          .then(res => {
-            console.log(res);
-            this.allUsers = res.data.msg
-          })
-        }
-        if(param !== undefined){
-          await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter', {
-            params: param
-          })
-          .then(res => {
-            console.log(res);
-            this.allUsers = res.data.msg
-          })
-        }
+        await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter', {params: params})
+        .then(res => {
+          console.log(res);
+          this.allUsers = res.data.msg
+        })
       } catch (error) {
         console.log(error);
       }
@@ -96,14 +102,26 @@ export default {
     showUserOptions(user){
       this.$router.push({name: 'editUser', params: {id: user.usr_id}})
     },
-    sayhello(){
-      console.log('hello');
+    reset(){
+      for(let elem in this.sortParams){
+        console.log(elem);
+        this.sortParams[elem] = null
+      }
+      this.getAllUsers()
     }
   }
 }
 </script>
 
 <style scoped>
+  .tools-wrapper{
+    display: flex;
+    justify-content: left;
+  }
+  .tools{
+    display: flex;
+    flex-direction: column;
+  }
   button{
     height: 2rem;
     font-size: 1.2rem;
@@ -111,9 +129,6 @@ export default {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   } 
-  .search-bar{
-    
-  }
   label{
     font-size: 1.2rem;
     font-family: 'Roboto Condensed', sans-serif;
@@ -216,6 +231,9 @@ export default {
   }
   
   @media (max-width: 650px){
+    .tools-wrapper{
+      display: block;
+    }
     .users-container{
       padding-top: 5rem;
     }
