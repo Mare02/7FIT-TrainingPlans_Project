@@ -36,8 +36,11 @@ export default {
 </script>
 
 <style scoped>
+
 .main {
+  background-color: rgb(0, 0, 0);
   overflow-x: hidden;
+  height: 100vh;
 }
 .wrapper1 {
   width: 100%;

@@ -4,6 +4,7 @@ import AuthorizationView from '../views/AuthorizationView.vue'
 import test_vezbe from '../views/test_vezbe.vue'
 import AdminView from '../views/AdminView.vue'
 import TestHome from '../components/TestHome.vue'
+import HomeLog from '../components/HomeLog.vue'
 import store from '../store'
 
 const routes = [{
@@ -31,6 +32,12 @@ const routes = [{
         path: '/testhome',
         name: 'TestHome',
         component: TestHome,
+
+    },
+    {
+        path: '/homelog',
+        name: 'HomeLog',
+        component: HomeLog,
 
     },
     {
