@@ -36,30 +36,30 @@ const routes = [{
                 path: '/admin/manage-users',
                 name: 'AdminManageUsers',
                 component: () =>
-                    import ('../components/AdminComponents/adminEditUsers.vue'),
+                    import ('../components/AdminComponents/ListComponents/adminEditUsers.vue'),
                 children: [{
                     path: '/admin/manage-users/:id',
                     name: 'editUser',
                     component: () =>
-                        import ('../components/AdminComponents/SingleUser.vue')
+                        import ('../components/AdminComponents/EditComponents/SingleUser.vue')
                 }]
             },
             {
                 path: '/admin/manage-plans',
                 name: 'AdminManagePlans',
                 component: () =>
-                    import ('../components/AdminComponents/adminManagePlans.vue')
+                    import ('../components/AdminComponents/ListComponents/adminManagePlans.vue')
             },
             {
                 path: '/admin/manage-exercises',
                 name: 'AdminManageExercises',
                 component: () =>
-                    import ('../components/AdminComponents/adminManageExercises.vue'),
+                    import ('../components/AdminComponents/ListComponents/adminManageExercises.vue'),
                 children: [{
                     path: '/admin/manage-exercises/:id',
                     name: 'editExercise',
                     component: () =>
-                        import ('../components/AdminComponents/SingleExercise.vue')
+                        import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
                 }]
             }
         ]

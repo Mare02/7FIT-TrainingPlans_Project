@@ -5,7 +5,6 @@
         <div class="exercise-picture" id="file" @click="showEdit($event, edit = this.editExercise)"> 
           <img :src="exercise.file_url" alt="">
         </div>
-        <img class="image-icon" src="../../assets/icons/image_edit.png" alt="">
       </div>
       <div class="exercise-details">
         <div class="details" id="details">
@@ -104,6 +103,7 @@ export default {
 
     closeEdit(){
       this.showEditInput = false
+      this.editText = ''
       localStorage.removeItem('currentParam')
     },
     async editExercise(param){
@@ -114,28 +114,37 @@ export default {
           if(this.editText != ''){
             console.log(this.editText);
             if(param != 'file'){
-              await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
-                                                                                [param]: this.editText})
-              .then((res) => {
-                console.log(res);
-                this.showEditInput = false
-                location.reload();
-                this.editText = ''
-                localStorage.removeItem('currentParam')
-              })   
+              try {
+                await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
+                                                                                  [param]: this.editText})
+                .then((res) => {
+                  console.log(res);
+                  this.showEditInput = false
+                  location.reload();
+                  this.editText = ''
+                  localStorage.removeItem('currentParam')
+                })
+              } catch (error) {
+                console.log(error);
+              }
+                 
             }
             if(param == 'file'){
-              let formdata = new FormData()
-              formdata.append('id', this.$route.params.id)
-              formdata.append('file', this.editText)
-              await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
-              .then((res) => {
-                console.log(res);
-                this.showEditInput = false
-                location.reload();
-                this.editText = ''
-                localStorage.removeItem('currentParam')
-              }) 
+              try {
+                let formdata = new FormData()
+                formdata.append('id', this.$route.params.id)
+                formdata.append('file', this.editText)
+                await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
+                .then((res) => {
+                  console.log(res);
+                  this.showEditInput = false
+                  location.reload();
+                  this.editText = ''
+                  localStorage.removeItem('currentParam')
+                }) 
+              } catch (error) {
+                console.log(error);
+              }
             }
           }
           else{
@@ -238,14 +247,6 @@ export default {
     background-color: rgb(83, 83, 83);
     height: 9rem;
     border-bottom: 2px solid gray;
-  }
-  .picture-space .image-icon{
-    position: absolute;
-    top: 18.5rem;
-    z-index: 2;
-    width: 2.5rem;
-    pointer-events: none;
-    /* opacity: 0; */
   }
   .exercise-picture{
     display: flex;

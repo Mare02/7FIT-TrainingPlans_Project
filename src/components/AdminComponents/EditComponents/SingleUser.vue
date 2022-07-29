@@ -5,7 +5,6 @@
         <div class="user-picture" id="file" @click="showEdit($event, edit = this.editUser)"> 
           <img :src="user.file_url" alt="">
         </div>
-        <img class="image-icon" src="../../assets/icons/image_edit.png" alt="">
       </div>
       <div class="user-details">
         <div class="details-name" id="name">
@@ -16,7 +15,7 @@
         <div class="details" id="details">
           <div id="username">
             <p><b>Username:</b> {{user.usr_username}}</p>
-            <button ref="username" @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
+            <button @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
           </div>
           <div id="email">
             <p><b>Email:</b> {{user.usr_email}}</p>
@@ -36,6 +35,10 @@
           <div>
             <p><b>Joined:</b> {{user.usr_joined}}</p>
           </div>
+          <div id="role">
+            <p><b>Role:</b> {{user.rol_name}}</p>
+            <button @click="showEdit($event, edit = this.editUser)" class="edit-btn">Edit</button>
+          </div>
         </div>
       </div>
     </div>
@@ -46,6 +49,11 @@
         <select v-model="editText" v-if="getIfDate() == 'sex'">
           <option value="1">Male</option>
           <option value="2">Female</option>
+        </select>
+        <select v-model="editText" v-if="getIfDate() == 'role'">
+          <option value="1">Admin</option>
+          <option value="2">Trainer</option>
+          <option value="3">User</option>
         </select>
         <input type="file" @change="getFile($event)" v-if="getIfDate() == 'file'">
       </div>
@@ -101,6 +109,9 @@ export default {
       if(currentParam == 'file'){
         return 'file'
       }
+      if(currentParam == 'role'){
+        return 'role'
+      }
       if(currentParam != 'sex' && currentParam != 'bday' && currentParam != 'file'){
         return false
       }
@@ -138,6 +149,7 @@ export default {
     },
     closeEdit(){
       this.showEditInput = false
+      this.editText = ''
       localStorage.removeItem('currentParam')
     },
     async editUser(param){
@@ -279,14 +291,6 @@ export default {
     background-color: rgb(83, 83, 83);
     height: 5.8rem;
     border-bottom: 2px solid gray;
-  }
-  .picture-space .image-icon{
-    position: absolute;
-    top: 15.15rem;
-    z-index: 2;
-    width: 2.5rem;
-    pointer-events: none;
-    /* opacity: 0; */
   }
   .user-picture{
     display: flex;

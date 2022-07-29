@@ -13,7 +13,7 @@
 				</div>
 			</div>
 		</form>
-		<button @click="emit_log_data" class="login-btn">log in</button>
+		<button @click="emit_log_data" class="login-btn" id="log_in">log in</button>
 		<div class="register-option">
 			<p>Don't have an account?</p>
 			<button class="register-btn" @click="emit_show">Register</button>
@@ -34,13 +34,19 @@ export default {
       }			
 		};
 	},
+  mounted(){
+
+  },
+  computed(){
+    
+  },
 	methods: {
 		emit_log_data() {
 			this.$emit("loginData", { email: this.log_data.email, password: this.log_data.password });
 		},
     emit_show(){
       this.$emit('emit_show')
-    }
+    },
 	},
 };
 </script>

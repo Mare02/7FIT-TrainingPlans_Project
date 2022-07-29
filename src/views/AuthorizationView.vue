@@ -12,8 +12,8 @@
 </template>
 
 <script>
-  import LoginComponent from '../components/LoginComponent.vue'
-  import RegisterComponent from '../components/RegisterComponent.vue'
+  import LoginComponent from '../components/AuthorizationComponents/LoginComponent.vue'
+  import RegisterComponent from '../components/AuthorizationComponents/RegisterComponent.vue'
   import axios from 'axios'
 
 

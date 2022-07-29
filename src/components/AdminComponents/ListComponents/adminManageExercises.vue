@@ -47,6 +47,9 @@
           <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
         </span>
       </li>
+      <div class="emptyListMessage" v-if="noExercises">
+        <p>Sorry, there are no exercises with given filter parameters.</p>
+      </div>
     </ul>
   </div>
   <router-view/>
@@ -70,7 +73,9 @@ export default {
         name: null,
         muscles: null,
         level: null 
-      }
+      },
+
+      noExercises: false
     }
   },
   computed(){
@@ -91,6 +96,12 @@ export default {
         .then(res => {
           console.log(res);
           this.allExercises = res.data.msg
+          if(res.data.msg == ''){
+            this.noExercises = true
+          }
+          else{
+            this.noExercises = false
+          }
         })
       }
       catch(error){
@@ -112,6 +123,15 @@ export default {
 </script>
 
 <style scoped>
+  .emptyListMessage{
+    background-color: #eb2626;
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+  }
   .tools-wrapper{
     display: flex;
     justify-content: left;

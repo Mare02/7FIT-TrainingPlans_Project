@@ -52,6 +52,9 @@
           <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
         </span>
       </li>
+      <div class="emptyListMessage" v-if="noUsers">
+        <p>Sorry, there are no users with given filter parameters.</p>
+      </div>
     </ul>
   </div>
   <router-view/>
@@ -76,6 +79,8 @@ export default {
         sex: null,
         text: ''
       },
+
+      noUsers: false
     }
   },
   computed(){
@@ -94,6 +99,12 @@ export default {
         .then(res => {
           console.log(res);
           this.allUsers = res.data.msg
+          if(res.data.msg == ''){
+            this.noUsers = true
+          }
+          else{
+            this.noUsers = false
+          }
         })
       } catch (error) {
         console.log(error);
@@ -114,6 +125,15 @@ export default {
 </script>
 
 <style scoped>
+  .emptyListMessage{
+    background-color: #eb2626;
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+  }
   .tools-wrapper{
     display: flex;
     justify-content: left;
