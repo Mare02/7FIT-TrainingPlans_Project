@@ -28,7 +28,7 @@
             <span>plans</span>
           </li>
         </router-link>  
-        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
+        <router-link to="/admin/" @click="closeNavOnSelect()">
           <li id="item-statistics" @click="selectActive">
             <img class="menu-img" src="../assets/icons/statistics.png" alt="">
             <span>statistics</span>
