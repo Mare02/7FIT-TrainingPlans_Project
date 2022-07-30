@@ -1,147 +1,51 @@
 <template>
   <div class="plans-container">
-    <div>
-      <button @click="showCreate()">add plan</button>
-      <div class="create-plan-container" v-if="showCreateContainer">
-        <div>
-          <label>Name: </label>
-          <input type="text" v-model="plan.name">
+    <button @click="showCreate()">create new plan</button>
+    <CreatePlan :showCreateContainer="showCreateContainer" v-if="false"/>
+    <ul class="plans-list">
+      <li v-for="(plan, index) in this.allPlans" :key="plan.exe_id" :id="index">
+        <div class="plan-image">
+          <img :src="plan.file_url" alt="">
         </div>
-        <div>
-          <label>Description: </label>
-          <input type="text" v-model="plan.description">
+        <div class="plan-info">
+          <div>
+            <p>{{plan.pla_name}}</p>
+          </div>
+          <div class="description">
+            <p>{{plan.pla_desc}}</p>
+          </div>
         </div>
-        <div>
-          <label>Goal: </label>
-          <input type="text" v-model="plan.goal">
-        </div>
-        <div>
-          <label>Level: </label>
-          <input type="text" v-model="plan.level">
-        </div>
-        <div>
-          <label>Plan image: </label>
-          <input type="file" @change="getFile($event)">
-        </div>
-        <div>
-          <button @click="createPlan()">create</button>
-          <button @click="deletePlan()">cancel</button>
-        </div>  
-      </div>
-    </div>
-    <div class="plan-container" v-if="showPlanContainer"> 
-      <p class="plan-name">{{currentPlan.pla_name}}</p>
-      <button @click="addDay()">add day</button>
-      <ul class="days-list" >
-        <li v-for="day in this.allDays" :key="day.day_id" :id="day.day_id">
-            <p>Day {{day.day_number}}</p>
-            <button @click="removeDay($event)">Remove day</button>
-            <button @click="addSet($event)">add set</button>
-            <!-- <ul class="sets-list">
-              
-            </ul> -->\
-        </li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        <li v-for="plan in allPlans" :key="plan.pla_id">
-          <p>{{plan.pla_name}}</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div style="color: white;">
-    --------------------------------------------------------------
-  </div>
-  <div>
-    <ul>
-      <li v-for="exe in allExercises" :key="exe.exe_id">
-        <p>{{exe.exe_name}}</p>
+        <!-- <span class="button-wrapper" @click="showExerciseOptions(exercise)">
+          <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
+        </span> -->
       </li>
+      <div class="emptyListMessage" v-if="noPlans">
+        <p>Sorry, there are no exercises with given filter parameters.</p>
+      </div>
     </ul>
   </div>
+  <router-view/>
 </template>
 
 <script>
 import axios from 'axios'
 
+import CreatePlan from '../../SharedComponents/CreatePlan.vue'
+
 export default {
   data(){
     return{
-      allPlans: {},
-      allDays: {},
-      allSets: {},
-      allExercises: {},
-
-      currentPlan: {},
-
       showCreateContainer: false,
-      showPlanContainer: true,
-      currentPlanId: '6',
-      currentDayId: '',
+      
+      allPlans: {},
 
-      plan:{
-        name: '',
-        description: '',
-        goal: '',
-        level: '',
-        file: ''
-      },
-
-      day:{
-        day_description: '',
-        day_number: '',
-        pla_id: ''
-      },
-
-      set: {
-        day_id: '',
-        exe_id: '',
-        description: '',
-        duration: '',
-        reps: '',
-        rest: ''
-      }
+      noPlans: false
     }
   },
   mounted(){
     this.getAllPlans()
-    this.getPlanById()
-    this.getAllExercises()
   },
-  methods: {
-    async createPlan(){
-      let formdata = new FormData()
-      for(let key in this.plan){
-        formdata.append([key], this.plan[key])
-      }
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans', formdata)
-      .then(res => {
-        console.log(res);
-        this.currentPlanId = res.data.newPlanId
-        console.log(this.currentPlanId);
-      })
-      this.getPlanById()
-      this.getAllPlans()
-      this.showPlanContainer = true
-    },
-    async deletePlan(){
-      for(let key in this.plan){
-        this.plan[key] = ''
-      }
-      this.showCreateContainer = false
-      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params:{
-        id: this.currentPlanId
-      }})
-      .then(res => {
-        console.log(res);
-      })
-      this.getAllPlans()
-    },
-    getFile(event){
-      this.plan.file = event.target.files[0]
-    },
+  methods:{
     async getAllPlans(){
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans')
       .then(res => {
@@ -149,65 +53,34 @@ export default {
         this.allPlans = res.data.msg
       })
     },
-    async getPlanById(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.currentPlanId}} )
-      .then(res => {
-        console.log(res);
-        this.currentPlan = res.data.msg
-        this.allDays = res.data.msg.days
-      })
-    },
-    async addDay(){
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans/days', {pla_id: this.currentPlanId,
-        day_number: Object.keys(this.allDays).length + 1, day_description: ''})
-      .then(res => {
-        console.log(res);
-      })
-      this.getPlanById()
-    },
-    async removeDay(event){
-      let id = event.target.parentElement.id;
-      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans/days', {params:{id: id}})
-      .then(res => {
-        console.log(res);
-      })
-      this.getPlanById()
-    },
-    async addSet(event){
-      let id = event.target.parentElement.id;
-
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans/days/sets', {
-        day_id: id,
-        exe_id: '79',
-        description: 'asdasdadasd',
-        duration: '1000',
-        reps: '20',
-        rest: '500'
-      })
-      .then(res => {
-        console.log(res);
-      })
-      this.getPlanById()
-    },
-    async getAllExercises(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises')
-      .then(res => {
-        console.log(res);
-        this.allExercises = res.data.msg
-      })
-    },
     showCreate(){
       this.showCreateContainer = !this.showCreateContainer
     },
+  },
+  components:{
+    CreatePlan
   }
 }
 </script>
 
-<style>
-  input{
-    color: black;
-    font-size: 1.2rem;
-  } 
+<style scoped> 
+  .emptyListMessage{
+    background-color: #eb2626;
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+  }
+  .tools-wrapper{
+    display: flex;
+    justify-content: left;
+  }
+  .tools{
+    display: flex;
+    flex-direction: column;
+  }
   button{
     height: 2rem;
     font-size: 1.2rem;
@@ -215,35 +88,134 @@ export default {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   } 
-  .create-plan-container{
+  label{
+    font-size: 1.2rem;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+  input{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    border: 2px solid white;
+    border-radius: 5px;
+    outline: none;
+    min-width: 7rem;
+    height: 1.7rem;
+    color: white;
+    background-color: rgb(68, 68, 68);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .plans-container{
+    position: relative;
+    background: transparent;
+    padding-top: 2rem;
+  }
+  .plans-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-top: 2rem;
+  }
+  .plan-info{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-color: rgb(36, 36, 36);
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    box-shadow: 0 -20px 20px 10px rgb(36, 36, 36);
   }
-  .plan-container{
-    margin-top: 5rem;
-    width: 50rem;
-    height: auto;
-    background-color: rgb(56, 56, 56);
+  .plan-info .description p{
+    color: lightgray;
+    font-size: 1.2rem;
   }
-  .days-list{
-    list-style: none;
-  }
-  .days-list li{
+  .plans-list .plan-info div{
     display: flex;
-    justify-content: space-between;
+    margin-left: 1rem;
     margin-top: 0.5rem;
-    width: 20rem;
-    cursor: pointer;
-    background-color: rgb(99, 99, 99);
-    height: 2rem;
+    position: relative;
+    bottom: 0.25rem;
   }
-  .days-list li:hover{
+  .plans-list li{
+    cursor: pointer;
+    overflow: hidden;
+    margin: 1rem;
+    width: 28rem;
+    height: 23rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border-top: 1px solid rgb(145, 145, 145);
+    box-shadow: 0 0 10px 2px black;
+    border-radius: 10px;
+    background-color: rgb(65, 65, 65);
+  }
+  .plan-image{
+    margin-left: 5px;
+    width: 100%;
+    height: 20rem;
+    box-shadow: 0 0 2px 2px rgb(41, 41, 41);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .plan-image img{
+    object-fit: fill;
+    width: auto;
+    height: 100%;
+  }
+  .plan-info p{
+    font-size: 1.4rem;
+  }
+  .plan-info label{
+    font-size: 1.2rem;
+  }
+  .title label{
+    font-size: 1.7rem;
+    font-family: 'Bebas Neue', cursive;
+  }
+  .tools{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .button-wrapper{
+    margin-right: 1rem;
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+    color: white;
+  }
+  .button-wrapper:hover{
+    cursor: pointer;
     background-color: gray;
   }
-  .sets-list{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
+  .fa-ellipsis-vertical{
+    border-radius: 50%;
+    position: relative;
+    left: 1.3rem;
+    top: 1rem;
+    z-index: 2;
+  }
+  .fa-ellipsis-vertical:hover{
+    background-position: center;
   }
   
+  @media (max-width: 650px){
+    .plans-container{
+      padding-top: 5rem;
+    }
+    .plans-list{
+      margin-left: 0;
+    }
+    .button-wrapper{
+      z-index: 5;
+    }
+  }
 </style>

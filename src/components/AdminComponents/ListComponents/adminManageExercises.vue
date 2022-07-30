@@ -218,7 +218,6 @@ export default {
   }
   .title label{
     font-size: 1.7rem;
-    font-family: 'Bebas Neue', cursive;
   }
   .tools{
     display: flex;
