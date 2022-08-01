@@ -3,6 +3,8 @@ import LandingPageView from '../views/LandingPageView.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import test_vezbe from '../views/test_vezbe.vue'
 import AdminView from '../views/AdminView.vue'
+import TestHome from '../components/TestHome.vue'
+import HomeLog from '../components/HomeLog.vue'
 
 const routes = [{
         path: '/',
@@ -13,6 +15,16 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: AuthorizationView,
+    },
+    {
+        path: '/testhome',
+        name: 'TestHome',
+        component: TestHome,
+    },
+    {
+        path: '/homelog',
+        name: 'HomeLog',
+        component: HomeLog,
     },
     {
         path: '/admin',
