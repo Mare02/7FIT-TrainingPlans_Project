@@ -71,7 +71,7 @@ is the will, the desire and leave<br> the <b>rest to us!</b></p>
 </template> 
 
 <script>
-import NavbarComponent from '../components/NavbarComponent.vue'
+import NavbarComponent from '../components/SharedComponents/NavbarComponent.vue'
 import FooterComponent from '../components/FooterComponent.vue'
 
 export default {

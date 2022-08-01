@@ -171,6 +171,7 @@ export default {
     padding-top: 2rem;
   }
   .exercises-list{
+    box-shadow: 0 0 10px 2px black;
     list-style: none;
     margin-top: 2rem;
     max-width: 50rem;

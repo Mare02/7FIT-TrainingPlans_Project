@@ -1,7 +1,39 @@
 <template>
   <div class="plans-container">
-    <button @click="showCreate()">create new plan</button>
-    <CreatePlan :showCreateContainer="showCreateContainer" v-if="false"/>
+    <div class="tools-wrapper">
+      <div class="tools">
+        <div>
+          <label>Goal:</label>
+          <select v-model="sortParams.goal">
+            <option value="">All</option>
+            <option value="1">Bulk</option>
+            <option value="2">Shred</option>
+            <option value="3">Cardio</option>
+            <option value="4">Progression</option>
+            <option value="5">Strenght</option>
+          </select>
+        </div>   
+        <div>
+          <label>Level:</label>
+          <select v-model="sortParams.level">
+            <option value="">All</option>
+            <option value="1">Beginner</option>
+            <option value="2">Normal</option>
+            <option value="3">Expert</option>
+            <option value="4">Universal</option>
+          </select>
+        </div>   
+        <div class="search-bar">
+          <label>Search: </label>
+          <input type="text" v-model="sortParams.text">
+        </div>
+        <div>
+          <button @click="getAllPlans()">Submit</button>
+          <button @click="reset()">reset</button>
+          <button @click="redirectToCreate()">create new plan</button>
+        </div>   
+      </div>
+    </div>
     <ul class="plans-list">
       <li v-for="(plan, index) in this.allPlans" :key="plan.exe_id" :id="index">
         <div class="plan-image">
@@ -30,35 +62,56 @@
 <script>
 import axios from 'axios'
 
-import CreatePlan from '../../SharedComponents/CreatePlan.vue'
-
 export default {
   data(){
     return{
-      showCreateContainer: false,
+      showCreate: false,
+      noPlans: false,
       
       allPlans: {},
 
-      noPlans: false
+      sortParams: {
+        goal: '',
+        level: '',
+        text: ''
+      },
     }
   },
   mounted(){
     this.getAllPlans()
   },
   methods:{
+
     async getAllPlans(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans')
-      .then(res => {
-        console.log(res);
-        this.allPlans = res.data.msg
-      })
+      const params = {};
+      for (const key in this.sortParams) {
+        if (this.sortParams[key] !== null && this.sortParams[key] !== '') {
+          params[key] = this.sortParams[key];
+        }
+      }
+      try {
+        await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: params})
+        .then(res => {
+          console.log(res);
+          this.allPlans = res.data.msg
+        })
+      } catch (error) {
+        console.log(error);
+      }
+      
     },
-    showCreate(){
-      this.showCreateContainer = !this.showCreateContainer
+    reset(){
+      for(let elem in this.sortParams){
+        this.sortParams[elem] = null
+      }
+      this.getAllPlans()
     },
+    redirectToCreate(){
+      this.$router.push({name: 'createPlan'})
+    }
   },
   components:{
-    CreatePlan
+
   }
 }
 </script>
@@ -122,11 +175,13 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(27, 27, 27);
     position: relative;
     width: 100%;
     height: 5rem;
-    box-shadow: 0 -20px 20px 10px rgb(36, 36, 36);
+    box-shadow: 0 -15px 20px 10px rgb(27, 27, 27);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
   .plan-info .description p{
     color: lightgray;
@@ -142,15 +197,16 @@ export default {
   .plans-list li{
     cursor: pointer;
     overflow: hidden;
-    margin: 1rem;
-    width: 28rem;
-    height: 23rem;
+    margin: 2rem;
+    width: 26rem;
+    height: 21rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: transparent;
     border-top: 1px solid rgb(145, 145, 145);
+    border-bottom: 1px solid rgb(88, 88, 88);
     box-shadow: 0 0 10px 2px black;
     border-radius: 10px;
     background-color: rgb(65, 65, 65);
@@ -171,7 +227,7 @@ export default {
     height: 100%;
   }
   .plan-info p{
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .plan-info label{
     font-size: 1.2rem;

@@ -23,10 +23,6 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: AuthorizationView,
-        beforeEnter: () => {
-
-        }
-
     },
     {
         path: '/admin',
@@ -61,14 +57,19 @@ const routes = [{
                     component: () =>
                         import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
                 }]
-            }
-        ]
+            }]
     },
     {
         path: '/test',
         name: 'test_vezbe',
         component: test_vezbe
     },
+    {
+        path: '/manage-plans/create-plan',
+        name: 'createPlan',
+        component: () =>
+          import ('../components/SharedComponents/CreatePlan.vue')    
+  },
 ]
 
 const router = createRouter({

@@ -284,6 +284,7 @@ export default {
     height: 40rem;
     background-color: rgb(58, 58, 58);
     margin-right: 3rem;
+    box-shadow: 0 0 10px 2px black;
   }
   .picture-space{
     display: flex;

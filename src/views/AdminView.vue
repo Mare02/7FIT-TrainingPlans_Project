@@ -50,13 +50,14 @@ export default {
   data(){
     return{
       showNavbar: true,
+      showCreate: false 
     }
   },
   mounted(){
     window.addEventListener('resize', this.resizeNav)
   },
   components:{
-    
+
   },
   methods:{
     selectActive(event){
@@ -84,8 +85,7 @@ export default {
       if($(window).width() > 650){
         this.showNavbar = true
       }
-      
-    }
+    },
   }
 }
 </script>
