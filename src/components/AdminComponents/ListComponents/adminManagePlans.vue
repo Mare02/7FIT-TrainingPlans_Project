@@ -46,10 +46,11 @@
           <div class="description">
             <p>{{plan.pla_desc}}</p>
           </div>
+          <div class="plan-buttons"> 
+            <button @click="showPlanOptions(plan)">view details</button>
+            <button>save</button>
+          </div>
         </div>
-        <!-- <span class="button-wrapper" @click="showExerciseOptions(exercise)">
-          <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
-        </span> -->
       </li>
       <div class="emptyListMessage" v-if="noPlans">
         <p>Sorry, there are no exercises with given filter parameters.</p>
@@ -108,6 +109,9 @@ export default {
     },
     redirectToCreate(){
       this.$router.push({name: 'createPlan'})
+    },
+    showPlanOptions(plan){
+      this.$router.push({name: 'editPlan', params: {id: plan.pla_id}})
     }
   },
   components:{
@@ -178,10 +182,14 @@ export default {
     background-color: rgb(27, 27, 27);
     position: relative;
     width: 100%;
-    height: 5rem;
+    height: 10rem;
     box-shadow: 0 -15px 20px 10px rgb(27, 27, 27);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+  }
+  .plan-buttons{
+    position: relative;
+    top: 2rem;
   }
   .plan-info .description p{
     color: lightgray;
@@ -199,7 +207,7 @@ export default {
     overflow: hidden;
     margin: 2rem;
     width: 26rem;
-    height: 21rem;
+    height: 30rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -207,12 +215,11 @@ export default {
     background: transparent;
     border-top: 1px solid rgb(145, 145, 145);
     border-bottom: 1px solid rgb(88, 88, 88);
-    box-shadow: 0 0 10px 2px black;
+    box-shadow: 0 0 10px 2px rgb(27, 27, 27);
     border-radius: 10px;
     background-color: rgb(65, 65, 65);
   }
   .plan-image{
-    margin-left: 5px;
     width: 100%;
     height: 20rem;
     box-shadow: 0 0 2px 2px rgb(41, 41, 41);

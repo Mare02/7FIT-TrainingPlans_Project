@@ -1,23 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import LandingPageView from '../views/LandingPageView.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import test_vezbe from '../views/test_vezbe.vue'
 import AdminView from '../views/AdminView.vue'
 
 const routes = [{
         path: '/',
-        name: 'Home',
-        component: Home,
-
-    },
-    {
-        path: '/about',
-        name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/About.vue')
+        name: 'LandingPage',
+        component: LandingPageView,
     },
     {
         path: '/login',
@@ -29,30 +19,36 @@ const routes = [{
         name: 'AdminView',
         component: AdminView,
         children: [{
-                path: '/admin/manage-users',
+                path: '/admin/users',
                 name: 'AdminManageUsers',
                 component: () =>
                     import ('../components/AdminComponents/ListComponents/adminEditUsers.vue'),
                 children: [{
-                    path: '/admin/manage-users/:id',
+                    path: '/admin/users/:id',
                     name: 'editUser',
                     component: () =>
                         import ('../components/AdminComponents/EditComponents/SingleUser.vue')
                 }]
             },
             {
-                path: '/admin/manage-plans',
+                path: '/admin/plans',
                 name: 'AdminManagePlans',
                 component: () =>
-                    import ('../components/AdminComponents/ListComponents/adminManagePlans.vue')
+                    import ('../components/AdminComponents/ListComponents/adminManagePlans.vue'),
+                children: [{
+                    path: '/admin/plans/:id',
+                    name: 'editPlan',
+                    component: () => 
+                        import ('../components/AdminComponents/EditComponents/SinglePlan.vue')
+                }]
             },
             {
-                path: '/admin/manage-exercises',
+                path: '/admin/exercises',
                 name: 'AdminManageExercises',
                 component: () =>
                     import ('../components/AdminComponents/ListComponents/adminManageExercises.vue'),
                 children: [{
-                    path: '/admin/manage-exercises/:id',
+                    path: '/admin/exercises/:id',
                     name: 'editExercise',
                     component: () =>
                         import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
@@ -65,11 +61,11 @@ const routes = [{
         component: test_vezbe
     },
     {
-        path: '/manage-plans/create-plan',
+        path: '/plans/create-plan',
         name: 'createPlan',
         component: () =>
           import ('../components/SharedComponents/CreatePlan.vue')    
-  },
+    },
 ]
 
 const router = createRouter({

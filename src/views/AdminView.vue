@@ -10,25 +10,25 @@
     </div>
     <nav class="nav" id="nav" v-if="showNavbar">  
       <ul class="menu-list">
-        <router-link to="/admin/manage-users" @click="closeNavOnSelect()">
+        <router-link to="/admin/users" @click="closeNavOnSelect()">
           <li id="item-users" @click="selectActive">
             <img class="menu-img" src="../assets/icons/user.png" alt="">
             <span>users</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-exercises" @click="closeNavOnSelect()">
+        <router-link to="/admin/exercises" @click="closeNavOnSelect()">
           <li id="item-exercises" @click="selectActive">
             <img class="menu-img" src="../assets/icons/exercise.png" alt="">
             <span>exercises</span>
           </li>
         </router-link>
-        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
+        <router-link to="/admin/plans" @click="closeNavOnSelect()">
           <li id="item-plans" @click="selectActive">
             <img class="menu-img" src="../assets/icons/planning.png" alt="">
             <span>plans</span>
           </li>
         </router-link>  
-        <router-link to="/admin/manage-plans" @click="closeNavOnSelect()">
+        <router-link to="/admin/plans" @click="closeNavOnSelect()">
           <li id="item-statistics" @click="selectActive">
             <img class="menu-img" src="../assets/icons/statistics.png" alt="">
             <span>statistics</span>
@@ -166,7 +166,7 @@ export default {
     width: 6rem;
     margin-left: 4rem;
   }
-   .menu-logo{
+  .menu-logo{
     display: flex;
     justify-content: left;
     align-items: center;

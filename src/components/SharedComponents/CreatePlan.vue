@@ -36,7 +36,7 @@
         <div>
           <button @click="createPlan()">create</button>
           
-          <router-link to="/admin/manage-plans">
+          <router-link to="/admin/plans">
             <button @click="deletePlan()">cancel</button>
           </router-link>
         </div>  
@@ -60,7 +60,7 @@
             </li>
           </ul>
         </div>
-        <router-link to="/admin/manage-plans">
+        <router-link to="/admin/plans">
             <button>Submit Plan</button>
           </router-link>
         <div class="add-set-wrap" v-if="showAddSetWrap">
