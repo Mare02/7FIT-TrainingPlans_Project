@@ -170,7 +170,7 @@ export default {
   .users-container{
     position: relative;
     background: transparent;
-    padding-top: 2rem;
+    padding-top: 5rem;
   }
   .users-list{
     box-shadow: 0 0 10px 2px black;

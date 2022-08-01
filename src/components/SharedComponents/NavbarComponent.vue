@@ -1,37 +1,47 @@
 <template>
-    <nav class="nav-home">
-      <div>
-        <img src="../../assets/logo.png" alt="">
-      </div>
-      <div class="list-div">
-        <ul class="nav-list">
-          <li class="nav-menu">
-            <button>menu</button>
-            <ul>
-              <li>
-                Exercises list
-              </li>
-              <li>
-                See all plans
-              </li>
-               <li>
-                Dashboard
-              </li>
-              <li>
-                About us
-              </li>
+  <nav class="nav-home">
+    <div>
+      <img src="../../assets/logo.png" alt="">
+    </div>
+    <div class="list-div">
+      <ul class="nav-list">
+        <li class="nav-menu">
+          <button>menu</button>
+          <ul>
+            <li>
+              <a href="/homelog">Home</a>
+            </li>
+            <li>
+              <a href="/exercises">Exercises list</a>
+            </li>
+            <li>
+              <a href="/plans">See all plans</a>
+            </li>
+            <li>
+              <a href="/testhome">Dashboard</a>
+            </li>
+            <li>
+              <a href="/">About us</a>
+            </li>
+            <div v-if="true">
               <li class="line"></li>
+              <p>Admin settings:</p>
               <li>
-                Admin settings
+                <a href="/admin/users">Users</a>
               </li>
-            </ul>
-          </li>
-          <li>
-            <a href="/login">log out</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+              <li>
+                <a href="/admin/statistics">Statistics</a>
+              </li>
+            </div>
+            
+          </ul>
+        </li>
+        <li>
+          <a class="nav-item" href="/login">log out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -43,7 +53,7 @@ export default {
 <style scoped>
   .nav-home{
     font-family: 'Bebas Neue', cursive;
-    position: sticky;
+    position: fixed;
     top: 0;
     height: 4.3rem;
     display: flex;
@@ -66,40 +76,21 @@ export default {
     position: relative;
     color: white;
     text-decoration: none;
-    cursor: pointer;
     margin-left: 1.5rem;
     text-shadow: 0 0 10px black;
-  }
-  .nav-list a:hover {
-    transition: 0.5s;
-    color:#eb2626;
   }
   .nav-list .nav-menu .line{
     height: 0.1rem;
     background-color: gray;
-  }
-  .nav-list .nav-menu ul{
-    margin-left: -3.6rem;
-    font-family: 'Roboto Condensed', sans-serif;
-    width: 10rem;
-    font-size: 1.2rem;
-    position: absolute;
-    background-color: rgba(85, 84, 84, 0.3);
-    border: 1px solid gray;
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    color: white;
-    list-style: none;
-    text-decoration: none;
     pointer-events: none;
+    cursor: default;
   }
-  .nav-list .nav-menu ul li{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 2.5rem;
-    margin-left: 0rem;
+  .nav-list .nav-menu p{
+    text-align: center;
+    pointer-events: none;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    cursor:default;
   }
   .nav-list .nav-menu ul li:hover{
     background-color: #eb2626;
@@ -116,12 +107,50 @@ export default {
     transition: 0.5s;
     color:#eb2626;
   }
+  .nav-list .nav-menu ul li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2.5rem;
+    margin-left: 0rem;
+  }
+  .nav-list .nav-menu ul{
+    overflow: hidden;
+    margin-left: -3.6rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    width: 10rem;
+    font-size: 1.2rem;
+    position: absolute;
+    background-color: rgba(85, 84, 84, 0.3);
+    border: 1px solid gray;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    color: white;
+    list-style: none;
+    text-decoration: none;
+    visibility: hidden;
+  }
   .nav-list .nav-menu button:focus + ul{
+    visibility: visible;
     opacity: 1;
-    pointer-events: all;
     transition: all 0.3s;
   }
-  .nav-list a::before {
+  .nav-list .nav-menu ul li a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-list .nav-menu ul li a:hover{
+    transition: 0.5s;
+  }
+  .nav-list .nav-item:hover {
+    transition: 0.5s;
+    color:#eb2626;
+  }
+  .nav-list .nav-item::before {
     content: "";
     position: absolute;
     display: block;
@@ -133,10 +162,13 @@ export default {
     transform: scaleX(0);
     transition: transform 0.5s ease;
   }
-  .nav-list a:hover::before {
+  .nav-list .nav-item:hover::before {
     transform: scaleX(1);
   }
   .list-div{
+    position: fixed;
+    right: 0;
+
     margin-right: 1.5rem;
   }
 

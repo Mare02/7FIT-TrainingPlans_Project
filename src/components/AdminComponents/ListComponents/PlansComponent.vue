@@ -47,7 +47,11 @@
             <p>{{plan.pla_desc}}</p>
           </div>
           <div class="plan-buttons"> 
-            <button @click="showPlanOptions(plan)">view details</button>
+            <div v-if="true">
+              <button @click="showPlanOptions(plan)">view details</button>
+              <button>edit</button>
+            </div>
+            
             <button>save</button>
           </div>
         </div>
@@ -132,7 +136,7 @@ export default {
   }
   .tools-wrapper{
     display: flex;
-    justify-content: left;
+    justify-content: center;
   }
   .tools{
     display: flex;
@@ -164,8 +168,10 @@ export default {
     padding-right: 0.5rem;
   }
   .plans-container{
-    position: relative;
-    background: transparent;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: rgb(36, 36, 36);
     padding-top: 2rem;
   }
   .plans-list{
@@ -179,17 +185,17 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(27, 27, 27);
+    background-color: rgb(61, 61, 61);
     position: relative;
     width: 100%;
-    height: 10rem;
-    box-shadow: 0 -15px 20px 10px rgb(27, 27, 27);
+    height: 8rem;
+    /* box-shadow: 0 -15px 30px 20px rgb(53, 0, 0); */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border-top: 2px solid gray;
   }
   .plan-buttons{
-    position: relative;
-    top: 2rem;
+    
   }
   .plan-info .description p{
     color: lightgray;
@@ -221,7 +227,7 @@ export default {
   }
   .plan-image{
     width: 100%;
-    height: 20rem;
+    height: 22rem;
     box-shadow: 0 0 2px 2px rgb(41, 41, 41);
     overflow: hidden;
     display: flex;

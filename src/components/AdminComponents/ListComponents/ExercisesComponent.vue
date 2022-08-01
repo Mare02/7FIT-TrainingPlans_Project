@@ -29,23 +29,21 @@
     </div>
     <ul class="exercises-list">
       <li v-for="(exercise, index) in this.allExercises" :key="exercise.exe_id" :id="index">
-        <div class="info-wrapper">
-          <div class="exercise-image">
-            <img :src="exercise.file_url" alt="">
-          </div>
-          <div class="exercise-info">
-            <div>
-              <p>{{exercise.exe_name}}</p>
-            </div>
-            <div>
-              <label>Description: </label>
-              <p>{{exercise.exe_desc}}</p>
-            </div>
+        <div class="exercise-info">
+          <label class="exercise-name">{{exercise.exe_name}}</label>
+          <div class="description">
+              <p><label>Description: </label>{{exercise.exe_desc}}</p>
+              <p><label>Muscles: </label>{{exercise.muscles}}</p>
           </div>
         </div>
-        <span class="button-wrapper" @click="showExerciseOptions(exercise)">
-          <i class="fa-solid fa-xl fa-ellipsis-vertical"></i>
-        </span>
+        <div class="exercise-image">
+          <img :src="exercise.file_url" alt="">
+        </div>
+        <div class="exercise-buttons"> 
+          <div v-if="true">
+            <button @click="showExerciseOptions(exercise)">Edit</button>
+          </div>
+        </div>
       </li>
       <div class="emptyListMessage" v-if="noExercises">
         <p>Sorry, there are no exercises with given filter parameters.</p>
@@ -123,6 +121,19 @@ export default {
 </script>
 
 <style scoped>
+  .exercise-info .exercise-name{
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .exercise-info .description p{
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    color: lightgray;
+  }
+  .exercise-info .description p label{
+    color: white;
+  }
+
   .emptyListMessage{
     background-color: #eb2626;
     height: 2rem;
@@ -132,14 +143,16 @@ export default {
     align-items: center;
     font-size: 1.3rem;
   }
+
   .tools-wrapper{
     display: flex;
-    justify-content: left;
+    justify-content: center;
   }
   .tools{
     display: flex;
     flex-direction: column;
   }
+
   button{
     height: 2rem;
     font-size: 1.2rem;
@@ -165,41 +178,46 @@ export default {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
   .exercises-container{
-    position: relative;
-    background: transparent;
-    padding-top: 2rem;
+    background-color: rgb(36, 36, 36);
+    position: absolute;
+    top: 0;
+    padding-top: 5rem;
+    width: 100%;
   }
+
   .exercises-list{
     box-shadow: 0 0 10px 2px black;
     list-style: none;
     margin-top: 2rem;
-    max-width: 50rem;
-  }
-  .info-wrapper{
     display: flex;
-    align-items: center;
-  }
-  .exercises-list .exercise-info div{
-    display: flex;
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    position: relative;
-    bottom: 0.25rem;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
   }
   .exercises-list li{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 10rem;
-    background: transparent;
     border-top: 1px solid rgb(145, 145, 145);
-    background-color: rgb(65, 65, 65);
+    background-color: rgb(56, 56, 56);
+    padding-right: 16rem;
+    padding-left: 16rem;
   }
+
+  .exercise-info{
+    width: 25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .exercise-image{
-    margin-left: 5px;
-    width: 8rem;
-    height: 8rem;
+    width: 9rem;
+    height: 9rem;
     box-shadow: 0 0 2px 2px rgb(41, 41, 41);
     overflow: hidden;
     display: flex;
@@ -211,31 +229,21 @@ export default {
     width: auto;
     height: 100%;
   }
-  .exercise-info p{
-    font-size: 1.2rem;
-  }
-  .exercise-info label{
-    font-size: 1.2rem;
+
+  .title{
+    display: flex;
+    justify-content: center;
   }
   .title label{
     font-size: 1.7rem;
   }
+  
   .tools{
     display: flex;
     align-items: center;
     margin-top: 1rem;
   }
-  .button-wrapper{
-    margin-right: 1rem;
-    border-radius: 100%;
-    width: 3rem;
-    height: 3rem;
-    color: white;
-  }
-  .button-wrapper:hover{
-    cursor: pointer;
-    background-color: gray;
-  }
+
   .fa-ellipsis-vertical{
     border-radius: 50%;
     position: relative;
@@ -248,14 +256,43 @@ export default {
   }
   
   @media (max-width: 650px){
-    .exercises-container{
-      padding-top: 5rem;
-    }
     .exercises-list{
       margin-left: 0;
     }
-    .button-wrapper{
-      z-index: 5;
+  }
+  @media (max-width:1270px){
+    .exercises-list li{
+      padding-left: 10rem;
+      padding-right: 10rem;
+    }
+  }
+  @media (max-width:1090px){
+    .exercises-list li{
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+  @media (max-width:800px){
+    .exercises-list li{
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+  }
+  @media (max-width:690px){
+    .exercises-list li{
+      flex-direction: column;
+      height: auto;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+    .exercise-image{
+      margin-top: 1rem;
+    }
+    .exercise-buttons{
+      padding-top: 1.5rem;
+    }
+    .exercise-info{
+      width: 22rem;
     }
   }
 </style>

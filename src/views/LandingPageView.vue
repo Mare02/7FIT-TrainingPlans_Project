@@ -1,5 +1,4 @@
-<template>
-  <NavbarComponent/>    
+<template>    
   <div class="container">
     <div class="content">
       <div class="image-1">
@@ -322,13 +321,36 @@ font-size: 45px;
     }
   }
   @media only screen and (max-width: 480px){
+    .content-everyone .content-everyone-text ul{  
+      margin-left: 1.2rem;
+    }
+    .content-everyone-text li{
+      margin-top: 2rem;
+      font-size: 1.4rem;
+    }
+    .content-everyone-text img{
+      position: relative;
+      top: 3px;
+      right: 10px;
+      width: 20px;
+      filter: invert();
+    }
     .container .exercises{
       height: 105rem;
     }
     .content-everyone .content-everyone-text .text{
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       left: 0.2rem;
       margin-top: 4rem;
+      width: 23rem;
+    }
+    .exercises p{
+      font-size: 1.7rem;
+    }
+    .content-everyone .content-everyone-text .text-title{
+      font-size: 1.7rem;
+      text-align: left;
+      margin-left: 1.5rem;
     }
   }
   @media only screen and (max-width: 470px){

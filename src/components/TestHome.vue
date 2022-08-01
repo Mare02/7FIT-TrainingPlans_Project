@@ -1,11 +1,9 @@
 <template>
-  <NavbarComponent />
   <div class="main">
     <div class="wrapper1">
       <p class="start">
         <span class="end1"></span><span class="middle1">WELCOME &nbsp; </span>
-        <span class="middle2"><i class="fas fa-code"></i></span
-        ><span class="end2"><b>MIHAJLO</b></span>
+        <span class="end2"><b>MIHAJLO</b></span>
       </p>
     </div>
     <div class="wrapps">
@@ -15,11 +13,11 @@
           <br /><br />
           <div class="table2"></div>
         </div>
-        <div class="head3">
+        <!-- <div class="head3">
           <h2>WEEKLY <b>PLAN</b></h2>
           <br /><br />
           <div class="table3"></div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -41,17 +39,18 @@ export default {
   background-color: rgb(0, 0, 0);
   overflow-x: hidden;
   height: 100vh;
+  width: 100%;
 }
 .wrapper1 {
   width: 100%;
   height: 370px;
-  padding-top: 60px;
+  padding-top: 80px;
   padding-left: 55px;
 }
 .wrapper2 {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: space-evenly;
 }

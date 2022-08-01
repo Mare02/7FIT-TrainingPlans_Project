@@ -1,16 +1,18 @@
 <template>
 <div class="app">
-  
   <div class="app-container">
+    <NavbarComponent v-if="this.$route.name != 'Login'"/>
     <router-view/>
   </div>
 </div>
 </template>
 
   <script>
+  import NavbarComponent from '../src/components/SharedComponents/NavbarComponent.vue'
+
   export default{
     components:{
-      
+      NavbarComponent
     }
   }
   </script>

@@ -161,7 +161,7 @@ export default {
     getBack(event){
       const container = document.getElementById('edit_exercise_container')
       if(event.target == container){
-        this.$router.push('/admin/manage-exercises')
+        this.$router.push('/exercises')
       }
     },
   }
@@ -225,11 +225,15 @@ export default {
     top: 0;
     left: 0;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
     z-index: 999;
+    background-color: rgb(0, 0, 0, 0.5);
+      justify-content: center;
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
   }
   .exercise-wrapper{
     display: flex;
@@ -239,7 +243,6 @@ export default {
     width: 40rem;
     height: 40rem;
     background-color: rgb(58, 58, 58);
-    margin-right: 3rem;
     box-shadow: 0 0 10px 2px black;
   }
   .picture-space{
@@ -314,17 +317,6 @@ export default {
     }
     .picture-space .image-icon{
       top: 11.1rem;
-    }
-  }
-  @media (max-width: 1750px){
-    .edit-exercise-container{
-      background-color: rgb(0, 0, 0, 0.5);
-      justify-content: center;
-      -webkit-backdrop-filter: blur(5px);
-      backdrop-filter: blur(5px);
-    }
-    .exercise-wrapper{
-      margin-right: 0;
     }
   }
 </style>

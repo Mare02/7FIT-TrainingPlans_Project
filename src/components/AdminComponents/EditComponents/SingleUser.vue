@@ -123,7 +123,7 @@ export default {
     getBack(event){
       const container = document.getElementById('edit_user_container')
       if(event.target == container){
-        this.$router.push('/admin/manage-users')
+        this.$router.push('/admin/users')
       }
     },
     async showEdit(event){

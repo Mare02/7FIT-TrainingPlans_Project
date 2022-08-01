@@ -1,6 +1,5 @@
 <template>
   <div class="mainw">
-    <NavbarComponent />
     <div class="gif">
       <img src="https://wallpapercave.com/wp/wp7661141.jpg" alt="popaj" id="slika1">
     </div>
