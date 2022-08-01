@@ -122,7 +122,7 @@ export default {
     width: 10rem;
     font-size: 1.2rem;
     position: absolute;
-    background-color: rgba(85, 84, 84, 0.3);
+    background-color: rgba(85, 84, 84, 0.5);
     border: 1px solid gray;
     backdrop-filter: blur(5px);
     opacity: 0;
