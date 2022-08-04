@@ -6,7 +6,7 @@ export default createStore({
             isLoggedIn: false,
             isAdmin: false,
             isTrainer: false
-        }
+        },
     },
     mutations: {},
     actions: {},

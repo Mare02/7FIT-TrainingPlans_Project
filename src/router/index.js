@@ -29,12 +29,12 @@ const routes = [{
       path: '/plans',
       name: 'Plans',
       component: () => import ('../components/AdminComponents/ListComponents/PlansComponent.vue'),
-      children: [{
-        path: '/plans/:id',
-        name: 'editPlan',
-        component: () => 
-            import ('../components/AdminComponents/EditComponents/SinglePlan.vue')
-    }]
+    },
+    {
+      path: '/plans/:id',
+      name: 'editPlan',
+      component: () => 
+          import ('../components/AdminComponents/EditComponents/SinglePlan.vue')
     },
     {
       path: '/exercises',

@@ -13,6 +13,14 @@
   export default{
     components:{
       NavbarComponent
+    },
+    mounted(){
+      
+    },
+    data(){
+      return{
+        color: 'white'
+      }
     }
   }
   </script>
@@ -29,6 +37,12 @@
     -moz-user-select: none; 
     -ms-user-select: none; 
     user-select: none;    
+  }
+
+  .app-container{
+    position: absolute;
+    width: 100%;
+    top: 0;
   }
 
   button{

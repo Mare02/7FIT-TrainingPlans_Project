@@ -52,10 +52,9 @@ export default {
 </script>
 <style scoped>
   .router-container{
-    overflow: hidden;
-    position: absolute;
+    overflow-x: hidden;
     background-color: rgb(36, 36, 36);
-    min-height: 100%;
+    height: 100vh;
     width: 100%;
     padding-left: 0.5rem;
     padding-right: 0.5rem;

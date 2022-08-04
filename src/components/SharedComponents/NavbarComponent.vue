@@ -33,7 +33,6 @@
                 <a href="/admin/statistics">Statistics</a>
               </li>
             </div>
-            
           </ul>
         </li>
         <li>
