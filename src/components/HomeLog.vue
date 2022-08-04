@@ -4,18 +4,18 @@
     <div class="gif">
       <img src="https://wallpapercave.com/wp/wp7661141.jpg" alt="popaj" id="slika1">
     </div>
-    <div class="mainer">
-      <p id="para">OUR <b>PLANS</b>
-      </p>
-      <p id="opis"> ONLINE WORKOUT PLANNER With the workout builder, you can easily create the workout plan you want. The workout plan you create shows how the exercises are done and which muscle groups they work. The custom workout plan you have designed with the workout plan generator is automatically saved to your profile. In this way, when you go to the training, you can open your profile page and follow the training plan you have saved. Unlike other paid programs, the online workout planner is completely free. If you want to design a free personalized workout plan, all you have to do is become a free member. WEEKLY WORKOUT PLAN Designed by the world's best fitness trainers to help you get the best possible results. Find a comprehensive fitness plan, for free. Ready... Set... Sweat! In this way, when you go to the training, you can open your profile page and follow the training plan you have saved. Unlike other paid programs, the online workout planner is completely free. If you want to design a free personalized workout plan, all you have to do is become a free member. WEEKLY WORKOUT PLAN Designed by the world's best fitness trainers to help you get the best possible results. Find a comprehensive fitness plan, for free. Ready... Set... Sweat! </p>
+    <div class="mainer"> 
+      
+      <p id="para">OUR <b>PLANS </b> </p>
+      <div class="mainerwraper">
+        <div class="model1">
+        <img src="../assets/model1.png" alt="photo1" id="slika2">
+        </div>
+     <p id="opis"> <b>Something else about us!</b> <br><br>Hello user, we are very grateful for your trust and registration on our site, we hope that you we will not disappoint and with your help we will make you what you always wanted! First of all, we are not here to train for you, we are here to show you the way and with the help of your wishes we progress and achieve desired results.<br><br><b>Why our plans and why our site?</b> <br><br>Our plans are plans designed by today's best coaches. Our plans have been tested countless times and we can guarantee excellent results.<br><br><b>How do I know I won't get hurt?</b> <br><br>If you do a certain type of exercise correctly, we can guarantee that you don't have to worry about injury of any kind. Also, if you are a beginner, you can find a blog on the site that introduces you to the entire training system and which talks about the potential danger of improper exercise.<br><br><b>Will I look great in a month?</b> <br><br>First of all, we would like to ask you not to expect too much from yourself. Habits and results develop gradually, this does not mean that results you won't notice after a month, of course, that you will gain discipline both physically and mentally it will mean you in every future endeavor in life!<br><br><b>I have a complex and that's why I use heavier weights and work irregularly!</b><br><br>It is a completely normal thing, you are not crazy or a loser if you work with less weight, with improper work and heavy weights, you can only injure one person, and that is yourself it is very important to use light weights in the beginning and then go to more, but gradually! No one has achieved success in a short time, but certainly with discipline, persistence and effort!</p>
     </div>
-    <div class="main">
-      <p id="para">RECOMENDED <b>PLANS</b> FOR YOU </p>
-      <br>
-      <div class="desc">
-        <p id="gara">PLAN DESCRIPTION</p>
-        <p id="descr">{{desc}}</p>
-      </div>
+    </div>
+    <div class="main"> 
+      <p id="para">RECOMENDED <b>PLANS</b> FOR YOUR <b>GOAL</b> </p> 
       <div class="carousel-wrapper">
         <span id="item-1"></span>
         <span id="item-2"></span>
@@ -33,6 +33,10 @@
           <a href="#item-1" class="arrow-next arrow" @click="channgeText1()"></a>
         </div>
       </div>
+       <!-- <div class="desc">
+        <p id="gara">PLAN DESCRIPTION</p>
+        <p id="descr">{{desc}}</p>
+      </div> -->
     </div>
   </div>
 </template>
@@ -49,18 +53,18 @@
       NavbarComponent,
     },
     methods: {
-      channgeText1() {
-        this.message = "PLAN 1",
-          this.desc = "Plan 1 is great way to improve your appearance !"
-      },
-      channgeText2() {
-        this.message = "PLAN 2",
-          this.desc = "Plan 2 is great way to improve your appearance !"
-      },
-      channgeText3() {
-        this.message = "PLAN 3",
-          this.desc = "Plan 3 is great way to improve your appearance ! "
-      }
+      // channgeText1() {
+      //   this.message = "PLAN 1",
+      //     this.desc = "Plan 1 is great way to improve your appearance !"
+      // },
+      // channgeText2() {
+      //   this.message = "PLAN 2",
+      //     this.desc = "Plan 2 is great way to improve your appearance !"
+      // },
+      // channgeText3() {
+      //   this.message = "PLAN 3",
+      //     this.desc = "Plan 3 is great way to improve your appearance ! "
+      // }
     }
   }
 </script>
@@ -69,24 +73,55 @@
     color: red
   }
 
+
+
+  .mainw {}
   #slika1 {
     width: 100vw;
   }
-
-  .mainw {}
-
+  #slika2{
+  }
   .gif {
     width: 100%;
     border-bottom: 3px solid white;
   }
+  .mainer {
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 2px solid white;
 
+  }
+  .mainerwraper{
+    padding-top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+  
+  #opis {
+    padding-bottom: 10px;
+    width: 35%;
+    font-size: 20px;
+    color: white
+  }
+  .model1{
+
+padding-right: 70px;
+  }
   .main {
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
-    margin: 35px;
+    margin: px;
     font-size: 70px;
     align-items: center;
   }
+  
 
   .caroseul {
     display: flex;
@@ -113,21 +148,7 @@
   #descr {
     font-family: 'Bebas Neue', cursive;
     font-size: 30px;
-    color: gray;
-  }
-
-  #opis {
-    width: 55%;
-    font-size: 28px;
-    color: white
-  }
-
-  .mainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
+    color: red;
   }
 
   .carousel-wrapper {
@@ -136,7 +157,7 @@
     width: 70rem;
     display: block;
     margin: 50px auto;
-    border: 2px solid white;
+    border: 6px solid white;
   }
 
   .carousel-item {
@@ -243,16 +264,39 @@
       text-decoration: underline;
     }
   }
+    @media only screen and (max-width: 1150px) {
+
+        .mainerwraper{
+    padding-top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #slika2{
+    max-width: 90vw;
+  }
+  .model1{
+    width: 70%;
+  }
+  
+    }
 
   @media only screen and (max-width: 1035px) {
     .carousel-wrapper {
-      height: 20rem;
+      height: 26rem;
       position: relative;
       width: 40rem;
       display: block;
       margin: 50px auto;
-      border: 2px solid white;
+      border: 5px solid white;
     }
+      #opis {
+    padding-bottom: 10px;
+    width: 75%;
+    font-size: 20px;
+    color: white
+  }
 
     #para {
       font-size: 40px;
@@ -273,15 +317,25 @@
       text-decoration: underline;
     }
   }
+    @media only screen and (max-width: 650px) {
+        #slika2{
+    max-width: 70vw;
+    align-items: center;
+  }
+  .model1{
+    display: flex;
+    width: 70%;
+  }
+    }
 
   @media only screen and (max-width: 700px) {
     .carousel-wrapper {
       height: 20rem;
       position: relative;
-      width: 30rem;
+      width: 35rem;
       display: block;
       margin: 50px auto;
-      border: 2px solid white;
+      border: 5px solid white;
     }
 
     #para {
@@ -307,10 +361,10 @@
     .carousel-wrapper {
       height: 15rem;
       position: relative;
-      width: 20rem;
+      width: 23rem;
       display: block;
       margin: 50px auto;
-      border: 2px solid white;
+      border: 5px solid white;
     }
 
     #para {
@@ -337,14 +391,14 @@
       align-content: center;
       height: 15rem;
       position: relative;
-      width: 100%;
+      width: 22rem;
       display: block;
       margin: 50px auto;
-      border: 2px solid white;
+      border: 4px solid white;
     }
 
     #para {
-      font-size: 30px;
+      font-size: 33px;
       font: bolder;
       text-transform: uppercase;
       text-align: center;
@@ -352,13 +406,27 @@
 
     #gara {
       padding-top: 27px;
-      font-size: 20px;
+      font-size: 25px;
       color: white;
     }
 
     #descr {
-      font-size: 17px;
+      font-size: 19px;
       text-decoration: underline;
     }
+            #slika2{
+    max-width: 70vw;
+    align-items: center;
   }
+  .model1{
+    display: flex;
+    width: 70%;
+  }
+
+  }
+    @media only screen and (max-width: 350px) {
+
+
+      
+    }
 </style>
