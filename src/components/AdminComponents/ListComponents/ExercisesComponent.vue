@@ -27,6 +27,48 @@
         </div>
       </div>
     </div>
+    <div class="create-exercise-wrap">
+      <div class="inputs">
+        <div>
+          <label>Name: </label>
+          <input type="text" v-model="exercise.name">
+        </div>
+         <div>
+          <label>File: </label>
+          <input type="file" @change="getFile($event)">
+        </div>
+         <div>
+          <label>Description: </label>
+          <input type="text" v-model="exercise.description">
+        </div>
+         <div>
+          <label>Muscles: </label>
+          <select multiple size="20" v-model="exercise.muscles">
+            <option v-for="mus in allMuscles" :key="mus.mus_id" :value="mus.mus_id">{{mus.mus_name}}</option>
+          </select>
+        </div>
+        <div>
+          <label>Level: </label>
+          <select v-model="exercise.level">
+            <option value="1">Beginner</option>
+            <option value="2">Normal</option>
+            <option value="3">Expert</option>
+            <option value="4">Universal</option>
+          </select>
+        </div>
+        <div>
+          <label>Goal: </label>
+          <select v-model="exercise.goals" multiple size="5">
+            <option value="1">Bulk</option>
+            <option value="2">Shred</option>
+            <option value="3">Cardio</option>
+            <option value="4">Progression</option>
+            <option value="4">Strenght</option>
+          </select>
+        </div>
+        <button @click="createExercise()">submit</button>
+      </div>
+    </div>
     <ul class="exercises-list">
       <li v-for="(exercise, index) in this.allExercises" :key="exercise.exe_id" :id="index">
         <div class="exercise-info">
@@ -61,11 +103,22 @@ export default {
 
   ],
   mounted(){
-    this.getAllExercises();
+    this.getAllExercises()
+    this.getAllMuscles()
   },
   data(){
     return{
-      allExercises: [],
+      allExercises: {},
+      allMuscles: {},
+
+      exercise:{
+        name: '',
+        file: '',
+        description: '',
+        muscles: [],
+        level: '',
+        goals: []
+      },
 
       sortParams:{
         name: null,
@@ -80,6 +133,24 @@ export default {
     
   },
   methods:{
+    getFile(event){
+      this.exercise.file = event.target.files[0]
+      console.log(event.target.files[0]);
+    },
+    async createExercise(){
+      let formdata = new FormData()
+      for(let key in this.exercise){
+        formdata.append([key], this.exercise[key]) 
+      }
+
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
+      .then(res => {
+        console.log(res);
+      })
+      for(let key in this.exercise){
+        this.exercise[key] = ''
+      }
+    },
     async getAllExercises(){
       const params = {};
       for (const key in this.sortParams) {
@@ -105,6 +176,13 @@ export default {
       catch(error){
         console.log(error);
       }
+    },
+    async getAllMuscles(){
+      await axios.get('http://783p122.e2.mars-hosting.com/7fit/info/muscles') 
+      .then(res => {
+        console.log(res);
+        this.allMuscles = res.data.muscles
+      })
     },
     showExerciseOptions(exercise){
       this.$router.push({name: 'editExercise', params: {id: exercise.exe_id}})

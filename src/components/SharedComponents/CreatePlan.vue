@@ -1,12 +1,10 @@
 <template>
   <div class="main-wrap">
     <div class="create-title">
-      <label>New workout plan</label>
+      <label>{{plan.name}}</label>
     </div>
     <PlanDaysComponent :plan="this.currentPlan" @add="addDay()"
-                                                @refresh="refresh()"
-                                                @remove="removeDay"
-                                                @removeSet="removeSet"/>
+                                                @refresh="refresh()"/>
   </div>
 </template>
 
@@ -21,15 +19,10 @@ export default {
   data(){
     return{
       allDays: {},
-      allSets: {},
-      allExercises: {},
 
       currentPlan: {},
 
-      showAddSetWrap: false,
-
       currentPlanId: '35',
-      currentDayId: '',
 
       plan:{
         name: '',
@@ -44,15 +37,6 @@ export default {
         day_number: '',
         pla_id: ''
       },
-
-      set: {
-        day_id: '',
-        exe_id: '',
-        description: '',
-        duration: '',
-        reps: '',
-        rest: ''
-      }
     }
   },
   mounted(){
@@ -86,17 +70,6 @@ export default {
         console.log(res);
       })
     },
-    async removeSet(id){
-      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans/days/sets', {params: {id: id}})
-      .then(res => {
-        console.log(res);
-      })
-      this.getPlanById()
-    },
-    getFile(event){
-      this.plan.file = event.target.files[0]
-    },
-    
     async getPlanById(){
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.currentPlanId}} )
       .then(res => {
@@ -113,49 +86,6 @@ export default {
       })
       this.getPlanById()
     },
-    async removeDay(id){
-      console.log(id);
-      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans/days', {params:{id: id}})
-      .then(res => {
-        console.log(res);
-      })
-      this.getPlanById()
-    },
-    async addSet(){
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans/days/sets', {day_id: this.set.day_id,
-                                                                                  exe_id: this.set.exe_id,
-                                                                                  description: this.set.description,
-                                                                                  duration: this.set.duration,
-                                                                                  reps: this.set.reps,
-                                                                                  rest: this.set.rest})
-      .then(res => {
-        console.log(res);
-      })
-      this.showAddSetWrap = false
-      this.getPlanById()
-    },
-    async getAllExercises(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises')
-      .then(res => {
-        console.log(res);
-        this.allExercises = res.data.msg
-      })
-    },
-    setActive(event){
-      let elem = document.getElementById(event.target.id)
-      if(!elem.classList.contains('active')){
-        elem.classList.add('active')
-      }
-      else{
-        elem.classList.remove('active')
-      }
-    },
-    showAddSet(event){
-      this.showAddSetWrap = !this.showAddSetWrap
-      this.getAllExercises()
-      const id = event.target.parentElement.parentElement.id
-      this.set.day_id = id
-    }
   }
 }
 </script>
