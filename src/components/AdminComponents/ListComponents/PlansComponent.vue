@@ -187,7 +187,7 @@ export default {
     background-color: rgb(61, 61, 61);
     position: relative;
     width: 100%;
-    height: 8rem;
+    min-height: 8rem;
     /* box-shadow: 0 -15px 30px 20px rgb(53, 0, 0); */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -209,10 +209,10 @@ export default {
   }
   .plans-list li{
     cursor: pointer;
-    overflow: hidden;
+    overflow-x: hidden;
     margin: 2rem;
     width: 26rem;
-    height: 30rem;
+    min-height: 30rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

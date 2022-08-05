@@ -3,8 +3,11 @@
   <div class="plan-content-head">
     <label>Plan</label>
   </div>
-  <label class="add-label">Add day</label>
-  <button class="show-set-btn" @click="emitAddDay()">+</button>
+  <div class="add-day-wrap" v-if="this.role == 'trainer' || this.role == 'admin'">
+    <label class="add-label">Add day</label>
+    <button class="show-set-btn" @click="emitAddDay()">+</button>
+  </div>
+  
   <div class="plan-content">
     <div v-for="day in this.plan.days" :key="day.day_id" :id="day.day_id" class="day-wrap" >
       <div class="day-head">
@@ -85,7 +88,8 @@ import axios from 'axios'
 
 export default {
   props: [
-    'plan'
+    'plan',
+    'role'
   ],
   data(){
     return{
@@ -172,7 +176,13 @@ export default {
 </script>
 
 <style scoped>
-   button{
+  .add-day-wrap{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+  button{
     display: flex;
     justify-content: center;
     align-items: center;
