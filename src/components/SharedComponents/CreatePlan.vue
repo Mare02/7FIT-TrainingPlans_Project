@@ -3,8 +3,10 @@
     <div class="create-title">
       <label>New workout plan</label>
     </div>
-    <button @click="addDay()">add day</button>
-    <PlanDaysComponent :plan="this.currentPlan" @remove="removeDay"/>
+    <PlanDaysComponent :plan="this.currentPlan" @add="addDay()"
+                                                @refresh="refresh()"
+                                                @remove="removeDay"
+                                                @removeSet="removeSet"/>
   </div>
 </template>
 
@@ -57,6 +59,9 @@ export default {
     this.getPlanById()
   },
   methods: {
+    refresh(){
+      this.getPlanById()
+    },
     async createPlan(){
       let formdata = new FormData()
       for(let key in this.plan){
@@ -80,6 +85,13 @@ export default {
       .then(res => {
         console.log(res);
       })
+    },
+    async removeSet(id){
+      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans/days/sets', {params: {id: id}})
+      .then(res => {
+        console.log(res);
+      })
+      this.getPlanById()
     },
     getFile(event){
       this.plan.file = event.target.files[0]
