@@ -31,7 +31,7 @@
               <option value="4">Universal</option>
             </select>
           </div>
-          <div>
+          <div class="image">
             <label>Image: </label>
             <input type="file" @change="getFile($event)">
           </div>
@@ -42,7 +42,7 @@
     <div class="plan-image">
         <img :src="this.currentPlan.file_url" alt="">
     </div>
-    <div class="plan-description">
+    <div class="plan-description" v-if="this.currentPlanId != ''">
         <div class="description-head">
           <label>PLAN DESCRIPTION</label>
         </div>
@@ -70,7 +70,7 @@ export default {
 
       currentPlan: {},
 
-      currentPlanId: '37',
+      currentPlanId: '',
 
       plan:{
         name: '',
@@ -134,7 +134,7 @@ export default {
     },
     async addDay(){
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans/days', {pla_id: this.currentPlanId,
-        day_number: Object.keys(this.allDays).length + 1, day_description: ''})
+        day_number: Object.keys(this.allDays).length + 1, day_description: this.day.day_description})
       .then(res => {
         console.log(res);
       })
@@ -183,6 +183,24 @@ export default {
   .create-title label{
     color: lightgray;
     font-size: 1.5rem;
+  }
+  .create-plan-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .create-plan-wrap .inputs{
+    width: 100%;
+  }
+  .create-plan-wrap .inputs label{
+    font-size: 1.5rem;
+  }
+  .create-plan-wrap .inputs div{
+    display: flex;
+    align-items: center;
   }
 
   .plan-image{

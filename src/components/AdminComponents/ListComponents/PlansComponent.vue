@@ -194,7 +194,8 @@ export default {
     border-top: 2px solid gray;
   }
   .plan-buttons{
-    
+    display: flex;
+    align-items: center;
   }
   .plan-info .description p{
     color: lightgray;
@@ -222,7 +223,7 @@ export default {
     border-bottom: 1px solid rgb(88, 88, 88);
     box-shadow: 0 0 10px 2px rgb(27, 27, 27);
     border-radius: 10px;
-    background-color: rgb(65, 65, 65);
+    background-color: rgb(61, 61, 61);
   }
   .plan-image{
     width: 100%;
@@ -239,10 +240,10 @@ export default {
     height: 100%;
   }
   .plan-info p{
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   .plan-info label{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .title label{
     font-size: 1.7rem;

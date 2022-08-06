@@ -16,8 +16,8 @@
             <p><b>Description:</b> {{exercise.description}}</p>
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
-          <div id="muscles">
-            <p><b>Muscles:</b> {{muscles}}</p> 
+          <div class="muscles" id="muscles">
+            <p><b>Muscles:</b><p v-for="mus in muscles" :key="mus.mus_id">{{mus.mus_name}}</p></p> 
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
         </div>
@@ -25,8 +25,11 @@
     </div>
     <div class="edit-input-container" v-show="showEditInput">
       <div class="input-div"> 
-        <input placeholder="" type="text" id="input" v-model="editText" v-if="!getIfFile()">
-        <input type="file" @change="getFile($event)" v-if="getIfFile()">
+        <input placeholder="" type="text" id="input" v-model="editText" v-if="getIfFile() == 'name'">
+        <input type="file" @change="getFile($event)" v-if="getIfFile() == 'file'">
+        <select v-if="getIfFile() == 'muscles'" v-model="editMuscles" multiple>
+          <option v-for="mus in allMuscles" :key="mus.mus_id" :value="mus.mus_id">{{mus.mus_name}}</option>
+        </select>
       </div>
       <div class="save-btn-wrapper">
         <button @click="closeEdit()" class="cancel">Cancel</button>
@@ -43,14 +46,17 @@ export default {
   data(){
     return{
       exercise: {},
+      allMuscles: {},
       muscles: {},
 
       showEditInput: false,
-      editText: ''
+      editText: '',
+      editMuscles: []
     }
   },
   mounted(){
     this.getExercise()
+    this.getAllMuscles()
   },
   methods:{
     async getExercise(){
@@ -59,7 +65,7 @@ export default {
         const res = await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises/' + id)
         console.log(res);
         this.exercise = res.data.msg
-        this.muscles = res.data.msg.muscles[0].mus_name
+        this.muscles = res.data.msg.muscles
       } catch (error) {
         console.log(error);
       }
@@ -67,10 +73,13 @@ export default {
     getIfFile(){
       let currentParam = localStorage.getItem('currentParam')
       if(currentParam == 'file'){
-        return true
+        return 'file'
       }
-      else{
-        return false
+      if(currentParam == 'muscles'){
+        return 'muscles'
+      }
+      if(currentParam != 'file' && currentParam != 'muscles'){
+        return 'name'
       }
     },
     getFile(event){
@@ -111,9 +120,9 @@ export default {
       if(param != null && param != undefined && param != ''){
         console.log('ulaz 1');
         try {
-          if(this.editText != ''){
+          if(this.editText != '' || this.editMuscles != []){
             console.log(this.editText);
-            if(param != 'file'){
+            if(param != 'file' && param != 'muscles'){
               try {
                 await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
                                                                                   [param]: this.editText})
@@ -128,6 +137,22 @@ export default {
                 console.log(error);
               }
                  
+            }
+            if(param == 'muscles'){
+              try {
+                await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
+                                                                                  [param]: this.editMuscles})
+                .then((res) => {
+                  console.log(res);
+                  this.showEditInput = false
+                  location.reload();
+                  this.editText = ''
+                  this.editMuscles = []
+                  localStorage.removeItem('currentParam')
+                })
+              } catch (error) {
+                console.log(error);
+              }
             }
             if(param == 'file'){
               try {
@@ -157,6 +182,13 @@ export default {
       else{
         console.log('param is undefined');
       }                                             
+    },
+    async getAllMuscles(){
+      await axios.get('http://783p122.e2.mars-hosting.com/7fit/info/muscles') 
+      .then(res => {
+        console.log(res);
+        this.allMuscles = res.data.muscles
+      })
     },
     getBack(event){
       const container = document.getElementById('edit_exercise_container')
@@ -281,6 +313,9 @@ export default {
     padding-right: 2rem;
     display: flex;
     flex-direction: column;
+  }
+  .exercise-details .details .muscles{
+    display: flex;
   }
   .line{
     margin-top: 1rem;
