@@ -4,21 +4,26 @@ import AuthorizationView from '../views/AuthorizationView.vue'
 import AdminView from '../views/AdminView.vue'
 import Profile from '../components/User/Profile.vue'
 import HomeLog from '../components/HomeLog.vue'
+import store from '../store'
+import user from '../exports/user'
 
 const routes = [{
         path: '/',
         name: 'LandingPage',
         component: LandingPageView,
+        meta: {auth: false}
     },
     {
         path: '/login',
         name: 'Login',
         component: AuthorizationView,
+        meta: {auth: false}
     },
     {
         path: '/profile',
         name: 'Profile',
         component: Profile,
+        meta: {auth: true},
         children:[
           {
             path: '/profile/my_program',
@@ -30,39 +35,42 @@ const routes = [{
             name: 'MyDetails',
             component: () => import('../components/User/MyDetails.vue')
           }
-        ]
+        ],
     },
     {
         path: '/homelog',
         name: 'HomeLog',
         component: HomeLog,
+        meta: {auth: true}
     },
     {
       path: '/plans',
       name: 'Plans',
       component: () => import ('../components/AdminComponents/ListComponents/PlansComponent.vue'),
+      meta: {auth: true},
     },
     {
       path: '/plans/:id',
       name: 'editPlan',
-      component: () => 
-          import ('../components/AdminComponents/EditComponents/SinglePlan.vue')
+      component: () => import ('../components/AdminComponents/EditComponents/SinglePlan.vue'),
+      meta: {auth: true}
     },
     {
       path: '/exercises',
       name: 'Exercises',
+      meta: {auth: true},
       component: () => import ('../components/AdminComponents/ListComponents/ExercisesComponent.vue'),
       children: [{
         path: '/exercises/:id',
         name: 'editExercise',
-        component: () =>
-            import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
+        component: () => import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
        }]
     },
     {
       path: '/admin',
       name: 'AdminView',
       component: AdminView,
+      meta: {auth: true},
       children: [{
               path: '/admin/users',
               name: 'AdminManageUsers',
@@ -77,10 +85,10 @@ const routes = [{
          }],
       },
     {
-        path: '/plans/create-plan',
-        name: 'createPlan',
-        component: () =>
-          import ('../components/SharedComponents/CreatePlan.vue')    
+      path: '/plans/create-plan',
+      name: 'createPlan',
+      meta: {auth: true},
+      component: () => import ('../components/SharedComponents/CreatePlan.vue')    
     },
 ]
 
@@ -89,4 +97,7 @@ const router = createRouter({
     routes,
     linkActiveClass: 'router-link-active'
 })
+
+
+
 export default router

@@ -2,13 +2,13 @@
   <div class="wrap">
     <div class="program-head">
       <label>Active plan</label>
-      <button v-if="this.currentPlan == {}">add new program</button>
+      <button v-if="this.activePlan == {}">add new program</button>
     </div>
     <div class="plan-name">
-      <label>{{currentPlan.pla_name}}</label>
+      <label>{{activePlan.pla_name}}</label>
     </div>
     <div class="plan">
-      <PlanDays :role="'admin'" :plan="currentPlan"/>
+      <PlanDays :role="'admin'" :plan="activePlan"/>
     </div>
     
   </div>
@@ -21,8 +21,8 @@ import PlanDays from '../SharedComponents/PlanDaysComponent.vue'
 export default {
   data(){
     return{
-      currentPlan: {},
-      currentPlanId: '35'
+      activePlan: {},
+      activePlanId: '35'
     }
   },
   components:{
@@ -33,10 +33,10 @@ export default {
   },
   methods:{
      async getPlanById(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.currentPlanId}} )
+      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.activePlanId}} )
       .then(res => {
         console.log(res);
-        this.currentPlan = res.data.msg
+        this.activePlan = res.data.msg
       })
     },
   }

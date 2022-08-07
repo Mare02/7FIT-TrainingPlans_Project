@@ -51,8 +51,6 @@
               <button @click="showPlanOptions(plan)">view details</button>
               <button>edit</button>
             </div>
-            
-            <button>save</button>
           </div>
         </div>
       </li>
@@ -115,7 +113,7 @@ export default {
     },
     showPlanOptions(plan){
       this.$router.push({name: 'editPlan', params: {id: plan.pla_id}})
-    }
+    },
   },
   components:{
 

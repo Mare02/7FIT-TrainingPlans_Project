@@ -44,7 +44,7 @@
         <option value="4">Strenght</option>
       </select>
     </div>
-    <button>save</button>
+    <button @click="editUser()">save</button>
   </div>
 </template>
 
@@ -86,6 +86,22 @@ export default {
         this.user.weight = result.usr_weight
         this.user.goal = result.goa_id
       })
+    },
+    async editUser(){
+      // const params = {id: 2};
+      const formdata = new FormData()
+      formdata.append('id', 2)
+      for (let key in this.user) {
+        if (this.user[key] !== null && this.user[key] !== '') {
+          // params[key] = this.user[key];
+          formdata.append([key], this.user[key])
+        }
+      }
+      await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', formdata)
+      .then(res => {
+        console.log(res);
+      })
+      this.getUserById()
     }
   }
 }

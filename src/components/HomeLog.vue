@@ -1,32 +1,32 @@
 <template>
   <div class="mainw">
-    <NavbarComponent />
     <div class="gif">
       <img src="https://wallpapercave.com/wp/wp7661141.jpg" alt="popaj" id="slika1">
     </div>
     <div class="main"> 
       <p id="para">RECOMENDED <b>PLANS</b> FOR YOUR <b>GOAL</b> </p> 
-      <div class="carousel-wrapper">
-        <span id="item-1"></span>
-        <span id="item-2"></span>
-        <span id="item-3"></span>
-        <div class="carousel-item item-1">
-          <a href="#item-3" class="arrow-prev arrow" @click="channgeText3()"></a>
-          <a href="#item-2" class="arrow-next arrow" @click="channgeText2()"></a>
-        </div>
-        <div class="carousel-item item-2">
-          <a href="#item-1" class="arrow-prev arrow" @click="channgeText1()"></a>
-          <a href="#item-3" class="arrow-next arrow" @click="channgeText3()"></a>
-        </div>
-        <div class="carousel-item item-3">
-          <a href="#item-2" class="arrow-prev arrow" @click="channgeText2()"></a>
-          <a href="#item-1" class="arrow-next arrow" @click="channgeText1()"></a>
-        </div>
+      <div class="rec-plans-wrap">
+        <ul class="plans-list">
+          <li v-for="(plan, index) in this.plans" :key="plan.pla_id" :id="index">
+            <div class="plan-image">
+              <img :src="plan.file_url" alt="">
+            </div>
+            <div class="plan-info">
+              <div>
+                <p>{{plan.pla_name}}</p>
+              </div>
+              <div class="description">
+                <p>{{plan.pla_desc}}</p>
+              </div>
+              <div class="plan-buttons"> 
+                <div v-if="true">
+                  <button @click="showPlanOptions(plan)">view details</button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-       <!-- <div class="desc">
-        <p id="gara">PLAN DESCRIPTION</p>
-        <p id="descr">{{desc}}</p>
-      </div> -->
     </div>
     <div class="mainer"> 
       <div class="mainerwraper">
@@ -40,40 +40,121 @@
   </div>
 </template>
 <script>
-  import NavbarComponent from "../components/SharedComponents/NavbarComponent.vue";
+import axios from 'axios'
+
   export default {
     data() {
       return {
         message: "PLAN 1",
-        desc: "Plan 1 is great way to imporve your body size ! "
+        desc: "Plan 1 is great way to imporve your body size ! ",
+
+        plans: {}
       }
     },
+    mounted(){
+      this.getPlansForGoal()
+    },
     components: {
-      NavbarComponent,
+
     },
     methods: {
-      // channgeText1() {
-      //   this.message = "PLAN 1",
-      //     this.desc = "Plan 1 is great way to improve your appearance !"
-      // },
-      // channgeText2() {
-      //   this.message = "PLAN 2",
-      //     this.desc = "Plan 2 is great way to improve your appearance !"
-      // },
-      // channgeText3() {
-      //   this.message = "PLAN 3",
-      //     this.desc = "Plan 3 is great way to improve your appearance ! "
-      // }
+     async getPlansForGoal(){
+      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {goal: 2}})
+        .then(res => {
+          console.log(res);
+          this.plans = res.data.msg
+        })
+      },
+      showPlanOptions(plan){
+        this.$router.push({name: 'editPlan', params: {id: plan.pla_id}})
+      },  
     }
   }
 </script>
 <style scoped>
+  .plans-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-top: 2rem;
+  }
+  .plan-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(61, 61, 61);
+    position: relative;
+    width: 100%;
+    min-height: 8rem;
+    /* box-shadow: 0 -15px 30px 20px rgb(53, 0, 0); */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 2px solid gray;
+  }
+  .plan-buttons{
+    display: flex;
+    align-items: center;
+  }
+  .plan-info .description p{
+    color: lightgray;
+    font-size: 1.2rem;
+  }
+  .plans-list .plan-info div{
+    display: flex;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    position: relative;
+    bottom: 0.25rem;
+  }
+  .plans-list li{
+    cursor: pointer;
+    overflow-x: hidden;
+    margin: 2rem;
+    width: 26rem;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border-top: 1px solid rgb(145, 145, 145);
+    border-bottom: 1px solid rgb(88, 88, 88);
+    box-shadow: 0 0 10px 2px rgb(27, 27, 27);
+    border-radius: 10px;
+    background-color: rgb(61, 61, 61);
+  }
+  .plan-image{
+    width: 100%;
+    height: 22rem;
+    box-shadow: 0 0 2px 2px rgb(41, 41, 41);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .plan-image img{
+    object-fit: fill;
+    width: auto;
+    height: 100%;
+  }
+  .plan-info p{
+    font-size: 1.8rem;
+  }
+  .plan-info label{
+    font-size: 1.5rem;
+  }
+  button{
+    height: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  } 
+
   b {
     color: red
   }
-
-
-
   #slika1 {
     width: 100vw;
   }

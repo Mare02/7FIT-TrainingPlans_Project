@@ -19,6 +19,9 @@
           <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate magni mollitia alias iusto sint id quis a reiciendis illo. Sequi, sint et modi maiores at expedita ex eaque quidem fugiat? </p>
         </div>
       </div>
+      <div>
+        <button class="save-plan-btn" @click="savePlan()">start plan</button>
+      </div>
     </div>
     <PlanDays :plan="plan"/>
   </div>
@@ -54,11 +57,33 @@ export default {
         console.log(error);
       }
     },
+    async savePlan(){
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: 2,
+                                                                            pla_id: this.$route.params.id})
+      .then(res => {
+        console.log(res);
+      })
+    },
   },
 }
 </script>
 
 <style scoped>
+  .save-plan-btn{
+    background-color: rgb(155, 19, 19);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 2.4rem;
+    width: 10rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .save-plan-btn:hover{
+    background-color: #eb2626;
+  }
   .single-plan-container{
     width: 100%;
     height: 100vh;

@@ -26,7 +26,7 @@
           </div>
           <div>
             <label>Goal: </label>
-            <p>Bulk</p>
+            <p>{{user.goa_id}}</p>
           </div>
         </div>
         <div class="user-menu">

@@ -9,18 +9,24 @@
 
   <script>
   import NavbarComponent from '../src/components/SharedComponents/NavbarComponent.vue'
+  import store from '../src/store'
+  import axios from 'axios'
+  import user from '../src/exports/user'
 
   export default{
     components:{
       NavbarComponent
     },
-    mounted(){
+    mounted(){ 
       
     },
     data(){
       return{
         color: 'white'
       }
+    },
+    methods:{
+
     }
   }
   </script>

@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="create-exercise-wrap">
+    <!-- <div class="create-exercise-wrap">
       <div class="inputs">
         <div>
           <label>Name: </label>
@@ -68,7 +68,7 @@
         </div>
         <button @click="createExercise()">submit</button>
       </div>
-    </div>
+    </div> -->
     <ul class="exercises-list">
       <li v-for="(exercise, index) in this.allExercises" :key="exercise.exe_id" :id="index">
         <div class="exercise-info">

@@ -15,6 +15,8 @@
   import LoginComponent from '../components/AuthorizationComponents/LoginComponent.vue'
   import RegisterComponent from '../components/AuthorizationComponents/RegisterComponent.vue'
   import axios from 'axios'
+  import store from '../store'
+  import user from '../exports/user'
 
 
   export default {
@@ -48,8 +50,8 @@
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
-          localStorage.setItem('isLoggedIn', true)
-          this.$router.push('/')
+          user.methods.checkSession()
+          this.$router.push('/homelog')
         });
       },
       async register(payload){

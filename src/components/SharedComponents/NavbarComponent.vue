@@ -23,7 +23,7 @@
             <li>
               <a href="/">About us</a>
             </li>
-            <div v-if="true">
+            <div v-if="role == 1">
               <li class="line"></li>
               <p>Admin settings:</p>
               <li>
@@ -35,8 +35,11 @@
             </div>
           </ul>
         </li>
-        <li>
-          <a class="nav-item" href="/login">log out</a>
+        <li v-if="isLoggedIn">
+          <a style="cursor: pointer;" class="nav-item" @click="logOut()">log out</a>
+        </li>
+        <li v-if="!isLoggedIn">
+          <a href="/login" style="cursor: pointer;" class="nav-item">log in</a>
         </li>
       </ul>
     </div>
@@ -44,8 +47,35 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios'
+import store from '../../store'
 
+
+export default {
+  data(){
+    return{
+      role: null,
+      isLoggedIn: null
+    }
+  },
+  mounted(){
+    this.role = store.state.user.role_id,
+    this.isLoggedIn = store.state.user.isLoggedIn
+  },
+  methods:{
+    async logOut(){
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/logout', {sid: localStorage.getItem('sid')})
+      .then(res => {
+        console.log(res);
+        if(res.status == 200){
+          localStorage.clear()
+          store.commit('SET_ISLOGGEDIN', false)
+          store.commit('SET_ROLE', null)
+          this.$router.push({name: 'Login'})
+        }
+      })
+    }
+  }
 }
 </script>
 

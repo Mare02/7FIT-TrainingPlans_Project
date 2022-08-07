@@ -4,11 +4,27 @@ export default createStore({
     state: {
         user: {
             isLoggedIn: false,
-            isAdmin: false,
-            isTrainer: false
+            role_id: ''
         },
     },
-    mutations: {},
-    actions: {},
+    getters:{
+      checkIsLoggedIn(state){
+        return state.user.isLoggedIn
+      },
+      checkRole(state){
+        return state.user.role_id
+      }
+    },
+    mutations: {
+      SET_ISLOGGEDIN(state, payload){
+        state.user.isLoggedIn = payload
+      },
+      SET_ROLE(state, payload){
+        state.user.role_id = payload
+      }
+    },
+    actions: {
+      
+    },
     modules: {}
 })
