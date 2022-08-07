@@ -147,7 +147,6 @@ export default {
     height: 100%;
     width: auto;
     display: block;
-    z-index: 3;
     cursor: pointer;
   }
 

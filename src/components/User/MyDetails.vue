@@ -110,6 +110,7 @@ export default {
     font-size: 1.6rem;
     cursor: pointer;
     margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .wrap-details button:hover{
     background-color: #eb2626;

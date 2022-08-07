@@ -345,8 +345,11 @@ export default {
     background-color: rgb(95, 95, 95);
     margin: 5px;
     transition: all 0.5s;
+    border-radius: 10px;
   }
   .day-head{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     background-color: gray;
     width: 100%;
     height: 2rem;
