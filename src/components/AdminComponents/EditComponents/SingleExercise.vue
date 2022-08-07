@@ -17,7 +17,12 @@
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
           <div class="muscles" id="muscles">
-            <p><b>Muscles:</b><p v-for="mus in muscles" :key="mus.mus_id">{{mus.mus_name}}</p></p> 
+            <div style="display: flex;">
+              <b>Muscles:</b>
+              <p v-for="mus in muscles" :key="mus.mus_id">
+                {{mus.mus_name}},
+              </p>
+            </div> 
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
         </div>
@@ -204,6 +209,9 @@ export default {
   b{
     color: lightgray;
     font-weight: 500;
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-top: 1rem;
   }
   *{
     padding: 0;

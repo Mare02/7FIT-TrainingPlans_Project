@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LandingPageView from '../views/LandingPageView.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import AdminView from '../views/AdminView.vue'
-import TestHome from '../components/TestHome.vue'
+import Profile from '../components/User/Profile.vue'
 import HomeLog from '../components/HomeLog.vue'
 
 const routes = [{
@@ -16,9 +16,21 @@ const routes = [{
         component: AuthorizationView,
     },
     {
-        path: '/testhome',
-        name: 'TestHome',
-        component: TestHome,
+        path: '/profile',
+        name: 'Profile',
+        component: Profile,
+        children:[
+          {
+            path: '/profile/my_program',
+            name: 'MyProgram',
+            component: () => import('../components/User/MyProgram.vue')
+          },
+          {
+            path: '/profile/my_details',
+            name: 'MyDetails',
+            component: () => import('../components/User/MyDetails.vue')
+          }
+        ]
     },
     {
         path: '/homelog',
@@ -74,6 +86,7 @@ const routes = [{
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
+    routes,
+    linkActiveClass: 'router-link-active'
 })
 export default router

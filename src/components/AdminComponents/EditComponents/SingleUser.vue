@@ -95,7 +95,7 @@ export default {
         const res = await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter?id=' + id)
         this.user = res.data.msg[0]
       } catch (error) {
-        
+        console.log(error);
       }
     },
     getIfDate(){

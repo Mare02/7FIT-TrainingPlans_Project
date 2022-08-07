@@ -12,13 +12,13 @@
               <a href="/homelog">Home</a>
             </li>
             <li>
+              <a href="/profile/my_program">Profile</a>
+            </li>
+            <li>
               <a href="/exercises">Exercises list</a>
             </li>
             <li>
               <a href="/plans">See all plans</a>
-            </li>
-            <li>
-              <a href="/testhome">Dashboard</a>
             </li>
             <li>
               <a href="/">About us</a>
@@ -29,9 +29,9 @@
               <li>
                 <a href="/admin/users">Users</a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="/admin/statistics">Statistics</a>
-              </li>
+              </li> -->
             </div>
           </ul>
         </li>

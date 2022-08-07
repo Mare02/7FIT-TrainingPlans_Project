@@ -74,11 +74,8 @@
 
 
 
-  .mainw {}
   #slika1 {
     width: 100vw;
-  }
-  #slika2{
   }
   .gif {
     width: 100%;
