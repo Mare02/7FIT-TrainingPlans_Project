@@ -11,84 +11,90 @@ const routes = [{
         path: '/',
         name: 'LandingPage',
         component: LandingPageView,
-        meta: {auth: false}
+        meta: { auth: false }
     },
     {
         path: '/login',
         name: 'Login',
         component: AuthorizationView,
-        meta: {auth: false}
+        meta: { auth: false }
     },
     {
         path: '/profile',
         name: 'Profile',
         component: Profile,
-        meta: {auth: true},
-        children:[
-          {
-            path: '/profile/my_program',
-            name: 'MyProgram',
-            component: () => import('../components/User/MyProgram.vue')
-          },
-          {
-            path: '/profile/my_details',
-            name: 'MyDetails',
-            component: () => import('../components/User/MyDetails.vue')
-          }
+        meta: { auth: true },
+        children: [{
+                path: '/profile/my_program',
+                name: 'MyProgram',
+                component: () =>
+                    import ('../components/User/MyProgram.vue')
+            },
+            {
+                path: '/profile/my_details',
+                name: 'MyDetails',
+                component: () =>
+                    import ('../components/User/MyDetails.vue')
+            }
         ],
     },
     {
         path: '/homelog',
         name: 'HomeLog',
         component: HomeLog,
-        meta: {auth: true}
+        meta: { auth: true }
     },
     {
-      path: '/plans',
-      name: 'Plans',
-      component: () => import ('../components/AdminComponents/ListComponents/PlansComponent.vue'),
-      meta: {auth: true},
+        path: '/plans',
+        name: 'Plans',
+        component: () =>
+            import ('../components/AdminComponents/ListComponents/PlansComponent.vue'),
+        meta: { auth: true },
     },
     {
-      path: '/plans/:id',
-      name: 'editPlan',
-      component: () => import ('../components/AdminComponents/EditComponents/SinglePlan.vue'),
-      meta: {auth: true}
+        path: '/plans/:id',
+        name: 'editPlan',
+        component: () =>
+            import ('../components/AdminComponents/EditComponents/SinglePlan.vue'),
+        meta: { auth: true }
     },
     {
-      path: '/exercises',
-      name: 'Exercises',
-      meta: {auth: true},
-      component: () => import ('../components/AdminComponents/ListComponents/ExercisesComponent.vue'),
-      children: [{
-        path: '/exercises/:id',
-        name: 'editExercise',
-        component: () => import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
-       }]
+        path: '/exercises',
+        name: 'Exercises',
+        meta: { auth: true },
+        component: () =>
+            import ('../components/AdminComponents/ListComponents/ExercisesComponent.vue'),
+        children: [{
+            path: '/exercises/:id',
+            name: 'editExercise',
+            component: () =>
+                import ('../components/AdminComponents/EditComponents/SingleExercise.vue')
+        }]
     },
     {
-      path: '/admin',
-      name: 'AdminView',
-      component: AdminView,
-      meta: {auth: true},
-      children: [{
-              path: '/admin/users',
-              name: 'AdminManageUsers',
-              component: () =>
-                  import ('../components/AdminComponents/ListComponents/adminEditUsers.vue'),
-              children: [{
-                  path: '/admin/users/:id',
-                  name: 'editUser',
-                  component: () =>
-                      import ('../components/AdminComponents/EditComponents/SingleUser.vue')
-              }]
-         }],
-      },
+        path: '/admin',
+        name: 'AdminView',
+        component: AdminView,
+        meta: { auth: true },
+        children: [{
+            path: '/admin/users',
+            name: 'AdminManageUsers',
+            component: () =>
+                import ('../components/AdminComponents/ListComponents/adminEditUsers.vue'),
+            children: [{
+                path: '/admin/users/:id',
+                name: 'editUser',
+                component: () =>
+                    import ('../components/AdminComponents/EditComponents/SingleUser.vue')
+            }]
+        }],
+    },
     {
-      path: '/plans/create-plan',
-      name: 'createPlan',
-      meta: {auth: true},
-      component: () => import ('../components/SharedComponents/CreatePlan.vue')    
+        path: '/plans/create-plan',
+        name: 'createPlan',
+        meta: { auth: true },
+        component: () =>
+            import ('../components/SharedComponents/CreatePlan.vue')
     },
 ]
 
@@ -98,6 +104,12 @@ const router = createRouter({
     linkActiveClass: 'router-link-active'
 })
 
+// router.beforeEach((to, from, next) => {
+//     if (to.meta.auth == true) {
 
+//     } else {
+//         next()
+//     }
+// })
 
 export default router
