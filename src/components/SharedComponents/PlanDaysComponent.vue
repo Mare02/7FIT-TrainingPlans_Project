@@ -3,7 +3,7 @@
   <div class="plan-content-head">
     <label>Plan</label>
   </div>
-  <div class="add-day-wrap" v-if="this.role == 'trainer' || this.role == 'admin'">
+  <div class="add-day-wrap" v-if="this.role == 1 || this.role == 2">
     <label class="add-label">Add day</label>
     <button class="show-set-btn" @click="emitAddDay()">+</button>
   </div>
@@ -12,7 +12,7 @@
     <div v-for="day in this.plan.days" :key="day.day_id" :id="day.day_id" class="day-wrap" >
       <div class="day-head">
         Day {{day.day_number}}
-        <div>   
+        <div  v-if="this.role == 1 || this.role == 2">   
           <button class="remove-day-btn" @click="removeDay(day.day_id)">remove day</button>  
         </div>
         <!-- <input type="checkbox" class="checkbox" :id="day.day_id+'check'" :checked="day.day_completed"> -->
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="div2">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="remove-set-btn" @click="removeSet(set.set_id)">
+            <svg  v-if="this.role == 1 || this.role == 2" width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="remove-set-btn" @click="removeSet(set.set_id)">
               <path
                 d="M8 11C7.44772 11 7 11.4477 7 12C7 12.5523 7.44772 13 8 13H16C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11H8Z"
                 fill="currentColor"
@@ -48,11 +48,9 @@
                 fill="currentColor"
               />
             </svg>
-          </div>
-          
-          
+          </div>    
         </li> 
-        <div class="set-inputs" :id="day.day_id+'set'">
+        <div class="set-inputs" :id="day.day_id+'set'"  v-if="this.role == 1 || this.role == 2">
           <div class="wrap-1">
               <select v-model="set.exe_id">
                 <option value="">Select exercise</option>
@@ -73,7 +71,7 @@
             <button class="submit-set-btn" @click="addSet()">add</button>
           </div>
         </div>
-        <div class="add-set-wrap">
+        <div class="add-set-wrap" v-if="this.role == 1 || this.role == 2">
           <button class="show-set-btn" @click="showSet($event)">+</button>
         </div>
       </ul>
@@ -89,7 +87,8 @@ import axios from 'axios'
 export default {
   props: [
     'plan',
-    'role'
+
+    'role',
   ],
   data(){
     return{

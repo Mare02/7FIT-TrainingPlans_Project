@@ -1,5 +1,4 @@
 <template>
-  <Navbar/>
   <div class="single-plan-container">
     <div class="title">
       <div>

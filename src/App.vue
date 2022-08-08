@@ -1,7 +1,7 @@
 <template>
 <div class="app">
   <div class="app-container">
-    <NavbarComponent v-if="this.$route.name != 'Login'"/>
+    <NavbarComponent :isLoggedIn="this.isLoggedIn" :role="this.role" v-if="this.$route.name != 'Login'"/>
     <router-view/>
   </div>
 </div>
@@ -11,23 +11,46 @@
   import NavbarComponent from '../src/components/SharedComponents/NavbarComponent.vue'
   import store from '../src/store'
   import axios from 'axios'
-  import user from '../src/exports/user'
+  import getUser from '../src/exports/user'
+  import { mapActions } from 'vuex'
 
   export default{
     components:{
       NavbarComponent
     },
     mounted(){ 
-      
+      this.getUserinfo()
+      console.log('app mounted');
     },
     data(){
       return{
-        color: 'white'
+        role: null,
+        isLoggedIn: null
       }
     },
     methods:{
+      async getUserinfo(){
+        let res = await getUser()
 
-    }
+        if(res){
+          if(res.data.msg.role == 1){
+            console.log('admin login');
+          }
+          else{
+            console.log('user login');
+          }
+          this.setLogin(true)
+          this.setRole(res.data.msg.role)
+
+          this.role = store.state.user.role_id;
+          this.isLoggedIn = store.state.user.isLoggedIn;
+          
+          console.log(store.state.user.isLoggedIn);
+          console.log(store.state.user.role_id);
+        }
+      },
+      ...mapActions(['setLogin', 'setRole']),
+    },
   }
   </script>
   

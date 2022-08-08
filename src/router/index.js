@@ -5,7 +5,7 @@ import AdminView from '../views/AdminView.vue'
 import Profile from '../components/User/Profile.vue'
 import HomeLog from '../components/HomeLog.vue'
 import store from '../store'
-import user from '../exports/user'
+import getUser from '../exports/user'
 
 const routes = [{
         path: '/',
@@ -104,12 +104,18 @@ const router = createRouter({
     linkActiveClass: 'router-link-active'
 })
 
-// router.beforeEach((to, from, next) => {
-//     if (to.meta.auth == true) {
+router.beforeEach(async(to, from, next) => {
+    let res = await getUser()
 
-//     } else {
-//         next()
-//     }
-// })
+    if (to.meta.auth == true) {
+        if (res) {
+            next()
+        } else {
+            next('Login')
+        }
+    } else {
+        next()
+    }
+})
 
 export default router

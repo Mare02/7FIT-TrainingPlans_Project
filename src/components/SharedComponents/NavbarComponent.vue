@@ -23,7 +23,7 @@
             <li>
               <a href="/">About us</a>
             </li>
-            <div v-if="role == 1">
+            <div v-if="this.role == 1">
               <li class="line"></li>
               <p>Admin settings:</p>
               <li>
@@ -35,10 +35,10 @@
             </div>
           </ul>
         </li>
-        <li v-if="isLoggedIn">
+        <li v-if="this.isLoggedIn">
           <a style="cursor: pointer;" class="nav-item" @click="logOut()">log out</a>
         </li>
-        <li v-if="!isLoggedIn">
+        <li v-if="this.isLoggedIn == null">
           <a href="/login" style="cursor: pointer;" class="nav-item">log in</a>
         </li>
       </ul>
@@ -49,18 +49,21 @@
 <script>
 import axios from 'axios'
 import store from '../../store'
+import { mapActions, mapGetters } from 'vuex'
 
 
 export default {
+  props:[
+    'role',
+    'isLoggedIn'
+  ],
   data(){
     return{
-      role: null,
-      isLoggedIn: null
+
     }
   },
   mounted(){
-    this.role = store.state.user.role_id,
-    this.isLoggedIn = store.state.user.isLoggedIn
+    
   },
   methods:{
     async logOut(){
@@ -69,12 +72,11 @@ export default {
         console.log(res);
         if(res.status == 200){
           localStorage.clear()
-          store.commit('SET_ISLOGGEDIN', false)
-          store.commit('SET_ROLE', null)
           this.$router.push({name: 'Login'})
         }
       })
-    }
+    },
+    // ...mapActions(['setRole', 'setLogin'])
   }
 }
 </script>

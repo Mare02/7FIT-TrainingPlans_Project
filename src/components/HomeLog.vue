@@ -41,6 +41,7 @@
 </template>
 <script>
 import axios from 'axios'
+ import { mapActions } from 'vuex'
 
   export default {
     data() {
@@ -52,7 +53,8 @@ import axios from 'axios'
       }
     },
     mounted(){
-      this.getPlansForGoal()
+      this.getPlansForGoal(),
+      this.getUserinfo()
     },
     components: {
 
@@ -68,7 +70,28 @@ import axios from 'axios'
       showPlanOptions(plan){
         this.$router.push({name: 'editPlan', params: {id: plan.pla_id}})
       },  
-    }
+      async getUserinfo(){
+        let res = await getUser()
+
+        if(res){
+          if(res.data.msg.role == 1){
+            console.log('admin login');
+          }
+          else{
+            console.log('user login');
+          }
+          this.setLogin(true)
+          this.setRole(res.data.msg.role)
+
+          this.role = store.state.user.role_id;
+          this.isLoggedIn = store.state.user.isLoggedIn;
+          
+          console.log(store.state.user.isLoggedIn);
+          console.log(store.state.user.role_id);
+        }
+      },
+      ...mapActions(['setLogin', 'setRole']),
+    },
   }
 </script>
 <style scoped>

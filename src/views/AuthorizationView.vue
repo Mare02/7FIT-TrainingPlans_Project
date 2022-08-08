@@ -16,8 +16,8 @@
   import RegisterComponent from '../components/AuthorizationComponents/RegisterComponent.vue'
   import axios from 'axios'
   import store from '../store'
-  import user from '../exports/user'
-
+  import getUser from '../exports/user'
+  import { mapActions } from 'vuex'
 
   export default {
     mounted(){
@@ -46,12 +46,13 @@
         })
       },
       async login(payload){
-        axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
+        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
-          user.methods.checkSession()
-          this.$router.push('/homelog')
+          this.$router.push({name: 'HomeLog'})
+          this.setLogin(true)
+          this.setRole(res.data.user.role)
         });
       },
       async register(payload){
@@ -80,6 +81,7 @@
       changeShow(){
         this.show = !this.show
       },
+      ...mapActions(['setLogin', 'setRole']),
     }
   }
 </script>

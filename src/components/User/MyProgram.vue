@@ -8,7 +8,7 @@
       <label>{{activePlan.pla_name}}</label>
     </div>
     <div class="plan">
-      <PlanDays :role="'admin'" :plan="activePlan"/>
+      <PlanDays :role="this.role" :plan="activePlan"/>
     </div>
     
   </div>
@@ -17,12 +17,15 @@
 <script>
 import axios from 'axios'
 import PlanDays from '../SharedComponents/PlanDaysComponent.vue'
+import getUser from '../../exports/user'
 
 export default {
   data(){
     return{
       activePlan: {},
-      activePlanId: '35'
+      activePlanId: '35',
+
+      role: 1
     }
   },
   components:{
@@ -30,6 +33,7 @@ export default {
   },
   mounted(){
     this.getPlanById()
+    // this.getCurrentUser()
   },
   methods:{
      async getPlanById(){
@@ -39,6 +43,12 @@ export default {
         this.activePlan = res.data.msg
       })
     },
+    async getCurrentUser(){
+      let res = await getUser()
+      console.log('awdwadawdawdwadawd');
+      this.role = res.data.msg.role;
+      
+    }
   }
 }
 </script>
