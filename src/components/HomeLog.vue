@@ -3,6 +3,7 @@
     <div class="gif">
       <img src="https://wallpapercave.com/wp/wp7661141.jpg" alt="popaj" id="slika1">
     </div>
+<<<<<<< HEAD
     <div class="main"> 
       <p id="para">RECOMENDED <b>PLANS</b> FOR YOUR <b>GOAL</b> </p> 
       <div class="rec-plans-wrap">
@@ -35,6 +36,41 @@
         </div>
      <p id="opis"> <b>Something else about us!</b> <br><br>Hello user, we are very grateful for your trust and registration on our site, we hope that you we will not disappoint and with your help we will make you what you always wanted! First of all, we are not here to train for you, we are here to show you the way and with the help of your wishes we progress and achieve desired results.<br><br><b>Why our plans and why our site?</b> <br><br>Our plans are plans designed by today's best coaches. Our plans have been tested countless times and we can guarantee excellent results.<br><br><b>How do I know I won't get hurt?</b> <br><br>If you do a certain type of exercise correctly, we can guarantee that you don't have to worry about injury of any kind. Also, if you are a beginner, you can find a blog on the site that introduces you to the entire training system and which talks about the potential danger of improper exercise.<br><br><b>Will I look great in a month?</b> <br><br>First of all, we would like to ask you not to expect too much from yourself. Habits and results develop gradually, this does not mean that results you won't notice after a month, of course, that you will gain discipline both physically and mentally it will mean you in every future endeavor in life!<br><br><b>I have a complex and that's why I use heavier weights and work irregularly!</b><br><br>It is a completely normal thing, you are not crazy or a loser if you work with less weight, with improper work and heavy weights, you can only injure one person, and that is yourself it is very important to use light weights in the beginning and then go to more, but gradually! No one has achieved success in a short time, but certainly with discipline, persistence and effort!</p>
     </div>
+=======
+    <div class="mainer"> 
+      
+      <p id="para">OUR <b>PLANS </b> </p>
+      <div class="mainerwraper">
+        <div class="model1">
+        <img src="../assets/model1.png" alt="photo1" id="slika2">
+        </div>
+     <p id="opis"> <b>Something else about us!</b> <br><br>Hello user, we are very grateful for your trust and registration on our site, we hope that you we will not disappoint and with your help we will make you what you always wanted! First of all, we are not here to train for you, we are here to show you the way and with the help of your wishes we progress and achieve desired results.<br><br><b>Why our plans and why our site?</b> <br><br>Our plans are plans designed by today's best coaches. Our plans have been tested countless times and we can guarantee excellent results.<br><br><b>How do I know I won't get hurt?</b> <br><br>If you do a certain type of exercise correctly, we can guarantee that you don't have to worry about injury of any kind. Also, if you are a beginner, you can find a blog on the site that introduces you to the entire training system and which talks about the potential danger of improper exercise.<br><br><b>Will I look great in a month?</b> <br><br>First of all, we would like to ask you not to expect too much from yourself. Habits and results develop gradually, this does not mean that results you won't notice after a month, of course, that you will gain discipline both physically and mentally it will mean you in every future endeavor in life!<br><br><b>I have a complex and that's why I use heavier weights and work irregularly!</b><br><br>It is a completely normal thing, you are not crazy or a loser if you work with less weight, with improper work and heavy weights, you can only injure one person, and that is yourself it is very important to use light weights in the beginning and then go to more, but gradually! No one has achieved success in a short time, but certainly with discipline, persistence and effort!</p>
+    </div>
+    </div>
+    <div class="main"> 
+      <p id="para">RECOMENDED <b>PLANS</b> FOR YOUR <b>GOAL</b> </p> 
+      <div class="carousel-wrapper">
+        <span id="item-1"></span>
+        <span id="item-2"></span>
+        <span id="item-3"></span>
+        <div class="carousel-item item-1">
+          <a href="#item-3" class="arrow-prev arrow" @click="channgeText3()"></a>
+          <a href="#item-2" class="arrow-next arrow" @click="channgeText2()"></a>
+        </div>
+        <div class="carousel-item item-2">
+          <a href="#item-1" class="arrow-prev arrow" @click="channgeText1()"></a>
+          <a href="#item-3" class="arrow-next arrow" @click="channgeText3()"></a>
+        </div>
+        <div class="carousel-item item-3">
+          <a href="#item-2" class="arrow-prev arrow" @click="channgeText2()"></a>
+          <a href="#item-1" class="arrow-next arrow" @click="channgeText1()"></a>
+        </div>
+      </div>
+       <!-- <div class="desc">
+        <p id="gara">PLAN DESCRIPTION</p>
+        <p id="descr">{{desc}}</p>
+      </div> -->
+>>>>>>> bfc64e801f3eea26df540317d376ba0441ee7ff7
     </div>
     
   </div>
@@ -58,6 +94,7 @@ import axios from 'axios'
 
     },
     methods: {
+<<<<<<< HEAD
      async getPlansForGoal(){
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {goal: 2}})
         .then(res => {
@@ -68,6 +105,20 @@ import axios from 'axios'
       showPlanOptions(plan){
         this.$router.push({name: 'editPlan', params: {id: plan.pla_id}})
       },  
+=======
+      // channgeText1() {
+      //   this.message = "PLAN 1",
+      //     this.desc = "Plan 1 is great way to improve your appearance !"
+      // },
+      // channgeText2() {
+      //   this.message = "PLAN 2",
+      //     this.desc = "Plan 2 is great way to improve your appearance !"
+      // },
+      // channgeText3() {
+      //   this.message = "PLAN 3",
+      //     this.desc = "Plan 3 is great way to improve your appearance ! "
+      // }
+>>>>>>> bfc64e801f3eea26df540317d376ba0441ee7ff7
     }
   }
 </script>
@@ -155,9 +206,21 @@ import axios from 'axios'
   b {
     color: red
   }
+<<<<<<< HEAD
   #slika1 {
     width: 100vw;
   }
+=======
+
+
+
+  .mainw {}
+  #slika1 {
+    width: 100vw;
+  }
+  #slika2{
+  }
+>>>>>>> bfc64e801f3eea26df540317d376ba0441ee7ff7
   .gif {
     width: 100%;
     border-bottom: 3px solid white;
@@ -169,7 +232,12 @@ import axios from 'axios'
     justify-content: center;
     flex-direction: column;
     width: 100%;
+<<<<<<< HEAD
     border-top: 2px solid white;
+=======
+    border-bottom: 2px solid white;
+
+>>>>>>> bfc64e801f3eea26df540317d376ba0441ee7ff7
   }
   .mainerwraper{
     padding-top: 35px;
