@@ -1,6 +1,11 @@
 <template>
+
   <div class="container" v-if="show">
     <p class="title">Register</p>
+                       <div class="checker" v-if="lala">
+       <p id="exe"> <b>{{messagexe}}</b> </p>
+          <p id="exe"> <b>{{errorMsg}}</b> </p>
+      </div>
     <form>
       <div class="register-div">
         <div class="wrap">
@@ -43,17 +48,19 @@
         </div>
       </div>
     </form>
-
+    
     <div class="form-buttons">
       <button @click="checkInputs" id="next-btn" class="reg-btn">next</button>
+      
       <button @click="emit_reg_data" class="reg-btn" v-if="show_reg_inputs_2">Submit</button>
     </div>
-    
+
     <div class="login-option">
 			<p>Already have an account?</p>
 			<button class="login-btn" @click="emit_show">Sign In</button>
 		</div>
   </div>
+    
 </template>
 
 <script>
@@ -62,10 +69,13 @@ import dayjs from 'dayjs'
 export default {
   props:[
     'show',
+    'errorMsg'
   ],
   data(){
-    return{
+    return{       
       dayjs,
+      messagexe: "",
+      lala:false,
 
 
       show_reg_inputs_2: false,
@@ -84,6 +94,9 @@ export default {
         sex: ''
       }     
     }
+  },
+  computed(){
+    
   },
   methods:{
     emit_reg_data(){
@@ -119,20 +132,63 @@ export default {
         button.innerText = 'next'
       }
     },
-    checkInputs(){
+    checkInputs(){ 
+           if(this.reg_data.basic.email.length<1||this.reg_data.basic.username<1||
+            this.reg_data.basic.password<1||this.reg_data.basic.password_confirm<1||this.reg_data.basic.bday<1){
+             this.messagexe="Fields must not be empty !"
+             this.lala=true
+           }
+            else if(this.reg_data.basic.password.length<8){
+              this.messagexe="The minimum length of the password must be 8 characters !"
+              this.lala=true
+            }
+            else if(this.reg_data.basic.password!=this.reg_data.basic.password_confirm){
+                this.messagexe="Passwords do not match !"
+              this.lala=true
+            }
+              else if(this.reg_data.basic.bday.substring(0, 4) > 2006){
+                this.messagexe=" You are too young !"
+              this.lala=true
+            }
+            else if(this.errorMsg.length>1){
+              this.lala=true
+            }
+            else{
+                this.lala=false
       this.$emit('form_check', {funcChange: this.changeShowRegInputs2,
                                 email: this.reg_data.basic.email,
                                 username: this.reg_data.basic.username,
                                 password: this.reg_data.basic.password,
                                 password_confirm: this.reg_data.basic.password_confirm,
                                 bday: this.reg_data.basic.bday})
-      console.log(this.reg_data.sex);
+          console.log(this.reg_data.sex);}
     }
   }
 }
 </script>
 
 <style scoped>
+#exe{
+  position: absolute;
+  padding-top: 10px;
+
+  color:red;
+
+}
+.checker{
+  align-content: center;
+  position: relative;
+  border: 2px solid white;
+  border-radius: 18px;
+  background-color: white;
+  width: 250px;
+  height: 50px;
+  color: #eb2626;
+    box-shadow: 0 0 20px 0.5px gray;
+    margin-top:  20px;
+    opacity: 50%;
+    
+}
   .container{
     text-align: center;
     overflow: hidden;
