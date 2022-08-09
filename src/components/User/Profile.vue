@@ -57,6 +57,7 @@
 
 <script>
 import axios from 'axios'
+import getUser from '../../exports/user'
 
 export default {
   components: {
@@ -72,7 +73,9 @@ export default {
   },
   methods:{
     async getUserById(){
-      const id = 2
+      let res = await getUser()
+      const id = res.data.msg.id
+ 
       try {
         const res = await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter?id=' + id)
         this.user = res.data.msg[0]
@@ -90,7 +93,7 @@ export default {
     color: white;
     overflow-x: hidden;
     width: 100%;
-    height: auto;
+    min-height: 100vh;
   }
 
   .profile-title{
