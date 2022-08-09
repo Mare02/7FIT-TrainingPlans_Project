@@ -41,7 +41,10 @@
 </template>
 <script>
 import axios from 'axios'
- import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
+import getUser from '../exports/user'
+import store from '../store'
+
 
   export default {
     data() {
@@ -95,6 +98,9 @@ import axios from 'axios'
   }
 </script>
 <style scoped>
+  .rec-plans-wrap{
+    width: 100%;
+  }
   .plans-list{
     display: flex;
     justify-content: center;
@@ -166,6 +172,22 @@ import axios from 'axios'
   }
   .plan-info label{
     font-size: 1.5rem;
+  }
+  @media (max-width: 650px){
+    .plans-container{
+      padding-top: 5rem;
+    }
+    .plans-list{
+      margin-left: 0;
+    }
+    .button-wrapper{
+      z-index: 5;
+    }
+    .plans-list li{
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
   button{
     height: 2rem;

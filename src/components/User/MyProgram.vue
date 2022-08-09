@@ -10,7 +10,9 @@
     <div class="plan-name">
       <label>{{activePlan.pla_name}}</label>
     </div>
-    <button v-if="activePlanId != ''" @click="finishPlan()">finish plan</button>
+    <div class="finish">
+      <button v-if="activePlanId != ''" @click="finishPlan()">finish plan</button>
+    </div>
     <div class="plan">
       <PlanDays v-if="activePlanId != ''" :role="3" :plan="activePlan"/>
     </div>
@@ -21,7 +23,7 @@
 <script>
 import axios from 'axios'
 import PlanDays from '../SharedComponents/PlanDaysComponent.vue'
-import getUser from '../../exports/user'
+import store from '../../store'
 
 export default {
   data(){
@@ -50,8 +52,8 @@ export default {
       
     },
     async getCurrentUser(){
-      let res = await getUser()
-      this.activeUserId = res.data.msg.id
+      
+      this.activeUserId = store.getters.checkUserId
       
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/training', {params: {usr_id: this.activeUserId}})
       .then(res => {
@@ -79,6 +81,19 @@ export default {
 </script>
 
 <style scoped>
+  .finish{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 1rem;
+  }
+  .finish button{
+    cursor: pointer;
+    width: 9rem;
+    height: 2.2rem;
+    font-size: 1.5rem;
+  }
   .wrap{
     display: flex;
     flex-direction: column;
@@ -105,7 +120,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   .plan{

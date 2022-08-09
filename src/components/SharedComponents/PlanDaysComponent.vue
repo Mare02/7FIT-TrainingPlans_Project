@@ -337,6 +337,7 @@ export default {
 
   .day-wrap{
     min-height: 4rem;
+    padding-bottom: 2rem;
     width: 20rem;
     display: flex;
     flex-direction: column;

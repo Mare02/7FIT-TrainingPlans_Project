@@ -41,15 +41,17 @@
           }
           this.setLogin(true)
           this.setRole(res.data.msg.role)
+          this.setUserId(res.data.msg.id)
 
           this.role = store.state.user.role_id;
           this.isLoggedIn = store.state.user.isLoggedIn;
           
           console.log(store.state.user.isLoggedIn);
           console.log(store.state.user.role_id);
+          console.log(store.state.user.user_id);
         }
       },
-      ...mapActions(['setLogin', 'setRole']),
+      ...mapActions(['setLogin', 'setRole', 'setUserId']),
     },
   }
   </script>

@@ -47,9 +47,8 @@
             <p>{{plan.pla_desc}}</p>
           </div>
           <div class="plan-buttons"> 
-            <div v-if="true">
+            <div>
               <button @click="showPlanOptions(plan)">view details</button>
-              <button>edit</button>
             </div>
           </div>
         </div>

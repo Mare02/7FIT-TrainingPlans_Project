@@ -57,7 +57,7 @@
 
 <script>
 import axios from 'axios'
-import getUser from '../../exports/user'
+import store from '../../store';
 
 export default {
   components: {
@@ -73,11 +73,11 @@ export default {
   },
   methods:{
     async getUserById(){
-      let res = await getUser()
-      const id = res.data.msg.id
+      const id = store.getters.checkUserId
  
       try {
         const res = await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter?id=' + id)
+        console.log(res);
         this.user = res.data.msg[0]
       } catch (error) {
         console.log(error);

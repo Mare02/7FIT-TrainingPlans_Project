@@ -4,6 +4,7 @@ export default createStore({
     state: {
         user: {
             isLoggedIn: false,
+            user_id: '',
             role_id: ''
         },
     },
@@ -13,7 +14,10 @@ export default createStore({
         },
         checkRole(state) {
             return state.user.role_id
-        }
+        },
+        checkUserId(state) {
+            return state.user.user_id
+        },
     },
     mutations: {
         SET_ISLOGGEDIN(state, payload) {
@@ -21,7 +25,10 @@ export default createStore({
         },
         SET_ROLE(state, payload) {
             state.user.role_id = payload
-        }
+        },
+        SET_USERID(state, payload) {
+            state.user.user_id = payload
+        },
     },
     actions: {
         setLogin(store, payload) {
@@ -29,6 +36,9 @@ export default createStore({
         },
         setRole(store, payload) {
             store.commit('SET_ROLE', payload)
+        },
+        setUserId(store, payload) {
+            store.commit('SET_USERID', payload)
         }
     },
     modules: {}

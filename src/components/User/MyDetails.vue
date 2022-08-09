@@ -50,6 +50,7 @@
 
 <script>
 import axios from 'axios'
+import store from '../../store'
 
 export default {
   data(){
@@ -71,7 +72,7 @@ export default {
   },
   methods:{
     async getUserById(){
-      const id = 2
+      const id = store.getters.checkUserId
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter?id=' + id)
       .then(res => {
         console.log(res);

@@ -6,6 +6,7 @@
         <label>Workout plan</label>
       </div>
     </div>
+    <button v-if="showDelete" @click="deletePlan()">delete plan</button>
     <div class="wrap">
       <div class="plan-image">
         <img :src="plan.file_url" alt="">
@@ -22,47 +23,73 @@
         <button class="save-plan-btn" @click="savePlan()">start plan</button>
       </div>
     </div>
-    <PlanDays :plan="plan"/>
+    <PlanDays :role="role" :plan="plan"/>
   </div>
   
 </template>
 
 <script>
-import Navbar from '../../SharedComponents/NavbarComponent.vue'
 import PlanDays from '../../SharedComponents/PlanDaysComponent.vue'
 import axios from 'axios'
+import store from '../../../store'
 
 export default {
   components:{
-    Navbar, PlanDays
+    PlanDays
   },
   data(){
     return{
-      plan: {}
+      plan: {},
+      role: store.getters.checkRole,
+      user_id: store.getters.checkUserId,
+      showDelete: null
     }
   },
   mounted(){
     this.getPlanById()
+    this.getPlansForUser()
   },
   methods: {
     async getPlanById(){
       try {
         await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id}})
         .then(res => {
-          console.log(res);
+          console.log(res)
           this.plan = res.data.msg
+          if(res.data.msg.usr_id_trainer == this.user_id){
+            this.showDelete == true
+          }
         })
       } catch (error) {
         console.log(error);
       }
     },
     async savePlan(){
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: 2,
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: this.user_id,
                                                                             pla_id: this.$route.params.id})
       .then(res => {
         console.log(res);
+        this.$router.push({name: 'MyProgram'})
       })
     },
+    async getPlansForUser(){
+      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {usr_id: this.user_id}})
+      .then(res =>{
+        let plans = res.data.msg
+        let trainers = []
+        for(let plan in plans){
+          trainers.push(plans[plan].usr_id_trainer)
+        }
+        console.log(trainers);
+      })
+    },
+    async deletePlan(){
+      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id,
+                                                                          sid: localStorage.getItem('sid')}})
+      .then(res => {
+        console.log(res);
+      })
+    }
   },
 }
 </script>

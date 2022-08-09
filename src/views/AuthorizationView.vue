@@ -53,6 +53,7 @@
           this.$router.push({name: 'HomeLog'})
           this.setLogin(true)
           this.setRole(res.data.user.role)
+          this.setUserId(res.data.user.id)
         });
       },
       async register(payload){
@@ -81,7 +82,7 @@
       changeShow(){
         this.show = !this.show
       },
-      ...mapActions(['setLogin', 'setRole']),
+      ...mapActions(['setLogin', 'setRole', 'setUserId']),
     }
   }
 </script>

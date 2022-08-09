@@ -38,6 +38,7 @@
         </div>
         <button @click="createPlan()">create</button>
       </div>
+      <button @click="deletePlan()">delete plan</button>
     </div>
     <div class="plan-image">
         <img :src="this.currentPlan.file_url" alt="">
@@ -52,12 +53,13 @@
       </div>
     <PlanDaysComponent v-if="this.currentPlanId != ''" :plan="this.currentPlan" @add="addDay()"
                                                 @refresh="refresh()"
-                                                :role="'admin'"/>
+                                                :role="role"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import store from '../../store'
 import PlanDaysComponent from '../SharedComponents/PlanDaysComponent.vue'
 
 export default {
@@ -71,6 +73,7 @@ export default {
       currentPlan: {},
 
       currentPlanId: '',
+      role: store.getters.checkRole,
 
       plan:{
         name: '',
@@ -101,6 +104,7 @@ export default {
       let formdata = new FormData()
       for(let key in this.plan){
         formdata.append([key], this.plan[key])
+        formdata.append('sid', localStorage.getItem('sid'))
       }
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans', formdata)
       .then(res => {
@@ -117,9 +121,8 @@ export default {
       for(let key in this.plan){
         this.plan[key] = ''
       }
-      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params:{
-        id: this.currentPlanId
-      }})
+      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.currentPlanId,
+                                                                          sid: localStorage.getItem('sid')}})
       .then(res => {
         console.log(res);
       })
