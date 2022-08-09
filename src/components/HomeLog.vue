@@ -49,14 +49,13 @@ import store from '../store'
   export default {
     data() {
       return {
-        message: "PLAN 1",
-        desc: "Plan 1 is great way to imporve your body size ! ",
+        userGoal: '',
 
         plans: {}
       }
     },
     mounted(){
-      this.getPlansForGoal(),
+      this.getUserGoal(),
       this.getUserinfo()
     },
     components: {
@@ -64,9 +63,8 @@ import store from '../store'
     },
     methods: {
      async getPlansForGoal(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {goal: 2}})
+      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {goal: this.userGoal}})
         .then(res => {
-          console.log(res);
           this.plans = res.data.msg
         })
       },
@@ -77,21 +75,22 @@ import store from '../store'
         let res = await getUser()
 
         if(res){
-          if(res.data.msg.role == 1){
-            console.log('admin login');
-          }
-          else{
-            console.log('user login');
-          }
           this.setLogin(true)
           this.setRole(res.data.msg.role)
 
           this.role = store.state.user.role_id;
           this.isLoggedIn = store.state.user.isLoggedIn;
           
-          console.log(store.state.user.isLoggedIn);
-          console.log(store.state.user.role_id);
+          console.log('is logged in: ' + store.state.user.isLoggedIn);
+          console.log('user role id: ' +store.state.user.role_id);
         }
+      },
+      async getUserGoal(){
+        await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter', {params: {id: store.getters.checkUserId}})
+        .then(res => {
+          this.userGoal = res.data.msg[0].goa_id
+          this.getPlansForGoal()
+        })
       },
       ...mapActions(['setLogin', 'setRole']),
     },
@@ -131,7 +130,6 @@ import store from '../store'
   }
   .plans-list .plan-info div{
     display: flex;
-    margin-left: 1rem;
     margin-top: 0.5rem;
     position: relative;
     bottom: 0.25rem;

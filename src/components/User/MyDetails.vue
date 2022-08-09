@@ -91,7 +91,7 @@ export default {
     async editUser(){
       // const params = {id: 2};
       const formdata = new FormData()
-      formdata.append('id', 2)
+      formdata.append('id', store.getters.checkUserId)
       for (let key in this.user) {
         if (this.user[key] !== null && this.user[key] !== '') {
           // params[key] = this.user[key];

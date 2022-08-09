@@ -200,7 +200,6 @@ export default {
   }
   .plans-list .plan-info div{
     display: flex;
-    margin-left: 1rem;
     margin-top: 0.5rem;
     position: relative;
     bottom: 0.25rem;

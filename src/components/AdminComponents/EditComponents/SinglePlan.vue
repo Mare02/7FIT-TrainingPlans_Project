@@ -6,7 +6,9 @@
         <label>Workout plan</label>
       </div>
     </div>
-    <button v-if="showDelete" @click="deletePlan()">delete plan</button>
+    <div class="delete-plan-btn">
+      <button  v-if="showDelete" @click="deletePlan()">delete plan</button>
+    </div>
     <div class="wrap">
       <div class="plan-image">
         <img :src="plan.file_url" alt="">
@@ -23,7 +25,7 @@
         <button class="save-plan-btn" @click="savePlan()">start plan</button>
       </div>
     </div>
-    <PlanDays :role="role" :plan="plan"/>
+    <PlanDays :role="role" :plan="plan" @add="addDay()" @refresh="refresh()"/>
   </div>
   
 </template>
@@ -40,24 +42,42 @@ export default {
   data(){
     return{
       plan: {},
+      allDays: {},
       role: store.getters.checkRole,
       user_id: store.getters.checkUserId,
-      showDelete: null
+      showDelete: false
     }
   },
   mounted(){
     this.getPlanById()
-    this.getPlansForUser()
+    // this.getPlansForUser()
   },
   methods: {
+    refresh(){
+      this.getPlanById()
+    },
+    async addDay(){
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans/days', {pla_id: this.$route.params.id,
+        day_number: Object.keys(this.allDays).length + 1, day_description: ''})
+      .then(res => {
+        console.log(res);
+      })
+      this.getPlanById()
+    },
     async getPlanById(){
       try {
         await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id}})
         .then(res => {
           console.log(res)
           this.plan = res.data.msg
-          if(res.data.msg.usr_id_trainer == this.user_id){
-            this.showDelete == true
+          this.allDays = res.data.msg.days
+          console.log(this.user_id);
+          console.log(res.data.msg.usr_id_trainer);
+          if(res.data.msg.usr_id_trainer == this.user_id || this.role == 1){
+            this.showDelete = true
+          }
+          if(res.data.msg.usr_id_trainer != this.user_id && this.role != 1){
+            this.role = 3
           }
         })
       } catch (error) {
@@ -72,17 +92,17 @@ export default {
         this.$router.push({name: 'MyProgram'})
       })
     },
-    async getPlansForUser(){
-      await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {usr_id: this.user_id}})
-      .then(res =>{
-        let plans = res.data.msg
-        let trainers = []
-        for(let plan in plans){
-          trainers.push(plans[plan].usr_id_trainer)
-        }
-        console.log(trainers);
-      })
-    },
+    // async getPlansForUser(){
+    //   await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {usr_id: this.user_id}})
+    //   .then(res =>{
+    //     let plans = res.data.msg
+    //     let trainers = []
+    //     for(let plan in plans){
+    //       trainers.push(plans[plan].usr_id_trainer)
+    //     }
+    //     console.log(trainers);
+    //   })
+    // },
     async deletePlan(){
       await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id,
                                                                           sid: localStorage.getItem('sid')}})
@@ -95,6 +115,25 @@ export default {
 </script>
 
 <style scoped>
+  .delete-plan-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+  }
+  .delete-plan-btn button{
+    background-color: rgb(155, 19, 19);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 2.4rem;
+    width: 10rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .delete-plan-btn button:hover{
+    background-color: #eb2626;
+  }
   .save-plan-btn{
     background-color: rgb(155, 19, 19);
     color: white;

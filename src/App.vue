@@ -20,7 +20,7 @@
     },
     mounted(){ 
       this.getUserinfo()
-      console.log('app mounted');
+      console.log('%cWELCOME TO 7FIT!', `color: #eb2626;font-size: 1rem;font-weight: bold;`);
     },
     data(){
       return{
@@ -36,6 +36,9 @@
           if(res.data.msg.role == 1){
             console.log('admin login');
           }
+          if(res.data.msg.role == 2){
+            console.log('trainer login');
+          }
           else{
             console.log('user login');
           }
@@ -46,9 +49,9 @@
           this.role = store.state.user.role_id;
           this.isLoggedIn = store.state.user.isLoggedIn;
           
-          console.log(store.state.user.isLoggedIn);
-          console.log(store.state.user.role_id);
-          console.log(store.state.user.user_id);
+          console.log('is logged in: ' + store.state.user.isLoggedIn);
+          console.log('user role id: ' +store.state.user.role_id);
+          console.log('user id: ' +store.state.user.user_id);
         }
       },
       ...mapActions(['setLogin', 'setRole', 'setUserId']),

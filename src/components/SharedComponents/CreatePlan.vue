@@ -91,7 +91,12 @@ export default {
     }
   },
   mounted(){
-    this.getPlanById()
+    if(this.currentPlanId != ''){
+      this.getPlanById()
+    }
+    if(localStorage.getItem('currentCreatedPlan')){
+      this.currentPlanId = localStorage.getItem('currentCreatedPlan')
+    }
   },
   methods: {
     getFile(event){
@@ -102,9 +107,9 @@ export default {
     },
     async createPlan(){
       let formdata = new FormData()
+      formdata.append('sid', localStorage.getItem('sid'))
       for(let key in this.plan){
-        formdata.append([key], this.plan[key])
-        formdata.append('sid', localStorage.getItem('sid'))
+        formdata.append([key], this.plan[key])  
       }
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans', formdata)
       .then(res => {
@@ -116,6 +121,7 @@ export default {
         this.plan[key] = ''
       }
       this.getPlanById()
+      localStorage.setItem('currentCreatedPlan', this.currentPlanId)
     },
     async deletePlan(){
       for(let key in this.plan){
@@ -125,6 +131,10 @@ export default {
                                                                           sid: localStorage.getItem('sid')}})
       .then(res => {
         console.log(res);
+        if(res.status == 200){
+          localStorage.removeItem('currentCreatedPlan')
+          this.$router.push({name: 'Plans'})
+        }
       })
     },
     async getPlanById(){
@@ -137,7 +147,7 @@ export default {
     },
     async addDay(){
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans/days', {pla_id: this.currentPlanId,
-        day_number: Object.keys(this.allDays).length + 1, day_description: this.day.day_description})
+        day_number: Object.keys(this.allDays).length + 1, day_description: ''})
       .then(res => {
         console.log(res);
       })

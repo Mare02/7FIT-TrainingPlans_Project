@@ -95,13 +95,6 @@ export default {
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
                               bday: dayjs(this.reg_data.basic.bday).format('YYYY-MM-DD'),
-                              // bday: (() => {
-                              //   let date = this.reg_data.bday;
-                              //   let day = ("0" + date.getDate()).slice(-2);
-                              //   let month = ("0" + (date.getMonth() + 1)).slice(-2);
-                              //   let bday = date.getFullYear() + "-" + month + "-" + day;
-                              //   return bday;
-                              // }),
                               sex: this.reg_data.sex
       })
     },

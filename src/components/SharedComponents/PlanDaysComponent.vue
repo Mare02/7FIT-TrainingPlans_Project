@@ -60,8 +60,8 @@
           </div>
           <div class="wrap2">
             <div>
-                <input type="number" v-model="set.duration" class="duration" placeholder="duration">
-                <input type="number" v-model="set.rest" class="rest" placeholder="rest">
+                <input type="number" v-model="set.duration" class="duration" placeholder="duration(s)">
+                <input type="number" v-model="set.rest" class="rest" placeholder="rest(s)">
             </div>
             <div>
               <input type="text" v-model="set.description" class="desc" placeholder="description">

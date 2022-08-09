@@ -35,7 +35,7 @@
             </div>
           </ul>
         </li>
-        <li v-if="this.isLoggedIn">
+        <li v-if="this.isLoggedIn != null">
           <a style="cursor: pointer;" class="nav-item" @click="logOut()">log out</a>
         </li>
         <li v-if="this.isLoggedIn == null">
@@ -59,7 +59,7 @@ export default {
   ],
   data(){
     return{
-
+      
     }
   },
   mounted(){
