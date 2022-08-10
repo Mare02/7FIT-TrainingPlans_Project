@@ -4,7 +4,7 @@
       <img src="https://wallpapercave.com/wp/wp7661141.jpg" alt="popaj" id="slika1">
     </div>
     <div class="main"> 
-      <p id="para">RECOMENDED <b>PLANS</b> FOR YOUR <b>GOAL</b> </p> 
+      <p class="animate__animated animate__fadeInLeft" id="para">RECOMENDED <b>PLANS</b> FOR YOUR <b>GOAL</b> </p> 
       <div class="rec-plans-wrap">
         <ul class="plans-list">
           <li v-for="(plan, index) in this.plans" :key="plan.pla_id" :id="index">
@@ -19,7 +19,7 @@
                 <p>{{plan.pla_desc}}</p>
               </div>
               <div class="plan-buttons"> 
-                <div v-if="true">
+                <div>
                   <button @click="showPlanOptions(plan)">view details</button>
                 </div>
               </div>
@@ -32,6 +32,7 @@
       <div class="mainerwraper">
         <div class="model1">
         <img src="../assets/model1.png" alt="photo1" id="slika2">
+        
         </div>
      <p id="opis"> <b>Something else about us!</b> <br><br>Hello user, we are very grateful for your trust and registration on our site, we hope that you we will not disappoint and with your help we will make you what you always wanted! First of all, we are not here to train for you, we are here to show you the way and with the help of your wishes we progress and achieve desired results.<br><br><b>Why our plans and why our site?</b> <br><br>Our plans are plans designed by today's best coaches. Our plans have been tested countless times and we can guarantee excellent results.<br><br><b>How do I know I won't get hurt?</b> <br><br>If you do a certain type of exercise correctly, we can guarantee that you don't have to worry about injury of any kind. Also, if you are a beginner, you can find a blog on the site that introduces you to the entire training system and which talks about the potential danger of improper exercise.<br><br><b>Will I look great in a month?</b> <br><br>First of all, we would like to ask you not to expect too much from yourself. Habits and results develop gradually, this does not mean that results you won't notice after a month, of course, that you will gain discipline both physically and mentally it will mean you in every future endeavor in life!<br><br><b>I have a complex and that's why I use heavier weights and work irregularly!</b><br><br>It is a completely normal thing, you are not crazy or a loser if you work with less weight, with improper work and heavy weights, you can only injure one person, and that is yourself it is very important to use light weights in the beginning and then go to more, but gradually! No one has achieved success in a short time, but certainly with discipline, persistence and effort!</p>
     </div>
@@ -41,7 +42,7 @@
 </template>
 <script>
 import axios from 'axios'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import getUser from '../exports/user'
 import store from '../store'
 
@@ -50,13 +51,15 @@ import store from '../store'
     data() {
       return {
         userGoal: '',
-
         plans: {}
       }
     },
     mounted(){
       this.getUserGoal(),
       this.getUserinfo()
+    },
+    computed:{
+      
     },
     components: {
 
@@ -77,12 +80,6 @@ import store from '../store'
         if(res){
           this.setLogin(true)
           this.setRole(res.data.msg.role)
-
-          this.role = store.state.user.role_id;
-          this.isLoggedIn = store.state.user.isLoggedIn;
-          
-          console.log('is logged in: ' + store.state.user.isLoggedIn);
-          console.log('user role id: ' +store.state.user.role_id);
         }
       },
       async getUserGoal(){
@@ -93,6 +90,7 @@ import store from '../store'
         })
       },
       ...mapActions(['setLogin', 'setRole']),
+      ...mapGetters(['checkRole', 'checkIsLoggedIn'])
     },
   }
 </script>

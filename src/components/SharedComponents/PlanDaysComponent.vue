@@ -15,7 +15,7 @@
         <div  v-if="this.role == 1 || this.role == 2">   
           <button class="remove-day-btn" @click="removeDay(day.day_id)">remove day</button>  
         </div>
-        <input :checked="day.completed" type="checkbox" class="checkbox" :id="day.day_id+'check'" @change="completeDay($event, day.completed)">
+        <input :checked="day.completed" type="checkbox" class="checkbox" :id="day.day_id+'check'" @change="completeDay($event, day.completed)" v-if="this.allowTracking">
         <!-- <input type="checkbox" class="checkbox" :id="day.day_id+'check2'" @change="uncompleteDay($event)"> -->
       </div>
       <ul class="sets-container">
@@ -89,8 +89,8 @@ import store from '../../store'
 export default {
   props: [
     'plan',
-
     'role',
+    'allowTracking'
   ],
   data(){
     return{

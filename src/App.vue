@@ -1,8 +1,8 @@
 <template>
 <div class="app">
   <div class="app-container">
-    <NavbarComponent :isLoggedIn="this.checkIsLoggedIn" :role="this.checkRole" v-if="this.$route.name != 'Login'"/>
-    <router-view/>
+    <NavbarComponent :isLoggedIn="checkIsLoggedIn()" :role="checkRole()" v-if="this.$route.name != 'Login'"/>
+    <router-view class="fade-in"/>
   </div>
 </div>
 </template>
@@ -19,45 +19,43 @@
       NavbarComponent
     },
     mounted(){ 
-      this.getUserinfo()
+      if(localStorage.getItem('sid')){
+        this.getUserinfo()
+      }
       console.log('%cWELCOME TO 7FIT!', `color: #eb2626;font-size: 1rem;font-weight: bold;`);
     },
     data(){
       return{
-        role: null,
-        isLoggedIn: null
+
       }
     },
     computed:{
-      ...mapGetters(['checkIsLoggedIn', 'checkRole'])
+      
     },
     methods:{
       async getUserinfo(){
+        
         let res = await getUser()
-
-        if(res){
-          if(res.data.msg.role == 1){
-            console.log('admin login');
-          }
-          if(res.data.msg.role == 2){
-            console.log('trainer login');
-          }
-          else{
-            console.log('user login');
-          }
-          this.setLogin(true)
-          this.setRole(res.data.msg.role)
-          this.setUserId(res.data.msg.id)
-
-          this.role = store.state.user.role_id;
-          this.isLoggedIn = store.state.user.isLoggedIn;
-          
-          console.log('is logged in: ' + store.state.user.isLoggedIn);
-          console.log('user role id: ' +store.state.user.role_id);
-          console.log('user id: ' +store.state.user.user_id);
+        if(res.data.msg.role == 1){
+          console.log(res.data.msg.role);
+          console.log('admin login');
         }
+        else if(res.data.msg.role == 2){
+          console.log('trainer login');
+        }
+        else{
+          console.log('user login');
+        }
+        this.setLogin(true)
+        this.setRole(res.data.msg.role)
+        this.setUserId(res.data.msg.id)
+        
+        console.log('is logged in: ' + this.checkIsLoggedIn());
+        console.log('user role id: ' + this.checkRole());
+        console.log('user id: ' + this.checkUserId());
       },
       ...mapActions(['setLogin', 'setRole', 'setUserId']),
+      ...mapGetters(['checkIsLoggedIn', 'checkRole', 'checkUserId'])
     },
   }
   </script>
@@ -76,6 +74,18 @@
          */
     user-select: none;
   }
+  .fade-in {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
   .app-container{
     position: absolute;
@@ -86,7 +96,10 @@
   button{
     font-family: 'Bebas Neue', cursive;
   }
-
+  button:hover{
+    background-color: #eb2626;
+    color: white;
+  }
   body{
     overflow-x: hidden;
     width: 100%;

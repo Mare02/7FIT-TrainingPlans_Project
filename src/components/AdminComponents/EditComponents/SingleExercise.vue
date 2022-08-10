@@ -25,7 +25,9 @@
             </div> 
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
-          <button @click="deleteExercise()" style="margin-top: 5rem">delete exercise</button>
+          <div class="delete-wrap">
+            <button class="delete-exe-btn" @click="deleteExercise()" style="margin-top: 5rem">delete exercise</button>
+          </div>
         </div>
       </div>
     </div>
@@ -225,8 +227,40 @@ export default {
   *{
     padding: 0;
   }
-  .edit-btn{
+  .exercise-details .details .delete-wrap{
+    width: 100%;
+    justify-content: center;
+  }
+  .delete-wrap .delete-exe-btn{
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     font-size: 1.2rem;
+    border-radius: 5px;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border: none;
+    margin-top: 1rem;
+    width: 10rem;
+  }
+  .delete-wrap .delete-exe-btn:hover{
+    background-color: #eb2626;
+    color: white;
+  }
+  .edit-btn{
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border: none;
+    margin-top: 1rem;
+  }
+  .edit-btn:hover{
+    background-color: #eb2626;
+    color: white;
   }
   .save-btn-wrapper{
     position: relative;

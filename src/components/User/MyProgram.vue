@@ -2,19 +2,19 @@
   <div class="wrap">
     <div class="program-head">
       <label>Active plan</label>
-      <button @click="redirectToPlans()" v-if="activePlan == {}">add new program</button>
     </div>
-    <div v-if="activePlanId == {}">
-      there are no active plans
+    <div v-if="activePlan != {}" class="no-plans-msg">
+      <p>There are no currently active plans.</p>
+      <button class="get-plan-btn" @click="redirectToPlans()" v-if="Object.keys(activePlan).length == 0">get plan</button>
     </div>
     <div class="plan-name">
       <label>{{activePlan.pla_name}}</label>
     </div>
-    <div class="finish">
-      <button v-if="activePlanId != ''" @click="finishPlan()">finish plan</button>
+    <div class="finish" v-if="Object.keys(activePlan).length != 0">
+      <button @click="finishPlan()">finish plan</button>
     </div>
     <div class="plan">
-      <PlanDays @refresh="this.getCurrentUser()" v-if="activePlanId != {}" :role="3" :plan="activePlan"/>
+      <PlanDays @refresh="this.getCurrentUser()" v-if="Object.keys(activePlan).length != 0" :allowTracking="true" :role="3" :plan="activePlan"/>
     </div>
     
   </div>
@@ -29,7 +29,6 @@ export default {
   data(){
     return{
       activePlan: {},
-      activePlanId: '',
       activeUserId: store.getters.checkUserId,
     }
   },
@@ -47,6 +46,7 @@ export default {
         if(res.status == 200){
           this.activePlan = res.data.msg
         }
+
       })
     },
     async finishPlan(){
@@ -66,6 +66,16 @@ export default {
 </script>
 
 <style scoped>
+  .no-plans-msg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .no-plans-msg p{
+    font-size: 1.4rem;
+  }
   .finish{
     display: flex;
     justify-content: center;
@@ -91,13 +101,28 @@ export default {
     font-size: 2rem;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-left: 10%;
     padding-right: 10%;
   }
   .program-head label{
     color: lightgray;
+  }
+  .get-plan-btn{
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border: none;
+    margin-top: 1rem;
+  }
+  .get-plan-btn:hover{
+    background-color: #eb2626;
+    color: white;
   }
 
   .plan-name{

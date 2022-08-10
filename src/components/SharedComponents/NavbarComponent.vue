@@ -35,10 +35,10 @@
             </div>
           </ul>
         </li>
-        <li v-if="this.isLoggedIn != null">
+        <li v-if="this.isLoggedIn == true">
           <a style="cursor: pointer;" class="nav-item" @click="logOut()">log out</a>
         </li>
-        <li v-if="this.isLoggedIn == null">
+        <li v-if="this.isLoggedIn == false">
           <a href="/login" style="cursor: pointer;" class="nav-item">log in</a>
         </li>
       </ul>
@@ -48,9 +48,6 @@
 
 <script>
 import axios from 'axios'
-import store from '../../store'
-import { mapActions, mapGetters } from 'vuex'
-
 
 export default {
   props:[
@@ -76,7 +73,6 @@ export default {
         }
       })
     },
-    // ...mapActions(['setRole', 'setLogin'])
   }
 }
 </script>

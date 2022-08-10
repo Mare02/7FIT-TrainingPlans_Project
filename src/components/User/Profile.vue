@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="content">
-        <router-view/>
+        <router-view class="animate__animated animate__fadeInRight"/>
       </div>
     </div>
   </div>
@@ -88,6 +88,7 @@ export default {
 </script>
 
 <style scoped>
+  
   .main {
     background-color: rgb(36, 36, 36);
     color: white;

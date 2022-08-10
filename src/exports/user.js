@@ -18,7 +18,7 @@ export default async function() {
             console.log(error);
         }
     } else {
-        console.log('you are not logged in');
+        console.log('Please log in or register to gain access');
         return false
     }
 }

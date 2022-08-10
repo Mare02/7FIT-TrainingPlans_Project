@@ -85,7 +85,7 @@
         </div>
         <div class="exercise-buttons"> 
           <div v-if="true">
-            <button v-if="this.role == 1" @click="showExerciseOptions(exercise)">Edit</button>
+            <button class="edit-exe-btn" v-if="this.role == 1" @click="showExerciseOptions(exercise)">Edit</button>
           </div>
         </div>
       </li>
@@ -210,6 +210,21 @@ export default {
 </script>
 
 <style scoped>
+  .edit-exe-btn{
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border: none;
+    margin-top: 1rem;
+  }
+  .edit-exe-btn:hover{
+    background-color: #eb2626;
+    color: white;
+  }
   .create-exercise-wrap{
     display: flex;
     justify-content: center;
@@ -287,6 +302,7 @@ export default {
     top: 0;
     padding-top: 5rem;
     width: 100%;
+    min-height: 100vh;
   }
 
   .exercises-list{
