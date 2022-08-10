@@ -1,4 +1,10 @@
 <template>
+                        <div class="checker" v-if="lala">
+       <p id="exe"> <b>{{messagexe}}</b> </p>
+      </div>
+      <div id="auto">
+                 <p id="exe"> <b>{{errorMsg}}</b> </p>
+      </div>
   <div class="container" v-if="show">
     <p class="title">Register</p>
     <form>
@@ -43,17 +49,19 @@
         </div>
       </div>
     </form>
-
+    
     <div class="form-buttons">
       <button @click="checkInputs" id="next-btn" class="reg-btn">next</button>
+      
       <button @click="emit_reg_data" class="reg-btn" v-if="show_reg_inputs_2">Submit</button>
     </div>
-    
+
     <div class="login-option">
 			<p>Already have an account?</p>
 			<button class="login-btn" @click="emit_show">Sign In</button>
 		</div>
   </div>
+    
 </template>
 
 <script>
@@ -62,14 +70,14 @@ import dayjs from 'dayjs'
 export default {
   props:[
     'show',
+    'errorMsg'
   ],
   data(){
-    return{
+    return{       
       dayjs,
-
-
+      messagexe: "",
+      lala:false,
       show_reg_inputs_2: false,
-
       reg_data:{
         basic:{
           email: '',
@@ -85,6 +93,9 @@ export default {
       }     
     }
   },
+  computed(){
+    
+  },
   methods:{
     emit_reg_data(){
       this.$emit('reg-data', {email: this.reg_data.basic.email,
@@ -95,6 +106,13 @@ export default {
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
                               bday: dayjs(this.reg_data.basic.bday).format('YYYY-MM-DD'),
+                              // bday: (() => {
+                              //   let date = this.reg_data.bday;
+                              //   let day = ("0" + date.getDate()).slice(-2);
+                              //   let month = ("0" + (date.getMonth() + 1)).slice(-2);
+                              //   let bday = date.getFullYear() + "-" + month + "-" + day;
+                              //   return bday;
+                              // }),
                               sex: this.reg_data.sex
       })
     },
@@ -112,21 +130,65 @@ export default {
         button.innerText = 'next'
       }
     },
-    checkInputs(){
+
+   checkInputs(){ 
+           if(this.reg_data.basic.email.length<1||this.reg_data.basic.username.length<1||
+            this.reg_data.basic.password.length<1||this.reg_data.basic.password_confirm.length<1||this.reg_data.basic.bday.length<1){
+             this.messagexe="Fields must not be empty !"
+             this.lala=true
+           }
+            else if(this.reg_data.basic.password.length<8){
+              this.messagexe="The minimum length of the password must be 8 characters !"
+              this.lala=true
+            }
+            else if(this.reg_data.basic.password!=this.reg_data.basic.password_confirm){
+                this.messagexe="Passwords do not match !"
+              this.lala=true
+            }
+              else if(this.reg_data.basic.bday.substring(0, 4) > 2006){
+                this.messagexe=" You are too young !"
+              this.lala=true
+            }
+            else{
+                this.lala=false
       this.$emit('form_check', {funcChange: this.changeShowRegInputs2,
+                                name: this.reg_data.basic.name,
                                 email: this.reg_data.basic.email,
                                 username: this.reg_data.basic.username,
                                 password: this.reg_data.basic.password,
                                 password_confirm: this.reg_data.basic.password_confirm,
                                 bday: this.reg_data.basic.bday})
-      console.log(this.reg_data.sex);
+          console.log(this.reg_data.sex);}
     }
   }
 }
+
 </script>
 
 <style scoped>
+#exe{
+  position: absolute;
+  padding-top: 10px;
+  color:red;
+
+}
+.checker{
+display: flex;
+justify-content: center;
+  border: 2px solid white;
+  border-radius: 18px;
+  background-color: white;
+  width: 250px;
+  height: 50px;
+  color: #eb2626;
+    box-shadow: 0 0 20px 0.5px gray;
+    margin:20px;
+    
+}
   .container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     text-align: center;
     overflow: hidden;
   }
@@ -134,6 +196,7 @@ export default {
   form{
     display: flex;
     justify-content: center;
+    flex-direction: row;
   }
   .form-buttons button{
     margin-left: 1rem;

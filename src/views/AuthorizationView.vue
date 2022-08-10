@@ -7,7 +7,7 @@
       <p>Registered successfuly! <br> You can now log in.</p>
     </div>
     <LoginComponent @loginData="login" :show="this.show" @emit_show="changeShow"/>
-    <RegisterComponent :show="!this.show" @emit_show="changeShow" @reg-data="register" @form_check="formValidation"/>
+    <RegisterComponent :errorMsg="errorMsg" :show="!this.show" @emit_show="changeShow" @reg-data="register" @form_check="formValidation"/>
   </div>
 </template>
 
@@ -16,8 +16,8 @@
   import RegisterComponent from '../components/AuthorizationComponents/RegisterComponent.vue'
   import axios from 'axios'
   import store from '../store'
-  import getUser from '../exports/user'
-  import { mapActions } from 'vuex'
+  import user from '../exports/user'
+
 
   export default {
     mounted(){
@@ -26,6 +26,7 @@
     data(){
       return{
         show: true,
+        errorMsg: ''
       }
     },
     components:{
@@ -34,26 +35,30 @@
     },
     methods:{
       async formValidation({funcChange, email, username, password, password_confirm, bday}){
-        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm, bday})
-        .then(res => {
-          console.log(res);
-          if(res.status == 200){
-            funcChange()
-          }
-          else{
-            console.log('jebem ti mater');
-          }
-        })
+        try {
+          await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm, bday})
+          .then(res => {
+            console.log(res);
+            if(res.status == 200){
+              funcChange()
+            }
+            else{
+              console.log('jebem ti nogu');
+            }
+          })
+        } catch (error) {
+          this.errorMsg = error.response.data.msg;
+          console.log(this.errorMsg);
+        }
+        
       },
       async login(payload){
-        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
+        axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
-          this.$router.push({name: 'HomeLog'})
-          this.setLogin(true)
-          this.setRole(res.data.user.role)
-          this.setUserId(res.data.user.id)
+          user.methods.checkSession()
+          this.$router.push('/homelog')
         });
       },
       async register(payload){
@@ -82,7 +87,6 @@
       changeShow(){
         this.show = !this.show
       },
-      ...mapActions(['setLogin', 'setRole', 'setUserId']),
     }
   }
 </script>
