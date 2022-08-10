@@ -9,13 +9,14 @@
   </div>
   
   <div class="plan-content">
-    <div v-for="day in this.plan.days" :key="day.day_id" :id="day.day_id" class="day-wrap" >
-      <div class="day-head">
+    <div v-for="day in this.plan.days" :key="day.day_id" :id="day.day_id" class="day-wrap">
+      <div class="day-head" :id="day.day_id+'head'" :class="{active: day.completed}">
         Day {{day.day_number}}
         <div  v-if="this.role == 1 || this.role == 2">   
           <button class="remove-day-btn" @click="removeDay(day.day_id)">remove day</button>  
         </div>
-        <!-- <input type="checkbox" class="checkbox" :id="day.day_id+'check'" :checked="day.day_completed"> -->
+        <input :checked="day.completed" type="checkbox" class="checkbox" :id="day.day_id+'check'" @change="completeDay($event, day.completed)">
+        <!-- <input type="checkbox" class="checkbox" :id="day.day_id+'check2'" @change="uncompleteDay($event)"> -->
       </div>
       <ul class="sets-container">
         <li v-for="set in day.sets" :key="set.set_id">
@@ -83,6 +84,7 @@
 
 <script>
 import axios from 'axios'
+import store from '../../store'
 
 export default {
   props: [
@@ -96,6 +98,7 @@ export default {
       allExercises: {},
 
       currentDayId: '',
+      user_id: store.getters.checkUserId,
 
       set: {
         day_id: '',
@@ -109,11 +112,42 @@ export default {
   },
   mounted(){
     this.getAllExercises()
+    console.log(this.plan);
   },
   updated(){
     
   },
   methods:{
+    async completeDay(event, completed){
+      let dayId = event.target.parentElement.parentElement.id
+      console.log(dayId);
+
+      if(completed == true){
+        await axios.put('http://783p122.e2.mars-hosting.com/7fit/training', {day_id_uncomplete: dayId,
+                                                                          usr_id: this.user_id})
+        .then(res=> {
+          console.log(res);
+        })
+      }
+      if(completed == false){
+        await axios.put('http://783p122.e2.mars-hosting.com/7fit/training', {day_id_complete: dayId,
+                                                                          usr_id: this.user_id})
+        .then(res=> {
+          console.log(res);
+        })
+      }
+       this.$emit('refresh')
+    },
+    async uncompleteDay(event){
+      let dayId = event.target.parentElement.parentElement.id
+      console.log(dayId);
+      // document.getElementById(dayId).classList.add('.active')
+      await axios.put('http://783p122.e2.mars-hosting.com/7fit/training', {day_id_uncomplete: dayId,
+                                                                          usr_id: this.user_id})
+      .then(res=> {
+        console.log(res);
+      })
+    },
     showSet(event){
       let id = event.target.parentElement.parentElement.parentElement.id
       this.currentDayId = id
@@ -175,6 +209,9 @@ export default {
 </script>
 
 <style scoped>
+  .active{
+    background-image: linear-gradient(to bottom, rgb(88, 165, 81), rgb(29, 54, 0));
+  }
   .add-day-wrap{
     display: flex; 
     flex-direction: column; 
@@ -299,7 +336,7 @@ export default {
   .checkbox{
     height: 1.8rem;
     width: 1.8rem;
-    background-color: green;
+    color: green;
   }
 
   .plan-days-container{
@@ -342,7 +379,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: left;
-    background-color: rgb(95, 95, 95);
+    background-color: rgb(100, 100, 100);
     margin: 5px;
     transition: all 0.5s;
     border-radius: 10px;
@@ -350,7 +387,6 @@ export default {
   .day-head{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    background-color: gray;
     width: 100%;
     height: 2rem;
     display: flex;

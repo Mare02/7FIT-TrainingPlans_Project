@@ -2,9 +2,9 @@
   <div class="wrap">
     <div class="program-head">
       <label>Active plan</label>
-      <button @click="redirectToPlans()" v-if="activePlanId == ''">add new program</button>
+      <button @click="redirectToPlans()" v-if="activePlan == {}">add new program</button>
     </div>
-    <div v-if="activePlanId == ''">
+    <div v-if="activePlanId == {}">
       there are no active plans
     </div>
     <div class="plan-name">
@@ -14,7 +14,7 @@
       <button v-if="activePlanId != ''" @click="finishPlan()">finish plan</button>
     </div>
     <div class="plan">
-      <PlanDays v-if="activePlanId != ''" :role="3" :plan="activePlan"/>
+      <PlanDays @refresh="this.getCurrentUser()" v-if="activePlanId != {}" :role="3" :plan="activePlan"/>
     </div>
     
   </div>
@@ -30,7 +30,7 @@ export default {
     return{
       activePlan: {},
       activePlanId: '',
-      activeUserId: '',
+      activeUserId: store.getters.checkUserId,
     }
   },
   components:{
@@ -38,31 +38,16 @@ export default {
   },
   mounted(){
     this.getCurrentUser()
-    this.getPlanById()
   },
   methods:{
-     async getPlanById(){
-       if(this.activePlanId != ''){
-         await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.activePlanId}})
-        .then(res => {
-          console.log(res);
-          this.activePlan = res.data.msg
-        })
-       }
-      
-    },
     async getCurrentUser(){
-      
-      this.activeUserId = store.getters.checkUserId
-      
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/training', {params: {usr_id: this.activeUserId}})
       .then(res => {
         console.log(res);
         if(res.status == 200){
-          this.activePlanId = res.data.msg.pla_id
+          this.activePlan = res.data.msg
         }
       })
-      this.getPlanById()
     },
     async finishPlan(){
       await axios.put('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: this.activeUserId,

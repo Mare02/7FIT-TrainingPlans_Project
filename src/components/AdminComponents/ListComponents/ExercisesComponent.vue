@@ -24,10 +24,11 @@
                                       sex: this.sortParams.sex,
                                       text: this.sortParams.text})">Submit</button>
           <button @click="reset()">reset</button>
+          <button v-if="this.role == 1" @click="showCreate()">create exercise</button>
         </div>
       </div>
     </div>
-    <!-- <div class="create-exercise-wrap">
+    <div class="create-exercise-wrap" v-if="showCreateExe">
       <div class="inputs">
         <div>
           <label>Name: </label>
@@ -67,8 +68,9 @@
           </select>
         </div>
         <button @click="createExercise()">submit</button>
+        <button @click="hideCreate()">cancel</button>
       </div>
-    </div> -->
+    </div>
     <ul class="exercises-list">
       <li v-for="(exercise, index) in this.allExercises" :key="exercise.exe_id" :id="index">
         <div class="exercise-info">
@@ -83,7 +85,7 @@
         </div>
         <div class="exercise-buttons"> 
           <div v-if="true">
-            <button @click="showExerciseOptions(exercise)">Edit</button>
+            <button v-if="this.role == 1" @click="showExerciseOptions(exercise)">Edit</button>
           </div>
         </div>
       </li>
@@ -97,6 +99,7 @@
 
 <script>
 import axios from 'axios'
+import store from '../../../store'
 
 export default {
   props:[
@@ -126,13 +129,21 @@ export default {
         level: null 
       },
 
-      noExercises: false
+      noExercises: false,
+      showCreateExe: false,
+      role: store.getters.checkRole
     }
   },
   computed(){
     
   },
   methods:{
+    showCreate(){
+      this.showCreateExe = true
+    },
+    hideCreate(){
+      this.showCreateExe = false
+    },
     getFile(event){
       this.exercise.file = event.target.files[0]
       console.log(event.target.files[0]);
@@ -199,6 +210,19 @@ export default {
 </script>
 
 <style scoped>
+  .create-exercise-wrap{
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+  }
+  .create-exercise-wrap .inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .create-exercise-wrap .inputs div{
+    margin-top: 1rem;
+  }
   .exercise-info .exercise-name{
     font-size: 1.6rem;
     margin-bottom: 1rem;
