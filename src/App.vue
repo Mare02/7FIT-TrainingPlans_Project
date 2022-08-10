@@ -1,7 +1,7 @@
 <template>
 <div class="app">
   <div class="app-container">
-    <NavbarComponent :isLoggedIn="this.isLoggedIn" :role="this.role" v-if="this.$route.name != 'Login'"/>
+    <NavbarComponent :isLoggedIn="this.checkIsLoggedIn" :role="this.checkRole" v-if="this.$route.name != 'Login'"/>
     <router-view/>
   </div>
 </div>
@@ -12,7 +12,7 @@
   import store from '../src/store'
   import axios from 'axios'
   import getUser from '../src/exports/user'
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default{
     components:{
@@ -27,6 +27,9 @@
         role: null,
         isLoggedIn: null
       }
+    },
+    computed:{
+      ...mapGetters(['checkIsLoggedIn', 'checkRole'])
     },
     methods:{
       async getUserinfo(){

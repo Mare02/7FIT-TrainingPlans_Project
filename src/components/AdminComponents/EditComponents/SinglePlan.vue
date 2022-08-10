@@ -104,11 +104,13 @@ export default {
     //   })
     // },
     async deletePlan(){
+      console.log(this.$route.params.id);
       await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id,
                                                                           sid: localStorage.getItem('sid')}})
       .then(res => {
         console.log(res);
       })
+      this.$router.push({name: 'Plans'})
     }
   },
 }

@@ -15,8 +15,6 @@
   import LoginComponent from '../components/AuthorizationComponents/LoginComponent.vue'
   import RegisterComponent from '../components/AuthorizationComponents/RegisterComponent.vue'
   import axios from 'axios'
-  import store from '../store'
-  import getUser from '../exports/user'
   import { mapActions } from 'vuex'
 
   export default {
@@ -34,16 +32,28 @@
     },
     methods:{
       async formValidation({funcChange, email, username, password, password_confirm, bday}){
-        await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm, bday})
-        .then(res => {
-          console.log(res);
-          if(res.status == 200){
-            funcChange()
+        let isValid = null
+        for(let key in arguments[0]){
+          if(arguments[0][key] == ''){
+            console.log('ima praznih');
+            isValid = false
           }
-          else{
-            console.log('jebem ti mater');
-          }
-        })
+        }
+        if(isValid != false){
+          await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/formCheck', {email, username, password, password_confirm, bday})
+          .then(res => {
+            console.log(res);
+            if(res.status == 200){
+              funcChange()
+            }
+            else{
+              console.log('jebem ti mater');
+            }
+          })
+        }
+        else{
+          
+        }
       },
       async login(payload){
         await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)

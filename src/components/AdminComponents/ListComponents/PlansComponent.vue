@@ -166,6 +166,7 @@ export default {
   .plans-container{
     position: absolute;
     width: 100%;
+    min-height: 100vh;
     top: 0;
     background-color: rgb(36, 36, 36);
     padding-top: 2rem;

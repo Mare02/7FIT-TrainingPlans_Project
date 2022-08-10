@@ -25,6 +25,7 @@
             </div> 
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
+          <button @click="deleteExercise()" style="margin-top: 5rem">delete exercise</button>
         </div>
       </div>
     </div>
@@ -74,6 +75,14 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    async deleteExercise(){
+      await axios.delete('http://783p122.e2.mars-hosting.com/7fit/exercises', {params:{id: this.$route.params.id, 
+                                                                              sid: localStorage.getItem('sid')}})
+      .then(res =>{
+        console.log(res);
+        this.$router.push({name: 'Exercises'})
+      })
     },
     getIfFile(){
       let currentParam = localStorage.getItem('currentParam')
