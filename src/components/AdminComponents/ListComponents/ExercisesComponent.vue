@@ -6,7 +6,7 @@
     <div class="tools-wrapper">
       <div class="tools">
         <div>
-          <label>Level:</label>
+          <label>Level: </label>
           <select v-model="this.sortParams.level">
             <option value="">All</option>
             <option value="1">1</option>
@@ -19,7 +19,7 @@
           <label>Search: </label>
           <input type="text" v-model="sortParams.name">
         </div>
-        <div>
+        <div class="btns">
           <button @click="getAllExercises({role: this.sortParams.role,
                                       sex: this.sortParams.sex,
                                       text: this.sortParams.text})">Submit</button>
@@ -67,8 +67,12 @@
             <option value="4">Strenght</option>
           </select>
         </div>
-        <button @click="createExercise()">submit</button>
-        <button @click="hideCreate()">cancel</button>
+        <div class="create-btns">
+          <div>
+            <button @click="createExercise()">submit</button>
+            <button @click="hideCreate()">cancel</button>
+          </div> 
+        </div>         
       </div>
     </div>
     <ul class="exercises-list">
@@ -130,7 +134,7 @@ export default {
       },
 
       noExercises: false,
-      showCreateExe: false,
+      showCreateExe: true,
       role: store.getters.checkRole
     }
   },
@@ -228,15 +232,39 @@ export default {
   .create-exercise-wrap{
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-top: 2rem;
+    padding-bottom: 2rem;
+    border: 2px solid gray;
+    margin-top: 2rem;
   }
   .create-exercise-wrap .inputs{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .create-btns{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .create-exercise-wrap input{
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    font-size: 1.3rem;
+  }
+  .create-exercise-wrap label{
+    font-size: 1.3rem;
   }
   .create-exercise-wrap .inputs div{
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
   .exercise-info .exercise-name{
     font-size: 1.6rem;
@@ -261,13 +289,49 @@ export default {
     font-size: 1.3rem;
   }
 
-  .tools-wrapper{
+  .tools-wrapper label{
     display: flex;
     justify-content: center;
+    font-size: 1.5rem;
+    
   }
   .tools{
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+  .tools div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tools div select{
+    margin-left: 1rem;
+    outline: none;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    color: white;
+    font-size: 1.2rem;
+  }
+  .search-bar input{
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    font-size: 1.3rem;
+  }
+  .btns{
+    margin-top: 0.5rem;
+  }
+  .btns button{
+     margin: 0.1rem;
+     font-size: 1.3rem;
   }
 
   button{
@@ -278,7 +342,7 @@ export default {
     padding-right: 0.5rem;
   } 
   label{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-family: 'Roboto Condensed', sans-serif;
   }
   input{
@@ -318,11 +382,13 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 10rem;
+    height: auto;
     border-top: 1px solid rgb(145, 145, 145);
     background-color: rgb(56, 56, 56);
     padding-right: 16rem;
     padding-left: 16rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .exercise-info{

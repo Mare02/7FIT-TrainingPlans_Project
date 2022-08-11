@@ -9,8 +9,6 @@
 
   <script>
   import NavbarComponent from '../src/components/SharedComponents/NavbarComponent.vue'
-  import store from '../src/store'
-  import axios from 'axios'
   import getUser from '../src/exports/user'
   import { mapActions, mapGetters } from 'vuex'
 
@@ -54,7 +52,7 @@
         console.log('user role id: ' + this.checkRole());
         console.log('user id: ' + this.checkUserId());
       },
-      ...mapActions(['setLogin', 'setRole', 'setUserId']),
+      ...mapActions(['setLogin', 'setRole', 'setUserId']), 
       ...mapGetters(['checkIsLoggedIn', 'checkRole', 'checkUserId'])
     },
   }
@@ -66,12 +64,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* -webkit-touch-callout: none; 
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-         */
     user-select: none;
   }
   .fade-in {
@@ -95,10 +87,12 @@
 
   button{
     font-family: 'Bebas Neue', cursive;
+    border: none;
   }
   button:hover{
     background-color: #eb2626;
     color: white;
+    
   }
   body{
     overflow-x: hidden;

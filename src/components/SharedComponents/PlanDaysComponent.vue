@@ -15,10 +15,11 @@
         <div  v-if="this.role == 1 || this.role == 2">   
           <button class="remove-day-btn" @click="removeDay(day.day_id)">remove day</button>  
         </div>
-        <input :checked="day.completed" type="checkbox" class="checkbox" :id="day.day_id+'check'" @change="completeDay($event, day.completed)" v-if="this.allowTracking">
+        <input :checked="day.completed" type="checkbox" class="checkbox" :id="day.day_id+'check'" @change="completeDay($event, day.completed)" v-if="this.allowTracking && Object.keys(day.sets).length != 0">
         <!-- <input type="checkbox" class="checkbox" :id="day.day_id+'check2'" @change="uncompleteDay($event)"> -->
       </div>
       <ul class="sets-container">
+        <p v-if="Object.keys(day.sets).length == 0" class="rest">Rest</p>
         <li v-for="set in day.sets" :key="set.set_id">
           <div class="div1">
             <div class="exe-wrap1">
@@ -36,8 +37,8 @@
               </div>
             </div>
           </div>
-          <div class="div2">
-            <svg  v-if="this.role == 1 || this.role == 2" width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="remove-set-btn" @click="removeSet(set.set_id)">
+          <div class="div2" v-if="this.role == 1 || this.role == 2">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="remove-set-btn" @click="removeSet(set.set_id)">
               <path
                 d="M8 11C7.44772 11 7 11.4477 7 12C7 12.5523 7.44772 13 8 13H16C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11H8Z"
                 fill="currentColor"
@@ -209,6 +210,11 @@ export default {
 </script>
 
 <style scoped>
+  .sets-container .rest{
+    font-size: 1.4rem;
+    position: relative;
+    left: 1.8rem;
+  }
   .active{
     background-image: linear-gradient(to bottom, rgb(88, 165, 81), rgb(29, 54, 0));
   }
@@ -394,6 +400,7 @@ export default {
     align-items: center;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 1.5rem;
+    color: lightgray;
   }
 
   .sets-container{
@@ -414,7 +421,7 @@ export default {
     background-color: rgb(70, 70, 70);
   }
   .sets-container li .div1{
-    width: 80%;
+    min-width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -424,7 +431,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20%;
+    max-width: 20%;
   }
   .sets-container li .div1 .exe-wrap1, 
   .sets-container li .div1 .exe-wrap2{

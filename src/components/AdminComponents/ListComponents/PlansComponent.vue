@@ -27,7 +27,7 @@
           <label>Search: </label>
           <input type="text" v-model="sortParams.text">
         </div>
-        <div>
+        <div class="create-btns">
           <button @click="getAllPlans()">Submit</button>
           <button @click="reset()">reset</button>
           <button @click="redirectToCreate()">create new plan</button>
@@ -121,6 +121,13 @@ export default {
 </script>
 
 <style scoped> 
+  .create-btns{
+    margin-top: 0.5rem;
+  }
+  .create-btns button{
+    margin: 0.1rem;
+    font-size: 1.3rem;
+  }
   .emptyListMessage{
     background-color: #eb2626;
     height: 2rem;
@@ -146,22 +153,29 @@ export default {
     padding-right: 0.5rem;
   } 
   label{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-family: 'Roboto Condensed', sans-serif;
   }
   input{
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 500;
-    font-size: 1.3rem;
-    border: 2px solid white;
-    border-radius: 5px;
-    outline: none;
-    min-width: 7rem;
-    height: 1.7rem;
-    color: white;
-    background-color: rgb(68, 68, 68);
+    margin-left: 1rem;
     padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    font-size: 1.3rem;
+  }
+  select{
+    margin-left: 1rem;
+    outline: none;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    color: white;
+    font-size: 1.3rem;
   }
   .plans-container{
     position: absolute;
@@ -282,6 +296,12 @@ export default {
     }
     .button-wrapper{
       z-index: 5;
+    }
+  }
+  @media (max-width: 550px){
+    .plans-list li{
+      width: 100%;
+      margin: 0;
     }
   }
 </style>

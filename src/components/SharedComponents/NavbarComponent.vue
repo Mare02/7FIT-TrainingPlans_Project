@@ -9,7 +9,7 @@
           <button>menu</button>
           <ul>
             <li>
-              <a href="/homelog">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li>
               <a href="/profile/my_program">Profile</a>
@@ -64,13 +64,11 @@ export default {
   },
   methods:{
     async logOut(){
+      localStorage.clear()
+      this.$router.push({name: 'Login'})
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/logout', {sid: localStorage.getItem('sid')})
       .then(res => {
         console.log(res);
-        if(res.status == 200){
-          localStorage.clear()
-          this.$router.push({name: 'Login'})
-        }
       })
     },
   }

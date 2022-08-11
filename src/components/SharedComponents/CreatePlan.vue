@@ -2,6 +2,7 @@
   <div class="main-wrap">
     <div class="create-title">
       <label class="plan-title">{{this.currentPlan.pla_name}}</label>
+      <button @click="deletePlan()" v-if="this.currentPlanId != ''">delete plan</button>
       <div class="create-plan-wrap" v-if="this.currentPlanId == ''">
         <div class="inputs">
           <div>
@@ -33,12 +34,13 @@
           </div>
           <div class="image">
             <label>Image: </label>
-            <input type="file" @change="getFile($event)">
+            <input class="file" type="file" @change="getFile($event)">
           </div>
         </div>
-        <button @click="createPlan()">create</button>
-      </div>
-      <button @click="deletePlan()">delete plan</button>
+        <div class="create-btns">
+          <button @click="createPlan()">create</button>
+        </div>
+      </div> 
     </div>
     <div class="plan-image">
         <img :src="this.currentPlan.file_url" alt="">
@@ -158,9 +160,19 @@ export default {
 </script>
 
 <style scoped>
+  .create-btns{
+    margin-top: 1rem;
+  }
   input{
-    color: black;
-    font-size: 1.2rem;
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    font-size: 1.3rem;
   } 
   button{
     height: 2rem;
@@ -169,6 +181,16 @@ export default {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   } 
+  select{
+    margin-left: 1rem;
+    outline: none;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    color: white;
+    font-size: 1.3rem;
+  }
   .main-wrap{
     width: 100%;
     min-height: 100vh;
@@ -176,6 +198,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .create-title{
@@ -184,11 +207,11 @@ export default {
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: rgb(59, 59, 59);
-    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 16rem;
   }
   .create-title .plan-title{
     font-size: 2rem;
@@ -214,6 +237,12 @@ export default {
   .create-plan-wrap .inputs div{
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
+  }
+  .create-plan-wrap .inputs .image .file{
+    width: 16rem;
+    background: transparent;
+    cursor: pointer;
   }
 
   .plan-image{

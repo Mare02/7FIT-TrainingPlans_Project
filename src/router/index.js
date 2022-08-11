@@ -3,7 +3,7 @@ import LandingPageView from '../views/LandingPageView.vue'
 import AuthorizationView from '../views/AuthorizationView.vue'
 import AdminView from '../views/AdminView.vue'
 import Profile from '../components/User/Profile.vue'
-import HomeLog from '../components/HomeLog.vue'
+import Home from '../components/Home.vue'
 import store from '../store'
 import getUser from '../exports/user'
 
@@ -39,9 +39,9 @@ const routes = [{
         ],
     },
     {
-        path: '/homelog',
-        name: 'HomeLog',
-        component: HomeLog,
+        path: '/home',
+        name: 'Home',
+        component: Home,
         meta: { auth: true }
     },
     {

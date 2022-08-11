@@ -229,6 +229,7 @@ export default {
   }
   .exercise-details .details .delete-wrap{
     width: 100%;
+    display: flex;
     justify-content: center;
   }
   .delete-wrap .delete-exe-btn{
@@ -240,7 +241,6 @@ export default {
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
     border: none;
-    margin-top: 1rem;
     width: 10rem;
   }
   .delete-wrap .delete-exe-btn:hover{
@@ -324,7 +324,7 @@ export default {
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
     width: 40rem;
-    height: 40rem;
+    height: auto;
     background-color: rgb(58, 58, 58);
     box-shadow: 0 0 10px 2px black;
   }

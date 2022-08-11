@@ -1,25 +1,17 @@
 <template>
-  <nav class="footer-container">
-    <div class="footer-contact">
-      <a href="">Contact Us</a>
+  <div class="copyright-wrap">
+    <div class="links">
+      <img class="instagram" src="../assets/instagram.png" alt="">
+      <img class="facebook" src="../assets/facebook.png" alt=""> 
     </div>
-    <div class="footer-list">
-      <ul>
-        <li class="email">
-          7fit@gmail.com
-        </li>
-        <li>
-          <img src="../assets/facebook.svg" alt="">
-        </li>
-        <li>
-          <img src="../assets/instagramsvg.svg" alt="">
-        </li>
-        <li>
-
-        </li>
-      </ul>
+    <div class="email">
+      <p>7fit@gmail.com</p>
     </div>
-  </nav>
+    <div class="text">
+      <p>7FIT Ⓒ 2022</p>
+      <p></p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,47 +21,47 @@ export default {
 </script>
 
 <style scoped>
-  .footer-container{
-    background-color: rgb(70, 70, 70);
-    height: 5rem;
+  .copyright-wrap{
+    border-top: 2px solid gray;
     color: white;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    align-items: center;
+    width: 100%;
+    height: 12rem;
+    background-color: rgb(39, 39, 39);
+    font-size: 1.3rem;
   }
-  .footer-contact{
-    font-family: 'Bebas Neue', cursive;
-    font-size: 1.8rem;
-    margin-left: 1.5rem;
-  }
-  .footer-list ul{
-    font-family: 'Bebas Neue', cursive;
-    font-size: 1.5rem;
+  .copyright-wrap .email{
     display: flex;
+    justify-content: center;
     align-items: center;
-    list-style: none;
+    padding-top: 2rem;
   }
-  .footer-list li{
-    margin-right: 1rem;
+  .copyright-wrap .text{
+    text-align: center;
+    padding-top: 1rem;
   }
-  .footer-list li img{
-    position: relative;
-    top: 2px;
-    width: 2.8rem;
+  .copyright-wrap .text p{
+
   }
-  .footer-list .email{
-    font-family: 'Roboto Condensed', sans-serif;
+  .copyright-wrap .links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .copyright-wrap .links .instagram{
+    width: 2rem;
+  }
+  .copyright-wrap .links .facebook{
+    width: 2rem;
+    margin-left: 1rem;
   }
 
+
   @media only screen and (max-width: 800px){
-    .footer-contact{
-      font-size: 1.3rem;
-    }
-    .footer-list .email{
-      font-size: 1.2rem;
-    }
-    .footer-list ul img{
-      width: 1.5rem;
-    }
+
   }
 </style>

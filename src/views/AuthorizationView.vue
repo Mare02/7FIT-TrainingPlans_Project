@@ -60,7 +60,7 @@
         .then(res => {
           console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
-          this.$router.push({name: 'HomeLog'})
+          this.$router.push({name: 'Home'})
           this.setLogin(true)
           this.setRole(res.data.user.role)
           this.setUserId(res.data.user.id)
