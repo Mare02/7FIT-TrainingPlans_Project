@@ -24,7 +24,8 @@
 <script>
 export default {
   props:[
-    'show'
+    'show',
+	'logmsg',
   ],
 	data() {
 		return {

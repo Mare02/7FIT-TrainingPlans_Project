@@ -6,7 +6,7 @@
     <div class="message hidden" id="msg">
       <p>Registered successfuly! <br> You can now log in.</p>
     </div>
-    <LoginComponent @loginData="login" :show="this.show" @emit_show="changeShow"/>
+    <LoginComponent :logmsg="logmsg" @loginData="login" :show="this.show" @emit_show="changeShow"/>
     <RegisterComponent :errorMsg="errorMsg" :show="!this.show" @emit_show="changeShow" @reg-data="register" @form_check="formValidation"/>
   </div>
 </template>
@@ -26,7 +26,8 @@
     data(){
       return{
         show: true,
-        errorMsg: ''
+        errorMsg: '',
+        logmsg: ''
       }
     },
     components:{
@@ -48,18 +49,30 @@
           })
         } catch (error) {
           this.errorMsg = error.response.data.msg;
-          console.log(this.errorMsg);
+          alert(this.errorMsg);
         }
-        
       },
       async login(payload){
-        axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
-        .then(res => {
-          console.log(res);
-          localStorage.setItem('sid', res.data.user.sid);
-          user.methods.checkSession()
-          this.$router.push('/homelog')
-        });
+        try {
+          axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
+          .then(res => {
+            console.log(res);
+            if(res.status == 200){
+              localStorage.setItem('sid', res.data.user.sid);
+              user.methods.checkSession()
+              this.$router.push('/homelog')
+            }
+            else{
+              console.log(res.data.response.msg);
+              this.logmsg=res.data.response.msg;
+             alert(logmsg)
+            }
+            
+          });
+        } catch (error) {
+          console.log(error);
+        }
+ 
       },
       async register(payload){
         console.log('reg ulaz');
@@ -145,4 +158,14 @@
        transform: translateY(-2rem);}
     100%{opacity: 1;}
   }
+  #alertBox {
+    position:relative;
+    width:300px;
+    min-height:100px;
+    margin-top:50px;
+    border:1px solid #666;
+    background-color:#fff;
+    background-repeat:no-repeat;
+    background-position:20px 30px;
+}
 </style>
