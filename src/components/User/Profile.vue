@@ -28,6 +28,10 @@
             <label>Goal: </label>
             <p>{{user.goa_name}}</p>
           </div>
+          <div>
+            <label>Role: </label>
+            <p>{{user.rol_name}}</p>
+          </div>
         </div>
         <div class="user-menu">
           <router-link to="/profile/my_program">
@@ -41,6 +45,14 @@
           <router-link to="/profile/my_details">
             <div>
               My details
+            </div>
+             <div>
+              >
+            </div>
+          </router-link>
+          <router-link v-if="user.rol_id != 3" to="/profile/my_details">
+            <div>
+              My created plans
             </div>
              <div>
               >
@@ -65,7 +77,7 @@ export default {
   },
   data(){
     return{
-      user: {}
+      user: {},
     }
   },
   mounted(){

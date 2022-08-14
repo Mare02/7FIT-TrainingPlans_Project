@@ -218,6 +218,8 @@ export default {
     margin-top: 0.5rem;
     position: relative;
     bottom: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .plans-list li{
     cursor: pointer;

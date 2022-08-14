@@ -3,7 +3,7 @@
     <div class="program-head">
       <label>Active plan</label>
     </div>
-    <div v-if="activePlan != {}" class="no-plans-msg">
+    <div v-if="Object.keys(activePlan).length == 0" class="no-plans-msg">
       <p>There are no currently active plans.</p>
       <button class="get-plan-btn" @click="redirectToPlans()" v-if="Object.keys(activePlan).length == 0">get plan</button>
     </div>

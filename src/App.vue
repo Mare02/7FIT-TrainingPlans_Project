@@ -2,7 +2,7 @@
 <div class="app">
   <div class="app-container">
     <NavbarComponent :isLoggedIn="checkIsLoggedIn()" :role="checkRole()" v-if="this.$route.name != 'Login'"/>
-    <router-view class="fade-in"/>
+    <router-view/>
   </div>
 </div>
 </template>

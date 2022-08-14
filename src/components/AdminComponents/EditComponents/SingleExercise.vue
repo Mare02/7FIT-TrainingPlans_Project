@@ -25,6 +25,15 @@
             </div> 
             <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
           </div>
+          <div class="goals" id="goals">
+            <div style="display: flex;">
+              <b>Goals:</b>
+              <p v-for="goal in exercise.goals" :key="goal.goa_id">
+                {{goal.goa_name}},
+              </p>
+            </div> 
+            <button @click="showEdit($event, edit = this.editExercise)" class="edit-btn">Edit</button>
+          </div>
           <div class="delete-wrap">
             <button class="delete-exe-btn" @click="deleteExercise()" style="margin-top: 5rem">delete exercise</button>
           </div>
@@ -33,7 +42,7 @@
     </div>
     <div class="edit-input-container" v-show="showEditInput">
       <div class="input-div"> 
-        <input placeholder="" type="text" id="input" v-model="editText" v-if="getIfFile() == 'name'">
+        <input placeholder="" type="text" id="input" v-model="editText" v-if="getIfFile() == 'name' || getIfFile() == 'goals'">
         <input type="file" @change="getFile($event)" v-if="getIfFile() == 'file'">
         <select v-if="getIfFile() == 'muscles'" v-model="editMuscles" multiple>
           <option v-for="mus in allMuscles" :key="mus.mus_id" :value="mus.mus_id">{{mus.mus_name}}</option>
@@ -91,10 +100,13 @@ export default {
       if(currentParam == 'file'){
         return 'file'
       }
+      if(currentParam == 'goals'){
+        return 'goals'
+      }
       if(currentParam == 'muscles'){
         return 'muscles'
       }
-      if(currentParam != 'file' && currentParam != 'muscles'){
+      if(currentParam != 'file' && currentParam != 'muscles' && currentParam != 'goals'){
         return 'name'
       }
     },

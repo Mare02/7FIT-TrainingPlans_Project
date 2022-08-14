@@ -58,7 +58,6 @@
       async login(payload){
         await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/login', payload)
         .then(res => {
-          console.log(res);
           localStorage.setItem('sid', res.data.user.sid);
           this.$router.push({name: 'Home'})
           this.setLogin(true)
@@ -70,7 +69,6 @@
         console.log('reg ulaz');
         await axios.post('http://783p122.e2.mars-hosting.com/7fit/auth/register', payload)
         .then(res => {
-          console.log(res);
           if(res.status == 200){
             this.show = !this.show;
           }

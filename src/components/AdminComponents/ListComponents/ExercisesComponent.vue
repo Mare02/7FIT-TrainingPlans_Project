@@ -35,18 +35,16 @@
           <input type="text" v-model="exercise.name">
         </div>
          <div>
-          <label>File: </label>
-          <input type="file" @change="getFile($event)">
+          <label>Image: </label>
+          <input type="file" class="file" @change="getFile($event)">
         </div>
-         <div>
+        <div>
           <label>Description: </label>
           <input type="text" v-model="exercise.description">
         </div>
-         <div>
+        <div>
           <label>Muscles: </label>
-          <select multiple size="20" v-model="exercise.muscles">
-            <option v-for="mus in allMuscles" :key="mus.mus_id" :value="mus.mus_id">{{mus.mus_name}}</option>
-          </select>
+          <Multiselect class="multi" @change="newExeMuscles($event)" mode="tags" placeholder="Choose muscles" :close-on-select="false" :options="muscles.options"/>
         </div>
         <div>
           <label>Level: </label>
@@ -59,13 +57,7 @@
         </div>
         <div>
           <label>Goal: </label>
-          <select v-model="exercise.goals" multiple size="5">
-            <option value="1">Bulk</option>
-            <option value="2">Shred</option>
-            <option value="3">Cardio</option>
-            <option value="4">Progression</option>
-            <option value="4">Strenght</option>
-          </select>
+          <Multiselect class="multi" @change="newExeGoals($event)" mode="tags" placeholder="Choose goals" :close-on-select="false" :options="goals.options"/>
         </div>
         <div class="create-btns">
           <div>
@@ -103,15 +95,22 @@
 
 <script>
 import axios from 'axios'
+import Multiselect from '@vueform/multiselect'
 import store from '../../../store'
 
 export default {
   props:[
 
   ],
+  components:{
+    Multiselect
+  },
   mounted(){
     this.getAllExercises()
     this.getAllMuscles()
+  },
+  computed:{
+
   },
   data(){
     return{
@@ -120,11 +119,11 @@ export default {
 
       exercise:{
         name: '',
-        file: '',
         description: '',
         muscles: [],
         level: '',
-        goals: []
+        goals: [],
+        file: ''
       },
 
       sortParams:{
@@ -133,15 +132,38 @@ export default {
         level: null 
       },
 
+      muscles:{
+        options: {}
+      },
+      levels:{
+        options: []
+      },
+      goals:{
+        options: {1: 'Bulk',
+                  2: 'Shred',
+                  3: 'Cardio',
+                  4: 'Progression',
+                  5: 'Strenght'}
+      },
+
       noExercises: false,
       showCreateExe: true,
       role: store.getters.checkRole
     }
   },
-  computed(){
-    
-  },
   methods:{
+    newExeMuscles(event){
+      console.log(event.map(item => {return Number(item)}));
+      this.exercise.muscles = event.map(item => {
+        return Number(item)
+      })
+    },
+    newExeGoals(event){
+      console.log(event.map(item => {return Number(item)}));
+      this.exercise.goals = event.map(item => {
+        return Number(item)
+      })
+    },
     showCreate(){
       this.showCreateExe = true
     },
@@ -155,10 +177,15 @@ export default {
     async createExercise(){
       let formdata = new FormData()
       for(let key in this.exercise){
-        formdata.append([key], this.exercise[key]) 
+        formdata.append([key], this.exercise[key])
       }
 
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', {name: this.exercise.name,
+                                                                            description: this.exercise.description,
+                                                                            file: this.exercise.file,
+                                                                            muscles: this.exercise.muscles,
+                                                                            goals: this.exercise.goals,
+                                                                            level: this.exercise.level})
       .then(res => {
         console.log(res);
       })
@@ -174,9 +201,7 @@ export default {
         }
       }
       try {
-        await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises', {
-          params: params
-        })
+        await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises', {params: params})
         .then(res => {
           console.log(res);
           this.allExercises = res.data.msg
@@ -195,8 +220,10 @@ export default {
     async getAllMuscles(){
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/info/muscles') 
       .then(res => {
-        console.log(res);
-        this.allMuscles = res.data.muscles
+        let allMuscles = res.data.muscles
+        for(let key in allMuscles){
+          this.muscles.options[allMuscles[key].mus_id] = allMuscles[key].mus_name
+        }
       })
     },
     showExerciseOptions(exercise){
@@ -204,7 +231,6 @@ export default {
     },
     reset(){
       for(let elem in this.sortParams){
-        console.log(elem);
         this.sortParams[elem] = null
       }
       this.getAllExercises()
@@ -212,8 +238,39 @@ export default {
   }
 }
 </script>
+<style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+  .inputs .file{
+    width: 17rem;
+    background: transparent;
+  }
+  .inputs div{
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .inputs div .multi{
+    width: 15rem;
+    margin-left: 1rem;
+    height: auto;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.2rem;
+    background: rgb(95, 95, 95);
+    color: white;
+    --ms-tag-bg: rgb(53, 53, 53);
+    --ms-dropdown-bg: rgb(95, 95, 95);
+  }
+  .inputs div select{
+    margin-left: 1rem;
+    outline: none;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    height: 1.7rem;
+    background-color: rgb(95, 95, 95);
+    color: white;
+    font-size: 1.2rem;
+  }
   .edit-exe-btn{
     cursor: pointer;
     padding-left: 0.5rem;
