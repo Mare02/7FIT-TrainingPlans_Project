@@ -120,11 +120,13 @@ export default {
       exercise:{
         name: '',
         description: '',
-        muscles: [],
+        
         level: '',
-        goals: [],
+        
         file: '',
       },
+      par_goals: [],
+      par_muscles: [],
       
 
       sortParams:{
@@ -154,10 +156,10 @@ export default {
   },
   methods:{
     newExeMuscles(event){
-      this.exercise.muscles = event.map(item => {return Number(item)})
+      this.par_muscles = event.map(item => {return Number(item)})
     },
     newExeGoals(event){
-      this.exercise.goals = event.map(item => {return Number(item)})
+      this.par_goals = event.map(item => {return Number(item)})
     },
     showCreate(){
       this.showCreateExe = true
@@ -166,7 +168,7 @@ export default {
       this.showCreateExe = false
     },
     getFile(event){
-      this.exe_file = event.target.files[0]
+      this.exercise.file = event.target.files[0]
       console.log(event.target.files[0]);
     },
     async createExercise(){
@@ -174,6 +176,12 @@ export default {
       for(let key in this.exercise){
         formdata.append([key], this.exercise[key])
       }
+      this.par_goals.forEach((item) => {
+        formdata.append('goals', item)
+      })
+      this.par_muscles.forEach((item) => {
+        formdata.append('muscles', item)
+      })
 
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
       .then(res => {
