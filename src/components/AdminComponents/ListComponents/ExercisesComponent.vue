@@ -123,8 +123,9 @@ export default {
         muscles: [],
         level: '',
         goals: [],
+        file: '',
       },
-      exe_file: '',
+      
 
       sortParams:{
         name: null,
@@ -174,12 +175,7 @@ export default {
         formdata.append([key], this.exercise[key])
       }
 
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', {name: this.exercise.name,
-                                                                            description: this.exercise.description,
-                                                                            file: this.exercise.file,
-                                                                            muscles: this.exercise.muscles,
-                                                                            goals: this.exercise.goals,
-                                                                            level: this.exercise.level})
+      await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
       .then(res => {
         console.log(res);
         this.showCreateExe = false

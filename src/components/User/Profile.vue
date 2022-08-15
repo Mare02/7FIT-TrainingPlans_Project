@@ -87,7 +87,7 @@ export default {
   data(){
     return{
       user: {},
-      userpfp: '',
+      userPfp: '',
       showSavepfp: false
     }
   },
@@ -102,7 +102,7 @@ export default {
       this.showSavepfp = true
       let src = document.getElementById('src')
       let target = document.getElementById('target')
-      this.userpfp = src.files[0]
+      this.userPfp = src.files[0]
       let reader = new FileReader()
       reader.readAsDataURL(src.files[0])
       reader.onload = function(e) {
