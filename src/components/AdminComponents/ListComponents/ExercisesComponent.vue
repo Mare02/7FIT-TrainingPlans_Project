@@ -123,8 +123,8 @@ export default {
         muscles: [],
         level: '',
         goals: [],
-        file: ''
       },
+      exe_file: '',
 
       sortParams:{
         name: null,
@@ -147,22 +147,16 @@ export default {
       },
 
       noExercises: false,
-      showCreateExe: true,
+      showCreateExe: false,
       role: store.getters.checkRole
     }
   },
   methods:{
     newExeMuscles(event){
-      console.log(event.map(item => {return Number(item)}));
-      this.exercise.muscles = event.map(item => {
-        return Number(item)
-      })
+      this.exercise.muscles = event.map(item => {return Number(item)})
     },
     newExeGoals(event){
-      console.log(event.map(item => {return Number(item)}));
-      this.exercise.goals = event.map(item => {
-        return Number(item)
-      })
+      this.exercise.goals = event.map(item => {return Number(item)})
     },
     showCreate(){
       this.showCreateExe = true
@@ -171,7 +165,7 @@ export default {
       this.showCreateExe = false
     },
     getFile(event){
-      this.exercise.file = event.target.files[0]
+      this.exe_file = event.target.files[0]
       console.log(event.target.files[0]);
     },
     async createExercise(){
@@ -188,6 +182,8 @@ export default {
                                                                             level: this.exercise.level})
       .then(res => {
         console.log(res);
+        this.showCreateExe = false
+        this.getAllExercises()
       })
       for(let key in this.exercise){
         this.exercise[key] = ''
@@ -305,6 +301,9 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+  .create-btns div button{
+    margin: 0.1rem;
   }
   .create-exercise-wrap input{
     margin-left: 1rem;

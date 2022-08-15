@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="exe-wrap2">
-              <div>
+              <div v-if="set.set_duration != null">
                 Duration: {{set.set_duration}}s
               </div>
               <div>

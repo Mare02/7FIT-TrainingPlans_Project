@@ -42,11 +42,14 @@
     </div>
     <div class="edit-input-container" v-show="showEditInput">
       <div class="input-div"> 
-        <input placeholder="" type="text" id="input" v-model="editText" v-if="getIfFile() == 'name' || getIfFile() == 'goals'">
+        <input placeholder="" type="text" id="input" v-model="editText" v-if="getIfFile() == 'name'">
         <input type="file" @change="getFile($event)" v-if="getIfFile() == 'file'">
-        <select v-if="getIfFile() == 'muscles'" v-model="editMuscles" multiple>
-          <option v-for="mus in allMuscles" :key="mus.mus_id" :value="mus.mus_id">{{mus.mus_name}}</option>
-        </select>
+        <Multiselect class="multi" @change="newExeGoals($event)" 
+          mode="tags" placeholder="Choose goals" :close-on-select="false" 
+          :options="goals.options" v-if="getIfFile() == 'goals'"/>
+        <Multiselect class="multi" @change="newExeMuscles($event)" 
+          mode="tags" placeholder="Choose muscles" :close-on-select="false" 
+          :options="muscles.options" v-if="getIfFile() == 'muscles'"/>
       </div>
       <div class="save-btn-wrapper">
         <button @click="closeEdit()" class="cancel">Cancel</button>
@@ -58,24 +61,46 @@
 
 <script>
 import axios from 'axios'
+import Multiselect from '@vueform/multiselect'
 
 export default {
   data(){
     return{
       exercise: {},
-      allMuscles: {},
+      // allMuscles: {},
       muscles: {},
 
       showEditInput: false,
       editText: '',
-      editMuscles: []
+      editMuscles: [],
+      editGoals: [],
+
+      goals:{
+        options: {1: 'Bulk',
+                  2: 'Shred',
+                  3: 'Cardio',
+                  4: 'Progression',
+                  5: 'Strenght'}
+      },
+      muscles:{
+        options: {}
+      }
     }
+  },
+  components:{
+    Multiselect
   },
   mounted(){
     this.getExercise()
     this.getAllMuscles()
   },
   methods:{
+    newExeGoals(event){
+      this.editGoals = event.map(item => {return Number(item)})
+    },
+    newExeMuscles(event){
+      this.editMuscles = event.map(item => {return Number(item)})
+    },
     async getExercise(){
       const id = this.$route.params.id
       try {
@@ -116,6 +141,7 @@ export default {
     },
 
     async showEdit(event){
+      this.getAllMuscles()
       let id;
       if (event.target.id == 'file'){
         id = event.target.id
@@ -169,13 +195,31 @@ export default {
             if(param == 'muscles'){
               try {
                 await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
-                                                                                  [param]: this.editMuscles})
+                                                                                  [param]: Object.values(this.editMuscles)})
                 .then((res) => {
                   console.log(res);
                   this.showEditInput = false
                   location.reload();
                   this.editText = ''
                   this.editMuscles = []
+                  this.editGoals = []
+                  localStorage.removeItem('currentParam')
+                })
+              } catch (error) {
+                console.log(error);
+              }
+            }
+            if(param == 'goals'){
+              try {
+                await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
+                                                                                  [param]: Object.values(this.editGoals)})
+                .then((res) => {
+                  console.log(res);
+                  this.showEditInput = false
+                  location.reload();
+                  this.editText = ''
+                  this.editMuscles = []
+                  this.editGoals = []
                   localStorage.removeItem('currentParam')
                 })
               } catch (error) {
@@ -214,8 +258,13 @@ export default {
     async getAllMuscles(){
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/info/muscles') 
       .then(res => {
-        console.log(res);
-        this.allMuscles = res.data.muscles
+        let allMuscles = res.data.muscles
+        let obj = {}
+        for(let key in allMuscles){
+          obj[allMuscles[key].mus_id] = allMuscles[key].mus_name
+        }
+        console.log(obj);
+        this.muscles.options = obj
       })
     },
     getBack(event){
@@ -300,6 +349,9 @@ export default {
   .input-div{
     position: relative;
     top: 3rem;
+  }
+  .input-div .multi{
+    width: 15rem;
   }
   .input-div input{
     font-family: 'Roboto Condensed', sans-serif;
