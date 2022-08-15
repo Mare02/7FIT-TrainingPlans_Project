@@ -5,8 +5,16 @@
     </div>
     <div class="content-wrap">
       <div class="user-details">
-        <div class="user-picture">
-          <img :src="user.file_url" alt="">
+        <input type="file" id="src" @change="openPfpInput()">
+        <div class="user-picture" @click="openImageSelect()">
+          <img :src="user.file_url" id="target" alt="">
+        </div>
+        <div class="change-pfp">
+          <p>Change profile image</p>
+        </div>
+        <div class="save-pfp-btns" id="pfp-btns" v-if="showSavepfp">
+          <button @click="savePfp()">save</button>
+          <button>cancel</button>
         </div>
         <div class="name">
           <p>{{user.usr_name}}</p>
@@ -58,6 +66,7 @@
               >
             </div>
           </router-link>
+          {{userpfp}}
         </div>
       </div>
       <div class="content">
@@ -78,12 +87,41 @@ export default {
   data(){
     return{
       user: {},
+      userpfp: '',
+      showSavepfp: false
     }
   },
   mounted(){
     this.getUserById()
   },
   methods:{
+    openImageSelect(){
+      document.getElementById('src').click()
+    },
+    async openPfpInput(){
+      this.showSavepfp = true
+      let src = document.getElementById('src')
+      let target = document.getElementById('target')
+      this.userpfp = src.files[0]
+      let reader = new FileReader()
+      reader.readAsDataURL(src.files[0])
+      reader.onload = function(e) {
+        target.src = e.target.result
+      }
+    },
+    async savePfp(){
+      const id = store.getters.checkUserId
+      let formdata = new FormData()
+      formdata.append('id', id)
+      formdata.append('file', this.userPfp)
+      axios.put('http://783p122.e2.mars-hosting.com/7fit/users', formdata, {config: {"content-type": "multipart/formdata"}})
+      .then(res => {
+        console.log(res);
+        this.userpfp = ''
+        this.showSavepfp = false
+        this.getUserById()
+      })
+    },
     async getUserById(){
       const id = store.getters.checkUserId
  
@@ -147,6 +185,7 @@ export default {
   }
 
   .user-picture{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -165,7 +204,35 @@ export default {
     display: block;
     cursor: pointer;
   }
-
+  .user-details .change-pfp{
+    position: relative;
+    bottom: 3.5rem;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .user-picture:hover{
+    opacity: 0.5;
+  }
+  .user-picture:hover + div{
+    opacity: 1;
+  }
+  #src{
+    display: none;
+  }
+  .user-details .save-pfp-btns{
+    margin-top: 1.2rem;
+    display: flex;
+  }
+  .user-details .save-pfp-btns button{
+    height: 1.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin: 0.1rem;
+    display: flex;
+    align-items: center;
+  }
   .user-info{
     width: 100%;
     margin-top: 1rem;

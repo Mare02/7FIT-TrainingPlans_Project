@@ -30,7 +30,7 @@
         <div class="create-btns">
           <button @click="getAllPlans()">Submit</button>
           <button @click="reset()">reset</button>
-          <button @click="redirectToCreate()">create new plan</button>
+          <button v-if="role != 3" @click="redirectToCreate()">create new plan</button>
         </div>   
       </div>
     </div>
@@ -62,12 +62,14 @@
 
 <script>
 import axios from 'axios'
+import store from '../../../store'
 
 export default {
   data(){
     return{
       showCreate: false,
       noPlans: false,
+      role: store.getters.checkRole,
       
       allPlans: {},
 

@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="exe-wrap2">
-              <div v-if="set.set_duration != null">
+              <div v-if="set.set_duration != 0">
                 Duration: {{set.set_duration}}s
               </div>
               <div>
@@ -343,6 +343,7 @@ export default {
     height: 1.8rem;
     width: 1.8rem;
     color: green;
+    cursor: pointer;
   }
 
   .plan-days-container{
@@ -415,7 +416,7 @@ export default {
     font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
-    height: 4rem;
+    min-height: 4rem;
     width: 100%;
     border-top: 1px solid gray;
     background-color: rgb(70, 70, 70);
