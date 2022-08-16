@@ -39,12 +39,14 @@
     </div>
     
   </div>
+  <Footer/>
 </template>
 <script>
 import axios from 'axios'
 import { mapActions, mapGetters } from 'vuex'
 import getUser from '../exports/user'
 import store from '../store'
+import Footer from '../components/FooterComponent.vue'
 
 
   export default {
@@ -62,7 +64,7 @@ import store from '../store'
       
     },
     components: {
-
+      Footer
     },
     methods: {
      async getPlansForGoal(){
