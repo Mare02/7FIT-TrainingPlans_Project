@@ -24,7 +24,7 @@
     </div>
     <div class="item-wrap">
       <label>Birthday: </label>
-      <input type="number" v-model="user.usr_bday">
+      <input type="date" v-model="usr_bday">
     </div>
     <div class="item-wrap">
       <label>Height: </label>
@@ -51,6 +51,8 @@
 <script>
 import axios from 'axios'
 import store from '../../store'
+import dayjs from 'dayjs'
+
 
 export default {
   data(){
@@ -61,11 +63,12 @@ export default {
         email: '',
         sex: '',
         age: '',
-        usr_bday: '',
+        
         height: '',
         weight: '',
         goal: ''
-      }
+      },
+      usr_bday: '',
     }
   },
   mounted(){
@@ -73,6 +76,9 @@ export default {
   },
   methods:{
     async getUserById(){
+      const customParseFormat = require('dayjs/plugin/customParseFormat')
+      dayjs.extend(customParseFormat)
+
       const id = store.getters.checkUserId
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter?id=' + id)
       .then(res => {
@@ -84,7 +90,7 @@ export default {
         this.user.email = result.usr_email
         this.user.sex = result.sex_id
         this.user.age = result.age
-        this.user.usr_bday = result.usr_bday
+        this.usr_bday = result.usr_bday
         this.user.height = result.usr_height
         this.user.weight = result.usr_weight
         this.user.goal = result.goa_id
@@ -100,6 +106,7 @@ export default {
           formdata.append([key], this.user[key])
         }
       }
+      formdata.append('bday', dayjs(this.usr_bday).format('YYYY-MM-DD'))
       await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', formdata)
       .then(res => {
         console.log(res);

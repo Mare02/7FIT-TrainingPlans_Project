@@ -9,10 +9,10 @@
           <label>Level: </label>
           <select v-model="this.sortParams.level">
             <option value="">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="1">Beginner</option>
+            <option value="2">Normal</option>
+            <option value="3">Expert</option>
+            <option value="4">Universal</option>
           </select>
         </div>   
         <div class="search-bar">

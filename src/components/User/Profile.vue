@@ -37,6 +37,10 @@
             <p>{{user.goa_name}}</p>
           </div>
           <div>
+            <label>BMI: </label>
+            <p>{{user.bmi}}</p>
+          </div>
+          <div>
             <label>Role: </label>
             <p>{{user.rol_name}}</p>
           </div>
