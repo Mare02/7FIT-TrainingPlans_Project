@@ -65,7 +65,7 @@
                 <input type="number" v-model="set.duration" class="duration" placeholder="duration(s)">
                 <input type="number" v-model="set.rest" class="rest" placeholder="rest(s)">
             </div>
-            <div>
+            <div v-if="false">
               <input type="text" v-model="set.description" class="desc" placeholder="description">
             </div>
           </div>
@@ -175,9 +175,9 @@ export default {
       .then(res => {
         console.log(res);
       })
-      for(let key in this.set){
-        this.set[key] = ''
-      }
+      // for(let key in this.set){
+      //   this.set[key] = ''
+      // }
       this.$emit('refresh')
     },
     async removeDay(id){
