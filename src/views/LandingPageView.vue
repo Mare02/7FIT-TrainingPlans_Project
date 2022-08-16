@@ -12,7 +12,7 @@
       </p>
       <div class="content-everyone">
         <div class="iphone-img">
-          <img src="../assets/iphone-x-app.png" alt="">
+          <img src="../assets/phone-x-app.png" alt="">
         </div>
         <div class="content-everyone-text">
              <div class="exewrapper">
@@ -84,7 +84,7 @@ export default {
   },
   methods:{
        apush(){
-         this.$router.push('/login')
+         this.$router.push('/plans')
        }
     
   }

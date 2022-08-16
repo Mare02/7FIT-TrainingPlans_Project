@@ -29,6 +29,9 @@
           <p>{{plan.goa_name}}</p>
         </div>
       </div>
+      <div class="errorMsg">
+        <p>{{errorMsg}}</p>
+      </div>
       <div>
         <button class="save-plan-btn" @click="savePlan()">start plan</button>
       </div>
@@ -53,7 +56,8 @@ export default {
       allDays: {},
       role: store.getters.checkRole,
       user_id: store.getters.checkUserId,
-      showDelete: false
+      showDelete: false,
+      errorMsg: ''
     }
   },
   mounted(){
@@ -93,23 +97,17 @@ export default {
       }
     },
     async savePlan(){
-      await axios.post('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: this.user_id,
+      try {
+        await axios.post('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: this.user_id,
                                                                             pla_id: this.$route.params.id})
-      .then(res => {
-        this.$router.push({name: 'MyProgram'})
-      })
+        .then(res => {
+          this.$router.push({name: 'MyProgram'})
+        })
+      } catch (error) {
+        this.errorMsg = error.response.data.msg
+      }
+      
     },
-    // async getPlansForUser(){
-    //   await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {usr_id: this.user_id}})
-    //   .then(res =>{
-    //     let plans = res.data.msg
-    //     let trainers = []
-    //     for(let plan in plans){
-    //       trainers.push(plans[plan].usr_id_trainer)
-    //     }
-    //     console.log(trainers);
-    //   })
-    // },
     async deletePlan(){
       console.log(this.$route.params.id);
       await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id,
@@ -124,6 +122,15 @@ export default {
 </script>
 
 <style scoped>
+  .errorMsg{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+  .errorMsg p{
+    color: #eb2626;
+    position: static;
+  }
   .delete-plan-btn{
     width: 100%;
     display: flex;

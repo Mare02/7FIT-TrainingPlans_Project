@@ -163,6 +163,10 @@ import store from '../store'
     width: auto;
     height: 100%;
   }
+  .plan-info{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   .plan-info p{
     font-size: 1.8rem;
   }

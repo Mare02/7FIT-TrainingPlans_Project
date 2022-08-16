@@ -58,14 +58,14 @@
               >
             </div>
           </router-link>
-          <router-link v-if="user.rol_id != 3" to="/profile/my_details">
+          <!-- <router-link v-if="user.rol_id != 3" to="/profile/my_details">
             <div>
               My created plans
             </div>
              <div>
               >
             </div>
-          </router-link>
+          </router-link> -->
         </div>
       </div>
       <div class="content">
