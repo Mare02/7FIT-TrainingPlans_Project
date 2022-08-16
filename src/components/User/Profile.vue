@@ -66,7 +66,6 @@
               >
             </div>
           </router-link>
-          {{userpfp}}
         </div>
       </div>
       <div class="content">
@@ -116,8 +115,7 @@ export default {
       formdata.append('file', this.userPfp)
       axios.put('http://783p122.e2.mars-hosting.com/7fit/users', formdata, {config: {"content-type": "multipart/formdata"}})
       .then(res => {
-        console.log(res);
-        this.userpfp = ''
+        this.userPfp = ''
         this.showSavepfp = false
         this.getUserById()
       })
@@ -127,7 +125,6 @@ export default {
  
       try {
         const res = await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter?id=' + id)
-        console.log(res);
         this.user = res.data.msg[0]
       } catch (error) {
         console.log(error);
@@ -206,7 +203,7 @@ export default {
   }
   .user-details .change-pfp{
     position: relative;
-    bottom: 3.5rem;
+    bottom: 3.7rem;
     opacity: 0;
     pointer-events: none;
   }
@@ -282,6 +279,10 @@ export default {
     .content-wrap{
       flex-direction: column;
       align-items: center;
+    }
+    .user-details .change-pfp{
+      font-size: 0.9rem;
+      bottom: 2.9rem;
     }
     .content{
       margin-top: 3rem;

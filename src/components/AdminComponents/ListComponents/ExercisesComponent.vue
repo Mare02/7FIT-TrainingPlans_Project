@@ -169,7 +169,6 @@ export default {
     },
     getFile(event){
       this.exercise.file = event.target.files[0]
-      console.log(event.target.files[0]);
     },
     async createExercise(){
       let formdata = new FormData()
@@ -185,7 +184,6 @@ export default {
 
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
       .then(res => {
-        console.log(res);
         this.showCreateExe = false
         this.getAllExercises()
       })
@@ -203,7 +201,6 @@ export default {
       try {
         await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises', {params: params})
         .then(res => {
-          console.log(res);
           this.allExercises = res.data.msg
           if(res.data.msg == ''){
             this.noExercises = true

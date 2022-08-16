@@ -153,19 +153,16 @@ export default {
       localStorage.removeItem('currentParam')
     },
     async editUser(param){
-      console.log('ulaz');
       if(param != null && param != undefined && param != ''){
         console.log('ulaz 1');
         try {
           if(this.editText != ''){
             console.log(this.editText);
             if(param == 'bday'){
-              console.log('ulaz 3');
               const date = dayjs(this.editText).format('YYYY-MM-DD')
               await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
                                                                                 [param]: date})
               .then((res) => {
-                console.log(res);
                 this.showEditInput = false
                 location.reload();
                 this.editText = ''
@@ -176,7 +173,6 @@ export default {
               await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', {id: this.$route.params.id,
                                                                                 [param]: this.editText})
               .then((res) => {
-                console.log(res);
                 this.showEditInput = false
                 location.reload();
                 this.editText = ''
@@ -189,7 +185,6 @@ export default {
               formdata.append('file', this.editText)
               await axios.put('http://783p122.e2.mars-hosting.com/7fit/users', formdata)
               .then((res) => {
-                console.log(res);
                 this.showEditInput = false
                 location.reload();
                 this.editText = ''

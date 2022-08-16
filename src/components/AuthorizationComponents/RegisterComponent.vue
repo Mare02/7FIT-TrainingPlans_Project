@@ -26,17 +26,26 @@
           </div>
           <div class="reg-inputs-2" v-if="show_reg_inputs_2">
             <div class="input-div">
-              <input type="text" placeholder="Weight" v-model="reg_data.weight" required/>
+              <input type="text" placeholder="Weight (kg)" v-model="reg_data.weight" required/>
             </div>
             <div class="input-div">
-              <input type="text" placeholder="Height" v-model="reg_data.height" required/>
+              <input type="text" placeholder="Height (cm)" v-model="reg_data.height" required/>
             </div>
-            
             <div class="input-div">
-              <label for="cars">Gender:</label>
-              <select id="goals" v-model="reg_data.sex">
+              <select id="sex" v-model="reg_data.sex">
+                <option value="">Select gender</option>
                 <option value="1">Male</option>
                 <option value="2">Female</option>
+              </select>
+            </div>
+            <div class="input-div">
+              <select id="goal" v-model="reg_data.goal">
+                <option value="">Select goal</option>
+                <option value="1">Bulk</option>
+                <option value="2">Shred</option>
+                <option value="3">Cardio</option>
+                <option value="4">Progression</option>
+                <option value="5">Strenght</option>
               </select>
             </div>
           </div>
@@ -79,10 +88,12 @@ export default {
           password_confirm: '',
           bday: ''
         },
-        weight: '60',
-        height: '180',
-        sex: ''
-      }     
+        weight: '',
+        height: '',
+        sex: '', 
+        goal: ''
+      },
+      errorMsg: ''
     }
   },
   methods:{
@@ -95,9 +106,11 @@ export default {
                               weight: this.reg_data.weight,
                               height: this.reg_data.height,
                               bday: dayjs(this.reg_data.basic.bday).format('YYYY-MM-DD'),
-                              sex: this.reg_data.sex
+                              sex: this.reg_data.sex,
+                              goal: this.reg_data.goal
       })
     },
+    
     emit_show(){
       this.$emit('emit_show')
     },
@@ -114,13 +127,13 @@ export default {
     },
     checkInputs(){
       this.$emit('form_check', {funcChange: this.changeShowRegInputs2,
-                                email: this.reg_data.basic.email,
-                                username: this.reg_data.basic.username,
-                                password: this.reg_data.basic.password,
-                                password_confirm: this.reg_data.basic.password_confirm,
-                                bday: this.reg_data.basic.bday})
-      console.log(this.reg_data.sex);
-    }
+                                  email: this.reg_data.basic.email,
+                                  username: this.reg_data.basic.username,
+                                  password: this.reg_data.basic.password,
+                                  password_confirm: this.reg_data.basic.password_confirm,
+                                  bday: this.reg_data.basic.bday,
+                                  name: this.reg_data.basic.name})   
+    },
   }
 }
 </script>
@@ -134,6 +147,17 @@ export default {
   form{
     display: flex;
     justify-content: center;
+  }
+  select{
+    width: 30rem;
+    height: 3rem;
+    background-color: rgb(15, 15, 15);
+    border: 2px solid gray;
+    border-radius: 10px;
+    color: lightgray;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.2rem;
   }
   .form-buttons button{
     margin-left: 1rem;

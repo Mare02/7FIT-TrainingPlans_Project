@@ -105,7 +105,6 @@ export default {
       const id = this.$route.params.id
       try {
         const res = await axios.get('http://783p122.e2.mars-hosting.com/7fit/exercises/' + id)
-        console.log(res);
         this.exercise = res.data.msg
         this.muscles = res.data.msg.muscles
       } catch (error) {
@@ -117,6 +116,7 @@ export default {
                                                                               sid: localStorage.getItem('sid')}})
       .then(res =>{
         console.log(res);
+        location.reload()
         this.$router.push({name: 'Exercises'})
       })
     },
@@ -136,7 +136,6 @@ export default {
       }
     },
     getFile(event){
-      console.log(event);
       this.editText = event.target.files[0]
     },
 
@@ -181,7 +180,6 @@ export default {
                 await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
                                                                                   [param]: this.editText})
                 .then((res) => {
-                  console.log(res);
                   this.showEditInput = false
                   location.reload();
                   this.editText = ''
@@ -197,7 +195,6 @@ export default {
                 await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
                                                                                   [param]: Object.values(this.editMuscles)})
                 .then((res) => {
-                  console.log(res);
                   this.showEditInput = false
                   location.reload();
                   this.editText = ''
@@ -214,7 +211,6 @@ export default {
                 await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', {id: this.$route.params.id,
                                                                                   [param]: Object.values(this.editGoals)})
                 .then((res) => {
-                  console.log(res);
                   this.showEditInput = false
                   location.reload();
                   this.editText = ''
@@ -233,7 +229,6 @@ export default {
                 formdata.append('file', this.editText)
                 await axios.put('http://783p122.e2.mars-hosting.com/7fit/exercises', formdata)
                 .then((res) => {
-                  console.log(res);
                   this.showEditInput = false
                   location.reload();
                   this.editText = ''
@@ -263,7 +258,6 @@ export default {
         for(let key in allMuscles){
           obj[allMuscles[key].mus_id] = allMuscles[key].mus_name
         }
-        console.log(obj);
         this.muscles.options = obj
       })
     },

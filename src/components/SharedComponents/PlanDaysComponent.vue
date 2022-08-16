@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="exe-wrap2">
-              <div v-if="set.set_duration != 0">
+              <div v-if="true">
                 Duration: {{set.set_duration}}s
               </div>
               <div>
@@ -433,6 +433,7 @@ export default {
     justify-content: center;
     align-items: center;
     max-width: 20%;
+    padding-right: 1rem;
   }
   .sets-container li .div1 .exe-wrap1, 
   .sets-container li .div1 .exe-wrap2{

@@ -97,7 +97,6 @@ export default {
       try {
         await axios.get('http://783p122.e2.mars-hosting.com/7fit/users/filter', {params: params})
         .then(res => {
-          console.log(res);
           this.allUsers = res.data.msg
           if(res.data.msg == ''){
             this.noUsers = true
@@ -115,7 +114,6 @@ export default {
     },
     reset(){
       for(let elem in this.sortParams){
-        console.log(elem);
         this.sortParams[elem] = null
       }
       this.getAllUsers()

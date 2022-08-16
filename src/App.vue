@@ -60,11 +60,23 @@
   
 
   <style>
+  
   *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     user-select: none;
+  }
+  .errorMsg{
+    
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+  .errorMsg p{
+    color: #eb2626;
+    position: absolute;
+    top: 11.5rem;
   }
   .fade-in {
     -webkit-animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

@@ -23,8 +23,8 @@
       </select>
     </div>
     <div class="item-wrap">
-      <label>Age: </label>
-      <input type="number" v-model="user.age">
+      <label>Birthday: </label>
+      <input type="number" v-model="user.usr_bday">
     </div>
     <div class="item-wrap">
       <label>Height: </label>
@@ -61,6 +61,7 @@ export default {
         email: '',
         sex: '',
         age: '',
+        usr_bday: '',
         height: '',
         weight: '',
         goal: ''
@@ -83,6 +84,7 @@ export default {
         this.user.email = result.usr_email
         this.user.sex = result.sex_id
         this.user.age = result.age
+        this.user.usr_bday = result.usr_bday
         this.user.height = result.usr_height
         this.user.weight = result.usr_weight
         this.user.goal = result.goa_id

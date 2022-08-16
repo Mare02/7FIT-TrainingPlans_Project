@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="delete-plan-btn">
-      <button  v-if="showDelete" @click="deletePlan()">delete plan</button>
+      <button v-if="showDelete" @click="deletePlan()">delete plan</button>
     </div>
     <div class="wrap">
       <div class="plan-image">
@@ -18,7 +18,15 @@
           <label>PLAN DESCRIPTION</label>
         </div>
         <div class="text">
-          <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate magni mollitia alias iusto sint id quis a reiciendis illo. Sequi, sint et modi maiores at expedita ex eaque quidem fugiat? </p>
+          <p>{{plan.pla_desc}}</p>
+        </div>
+      </div>
+      <div class="plan-description">
+        <div class="description-head">
+          <label>Goal</label>
+        </div>
+        <div class="text">
+          <p>{{plan.goa_name}}</p>
         </div>
       </div>
       <div>
@@ -68,7 +76,7 @@ export default {
       try {
         await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.$route.params.id}})
         .then(res => {
-          console.log(res)
+          console.log(res);
           this.plan = res.data.msg
           this.allDays = res.data.msg.days
           console.log(this.user_id);
@@ -88,7 +96,6 @@ export default {
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/training', {usr_id: this.user_id,
                                                                             pla_id: this.$route.params.id})
       .then(res => {
-        console.log(res);
         this.$router.push({name: 'MyProgram'})
       })
     },

@@ -95,7 +95,6 @@ export default {
       try {
         await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: params})
         .then(res => {
-          console.log(res);
           this.allPlans = res.data.msg
         })
       } catch (error) {

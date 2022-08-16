@@ -115,7 +115,6 @@ export default {
       }
       await axios.post('http://783p122.e2.mars-hosting.com/7fit/plans', formdata)
       .then(res => {
-        console.log(res);
         this.currentPlanId = res.data.newPlanId
         console.log(this.currentPlanId);
       })
@@ -132,7 +131,6 @@ export default {
       await axios.delete('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.currentPlanId,
                                                                           sid: localStorage.getItem('sid')}})
       .then(res => {
-        console.log(res);
         if(res.status == 200){
           localStorage.removeItem('currentCreatedPlan')
           this.$router.push({name: 'Plans'})
@@ -142,7 +140,6 @@ export default {
     async getPlanById(){
       await axios.get('http://783p122.e2.mars-hosting.com/7fit/plans', {params: {id: this.currentPlanId}} )
       .then(res => {
-        console.log(res);
         this.currentPlan = res.data.msg
         this.allDays = res.data.msg.days
       })
