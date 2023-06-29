@@ -8,7 +8,7 @@
     </div>
     <div class="exercises">
       <p>
-        <a href="#" onclick="return openInNewTab('http://google.com')">
+        <a href="#" @click="openInNewTab('http://google.com')">
             Cordova link external
         </a>
         Improving Health with Fitness for <b>Everyone</b> 
