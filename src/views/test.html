@@ -1,0 +1,20 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+  </head>
+
+  <body>
+    <ul>
+      <a href="#" onClick="openURL('http://www.google.com')">Go to Google external</a>
+    </ul>
+    <script>
+      function openURL(urlString){
+        let url = encodeURI(urlString);
+        window.open(url, '_system', 'location=no');
+      }
+    </script>
+  </body>
+</html>
