@@ -5,11 +5,10 @@
         <img src="../assets/guy_cut.jpg" alt="">
       </div>
       <p>Get the body <b>you</b> have <br> always dreamed about <b>.</b></p>
-      <a href="https://google.com">test cordova external link</a>
     </div>
     <div class="exercises">
-      <a href="#" onclick="window.open(encodeURI('http://www.google.com/'), '_system')">Test link cordova</a>
       <p>
+        <a href="#" onclick="window.open(encodeURI('http://www.google.com/'), '_system')">Test link cordova</a>
         Improving Health with Fitness for <b>Everyone</b> 
       </p>
       <div class="content-everyone">
