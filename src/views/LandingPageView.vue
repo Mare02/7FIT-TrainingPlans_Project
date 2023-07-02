@@ -9,15 +9,17 @@
     <div class="exercises">
 
 
-      <span @click="openInNewTab('http://google.com')">
-        Cordova function message
-      </span>
-      <span onclick="window.open('https://www.google.com/', '_system', 'location=yes');">
-        Cordova window.open inline
-      </span>
-      <a href="https://www.google.com" :target="computedTarget">
-        Cordova computed target
-      </a>
+      <div style="display: flex; flex-direction: column; gap: 15px; color: white !important; font-size: 16px;">
+        <span @click="openInNewTab('http://google.com')">
+          Cordova function message
+        </span>
+        <span onclick="window.open('https://www.google.com/', '_system', 'location=yes');">
+          Cordova window.open inline
+        </span>
+        <a href="https://www.google.com" target="_system">
+          Cordova a tag with system target
+        </a>
+      </div>
 
 
       <p>
@@ -72,7 +74,7 @@ that you have previous <b>experience in training</b>,<br> all we are looking for
 is the will, the desire and leave<br> the <b>rest to us!</b></p>
  </div>
  <div class="planbutton">
-   <a href="#" @click=" apush()"><span>start your plan</span></a>
+   <a href="#" class="action-button" @click=" apush()"><span>start your plan</span></a>
  </div>
  </div>
         </div>
@@ -91,15 +93,6 @@ export default {
   components: {
     NavbarComponent,
     FooterComponent
-  },
-  computed: {
-    computedTarget() {
-      if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.cordova_iab) {
-          // This means we are in a Cordova WebView
-          return '_system';
-      }
-      return '_blank';
-    },
   },
   methods:{
        apush(){
@@ -156,7 +149,7 @@ justify-content: center;
     padding-top: 40px;
   }
 
-a{
+.action-button{
   margin-top: 6rem;
   display: flex;
   justify-content: center;
@@ -178,12 +171,12 @@ a{
   border-radius: 20px;
 }
 
-a span{
+.action-button span{
   position: relative;
   z-index: 2;
 }
 
-a:after{
+.action-button:after{
   position: absolute;
   content: "";
   top: 0;
@@ -195,11 +188,11 @@ a:after{
       border-radius: 20px;
 }
 
-a:hover{
+.action-button:hover{
   color: #fff;
 }
 
-a:hover:after{
+.action-button:hover:after{
   width: 100%;
 }
   @media only screen and (max-width: 1100px){
