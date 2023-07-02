@@ -11,7 +11,8 @@
         <a href="#" @click="openInNewTab('http://google.com')">
             Cordova link external
         </a>
-        Improving Health with Fitness for <b>Everyone</b> 
+        <a href="#" onclick="window.open('https://www.google.com/', '_system', 'location=yes');" >Cordova link 2</a>
+        Improving Health with Fitness for <b>Everyone</b>
       </p>
       <div class="content-everyone">
         <div class="iphone-img">
