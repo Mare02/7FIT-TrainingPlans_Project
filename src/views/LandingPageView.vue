@@ -7,10 +7,19 @@
       <p>Get the body <b>you</b> have <br> always dreamed about <b>.</b></p>
     </div>
     <div class="exercises">
-      <a href="#" @click="openInNewTab('http://google.com')">
-        Cordova link external
+
+
+      <span @click="openInNewTab('http://google.com')">
+        Cordova function message
+      </span>
+      <span onclick="window.open('https://www.google.com/', '_system', 'location=yes');">
+        Cordova window.open inline
+      </span>
+      <a href="https://www.google.com" :target="computedTarget">
+        Cordova computed target
       </a>
-      <a href="#" onclick="window.open('https://www.google.com/', '_system', 'location=yes');" >Cordova link 2</a>
+
+
       <p>
         Improving Health with Fitness for <b>Everyone</b>
       </p>
@@ -83,27 +92,36 @@ export default {
     NavbarComponent,
     FooterComponent
   },
+  computed: {
+    computedTarget() {
+      if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.cordova_iab) {
+          // This means we are in a Cordova WebView
+          return '_system';
+      }
+      return '_blank';
+    },
+  },
   methods:{
        apush(){
          this.$router.push('/plans')
        },
       openInNewTab(url) {
-            // If WebKit message handler is available, send the message through it to Cordova application
-            if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.cordova_iab) {
-                // This means we are in a Cordova WebView
-                const data = {
-                    // Custom event name
-                    eventName: 'open-external',
-                    url: url
-                }
-                // Send message to InAppBrowser event listener so that Cordova app can handle it.
-                webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify(data))
-            } else {
-                // Otherwise we are in normal browser so directly open in the new tab
-                window.open(url, '_blank');
-            }
-            return false;
+        // If WebKit message handler is available, send the message through it to Cordova application
+        if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.cordova_iab) {
+          // This means we are in a Cordova WebView
+          const data = {
+            // Custom event name
+            eventName: 'open-external',
+            url: url
+          }
+          // Send message to InAppBrowser event listener so that Cordova app can handle it.
+          webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify(data));
+        } else {
+          // Otherwise we are in normal browser so directly open in the new tab
+          window.open(url, '_blank');
         }
+        return false;
+      }
   }
 }
 </script>
