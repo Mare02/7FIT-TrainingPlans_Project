@@ -5,13 +5,13 @@
         <img src="../assets/guy_cut.jpg" alt="">
       </div>
       <p>Get the body <b>you</b> have <br> always dreamed about <b>.</b></p>
+      <a href="#" @click="openInNewTab('http://google.com')">
+        Cordova link external
+      </a>
+      <a href="#" onclick="window.open('https://www.google.com/', '_system', 'location=yes');" >Cordova link 2</a>
     </div>
     <div class="exercises">
       <p>
-        <a href="#" @click="openInNewTab('http://google.com')">
-            Cordova link external
-        </a>
-        <a href="#" onclick="window.open('https://www.google.com/', '_system', 'location=yes');" >Cordova link 2</a>
         Improving Health with Fitness for <b>Everyone</b>
       </p>
       <div class="content-everyone">
@@ -83,9 +83,6 @@ export default {
     NavbarComponent,
     FooterComponent
   },
-  mounted(){
-    
-  },
   methods:{
        apush(){
          this.$router.push('/plans')
@@ -94,13 +91,11 @@ export default {
             // If WebKit message handler is available, send the message through it to Cordova application
             if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.cordova_iab) {
                 // This means we are in a Cordova WebView
-                
                 const data = {
                     // Custom event name
-                    eventName: 'open-external-url-in-new-tab',
+                    eventName: 'open-external',
                     url: url
                 }
-
                 // Send message to InAppBrowser event listener so that Cordova app can handle it.
                 webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify(data))
             } else {
@@ -111,12 +106,11 @@ export default {
 
             return false;
         }
-    
   }
 }
 </script>
 
-<style scoped> 
+<style scoped>
 
 .wrapper1{
   display: flex;
