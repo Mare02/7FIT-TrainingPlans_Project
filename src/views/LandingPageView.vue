@@ -99,11 +99,9 @@ export default {
                 // Send message to InAppBrowser event listener so that Cordova app can handle it.
                 webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify(data))
             } else {
-
                 // Otherwise we are in normal browser so directly open in the new tab
                 window.open(url, '_blank');
             }
-
             return false;
         }
   }
