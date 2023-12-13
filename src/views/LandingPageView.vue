@@ -7,21 +7,6 @@
       <p>Get the body <b>you</b> have <br> always dreamed about <b>.</b></p>
     </div>
     <div class="exercises">
-
-
-      <div style="display: flex; flex-direction: column; gap: 15px; color: white !important; font-size: 16px;">
-        <span @click="openInNewTab('http://google.com')">
-          Cordova function message
-        </span>
-        <span onclick="window.open('https://www.google.com/', '_system', 'location=yes');">
-          Cordova window.open inline
-        </span>
-        <a href="https://www.google.com" target="_system">
-          Cordova a tag with system target
-        </a>
-      </div>
-
-
       <p>
         Improving Health with Fitness for <b>Everyone</b>
       </p>
